@@ -35,13 +35,13 @@ namespace ContactsAppUI
             this.EmailTextBox = new System.Windows.Forms.TextBox();
             this.PhoneTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.SurenameTextBox = new System.Windows.Forms.TextBox();
+            this.SurnameTextBox = new System.Windows.Forms.TextBox();
             this.VkLabel = new System.Windows.Forms.Label();
             this.EmailLabel = new System.Windows.Forms.Label();
             this.PhoneLabel = new System.Windows.Forms.Label();
             this.BirthdayLabel = new System.Windows.Forms.Label();
             this.NameLabel = new System.Windows.Forms.Label();
-            this.SurenameLabel = new System.Windows.Forms.Label();
+            this.SurnameLabel = new System.Windows.Forms.Label();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -103,16 +103,16 @@ namespace ContactsAppUI
             this.NameTextBox.Enter += new System.EventHandler(this.NameTextBox_Enter);
             this.NameTextBox.Leave += new System.EventHandler(this.NameTextBox_Leave);
             // 
-            // SurenameTextBox
+            // SurnameTextBox
             // 
-            this.SurenameTextBox.Location = new System.Drawing.Point(64, 6);
-            this.SurenameTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.SurenameTextBox.Name = "SurenameTextBox";
-            this.SurenameTextBox.Size = new System.Drawing.Size(306, 20);
-            this.SurenameTextBox.TabIndex = 22;
-            this.SurenameTextBox.TextChanged += new System.EventHandler(this.SurenameTextBox_TextChanged);
-            this.SurenameTextBox.Enter += new System.EventHandler(this.SurenameTextBox_Enter);
-            this.SurenameTextBox.Leave += new System.EventHandler(this.SurenameTextBox_Leave);
+            this.SurnameTextBox.Location = new System.Drawing.Point(64, 6);
+            this.SurnameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SurnameTextBox.Name = "SurnameTextBox";
+            this.SurnameTextBox.Size = new System.Drawing.Size(306, 20);
+            this.SurnameTextBox.TabIndex = 22;
+            this.SurnameTextBox.TextChanged += new System.EventHandler(this.SurnameTextBox_TextChanged);
+            this.SurnameTextBox.Enter += new System.EventHandler(this.SurnameTextBox_Enter);
+            this.SurnameTextBox.Leave += new System.EventHandler(this.SurnameTextBox_Leave);
             // 
             // VkLabel
             // 
@@ -164,15 +164,15 @@ namespace ContactsAppUI
             this.NameLabel.TabIndex = 17;
             this.NameLabel.Text = "Name:";
             // 
-            // SurenameLabel
+            // SurnameLabel
             // 
-            this.SurenameLabel.AutoSize = true;
-            this.SurenameLabel.Location = new System.Drawing.Point(2, 9);
-            this.SurenameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.SurenameLabel.Name = "SurenameLabel";
-            this.SurenameLabel.Size = new System.Drawing.Size(58, 13);
-            this.SurenameLabel.TabIndex = 16;
-            this.SurenameLabel.Text = "Surename:";
+            this.SurnameLabel.AutoSize = true;
+            this.SurnameLabel.Location = new System.Drawing.Point(2, 9);
+            this.SurnameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.SurnameLabel.Name = "SurnameLabel";
+            this.SurnameLabel.Size = new System.Drawing.Size(58, 13);
+            this.SurnameLabel.TabIndex = 16;
+            this.SurnameLabel.Text = "Surname:";
             // 
             // OkButton
             // 
@@ -210,13 +210,13 @@ namespace ContactsAppUI
             this.Controls.Add(this.EmailTextBox);
             this.Controls.Add(this.PhoneTextBox);
             this.Controls.Add(this.NameTextBox);
-            this.Controls.Add(this.SurenameTextBox);
+            this.Controls.Add(this.SurnameTextBox);
             this.Controls.Add(this.VkLabel);
             this.Controls.Add(this.EmailLabel);
             this.Controls.Add(this.PhoneLabel);
             this.Controls.Add(this.BirthdayLabel);
             this.Controls.Add(this.NameLabel);
-            this.Controls.Add(this.SurenameLabel);
+            this.Controls.Add(this.SurnameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -237,13 +237,13 @@ namespace ContactsAppUI
         private System.Windows.Forms.TextBox EmailTextBox;
         private System.Windows.Forms.TextBox PhoneTextBox;
         private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.TextBox SurenameTextBox;
+        private System.Windows.Forms.TextBox SurnameTextBox;
         private System.Windows.Forms.Label VkLabel;
         private System.Windows.Forms.Label EmailLabel;
         private System.Windows.Forms.Label PhoneLabel;
         private System.Windows.Forms.Label BirthdayLabel;
         private System.Windows.Forms.Label NameLabel;
-        private System.Windows.Forms.Label SurenameLabel;
+        private System.Windows.Forms.Label SurnameLabel;
         private System.Windows.Forms.Button OkButton;
         private new System.Windows.Forms.Button CancelButton;
     }

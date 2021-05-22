@@ -41,18 +41,19 @@ namespace ContactsAppUI
             this.removeContactToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.SurenameLabel = new System.Windows.Forms.Label();
+            this.SurnameLabel = new System.Windows.Forms.Label();
             this.NameLabel = new System.Windows.Forms.Label();
             this.BirthdayLabel = new System.Windows.Forms.Label();
             this.PhoneLabel = new System.Windows.Forms.Label();
             this.EmailLabel = new System.Windows.Forms.Label();
             this.VkLabel = new System.Windows.Forms.Label();
-            this.SurenameTextBox = new System.Windows.Forms.TextBox();
+            this.SurnameTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.PhoneTextBox = new System.Windows.Forms.TextBox();
             this.EmailTextBox = new System.Windows.Forms.TextBox();
             this.VkTextBox = new System.Windows.Forms.TextBox();
             this.BirthdayDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.FindTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,6 +76,7 @@ namespace ContactsAppUI
             this.ContactsList.Size = new System.Drawing.Size(192, 316);
             this.ContactsList.TabIndex = 1;
             this.ContactsList.SelectedIndexChanged += new System.EventHandler(this.ContactsList_SelectedIndexChanged);
+            this.ContactsList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // menuStrip1
             // 
@@ -90,6 +92,7 @@ namespace ContactsAppUI
             this.menuStrip1.Size = new System.Drawing.Size(600, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // fileToolStripMenuItem
             // 
@@ -152,15 +155,15 @@ namespace ContactsAppUI
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
-            // SurenameLabel
+            // SurnameLabel
             // 
-            this.SurenameLabel.AutoSize = true;
-            this.SurenameLabel.Location = new System.Drawing.Point(224, 59);
-            this.SurenameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.SurenameLabel.Name = "SurenameLabel";
-            this.SurenameLabel.Size = new System.Drawing.Size(58, 13);
-            this.SurenameLabel.TabIndex = 3;
-            this.SurenameLabel.Text = "Surename:";
+            this.SurnameLabel.AutoSize = true;
+            this.SurnameLabel.Location = new System.Drawing.Point(224, 59);
+            this.SurnameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.SurnameLabel.Name = "SurnameLabel";
+            this.SurnameLabel.Size = new System.Drawing.Size(52, 13);
+            this.SurnameLabel.TabIndex = 3;
+            this.SurnameLabel.Text = "Surname:";
             // 
             // NameLabel
             // 
@@ -212,14 +215,15 @@ namespace ContactsAppUI
             this.VkLabel.TabIndex = 8;
             this.VkLabel.Text = "vk.com:";
             // 
-            // SurenameTextBox
+            // SurnameTextBox
             // 
-            this.SurenameTextBox.Location = new System.Drawing.Point(286, 57);
-            this.SurenameTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.SurenameTextBox.Name = "SurenameTextBox";
-            this.SurenameTextBox.ReadOnly = true;
-            this.SurenameTextBox.Size = new System.Drawing.Size(306, 20);
-            this.SurenameTextBox.TabIndex = 9;
+            this.SurnameTextBox.Location = new System.Drawing.Point(286, 57);
+            this.SurnameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SurnameTextBox.Name = "SurnameTextBox";
+            this.SurnameTextBox.ReadOnly = true;
+            this.SurnameTextBox.Size = new System.Drawing.Size(306, 20);
+            this.SurnameTextBox.TabIndex = 9;
+            this.SurnameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // NameTextBox
             // 
@@ -229,6 +233,7 @@ namespace ContactsAppUI
             this.NameTextBox.ReadOnly = true;
             this.NameTextBox.Size = new System.Drawing.Size(306, 20);
             this.NameTextBox.TabIndex = 10;
+            this.NameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // PhoneTextBox
             // 
@@ -238,6 +243,7 @@ namespace ContactsAppUI
             this.PhoneTextBox.ReadOnly = true;
             this.PhoneTextBox.Size = new System.Drawing.Size(306, 20);
             this.PhoneTextBox.TabIndex = 12;
+            this.PhoneTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // EmailTextBox
             // 
@@ -247,6 +253,7 @@ namespace ContactsAppUI
             this.EmailTextBox.ReadOnly = true;
             this.EmailTextBox.Size = new System.Drawing.Size(306, 20);
             this.EmailTextBox.TabIndex = 13;
+            this.EmailTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // VkTextBox
             // 
@@ -256,6 +263,7 @@ namespace ContactsAppUI
             this.VkTextBox.ReadOnly = true;
             this.VkTextBox.Size = new System.Drawing.Size(306, 20);
             this.VkTextBox.TabIndex = 14;
+            this.VkTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // BirthdayDateTimePicker
             // 
@@ -268,6 +276,16 @@ namespace ContactsAppUI
             this.BirthdayDateTimePicker.Size = new System.Drawing.Size(127, 20);
             this.BirthdayDateTimePicker.TabIndex = 16;
             this.BirthdayDateTimePicker.Value = new System.DateTime(2021, 5, 16, 0, 0, 0, 0);
+            this.BirthdayDateTimePicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
+            // 
+            // FindTextBox
+            // 
+            this.FindTextBox.Location = new System.Drawing.Point(41, 27);
+            this.FindTextBox.Name = "FindTextBox";
+            this.FindTextBox.Size = new System.Drawing.Size(160, 20);
+            this.FindTextBox.TabIndex = 17;
+            this.FindTextBox.TextChanged += new System.EventHandler(this.FindTextBox_TextChanged);
+            this.FindTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // MainForm
             // 
@@ -276,18 +294,19 @@ namespace ContactsAppUI
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(600, 379);
+            this.Controls.Add(this.FindTextBox);
             this.Controls.Add(this.BirthdayDateTimePicker);
             this.Controls.Add(this.VkTextBox);
             this.Controls.Add(this.EmailTextBox);
             this.Controls.Add(this.PhoneTextBox);
             this.Controls.Add(this.NameTextBox);
-            this.Controls.Add(this.SurenameTextBox);
+            this.Controls.Add(this.SurnameTextBox);
             this.Controls.Add(this.VkLabel);
             this.Controls.Add(this.EmailLabel);
             this.Controls.Add(this.PhoneLabel);
             this.Controls.Add(this.BirthdayLabel);
             this.Controls.Add(this.NameLabel);
-            this.Controls.Add(this.SurenameLabel);
+            this.Controls.Add(this.SurnameLabel);
             this.Controls.Add(this.ContactsList);
             this.Controls.Add(this.FindLabel);
             this.Controls.Add(this.menuStrip1);
@@ -299,6 +318,7 @@ namespace ContactsAppUI
             this.Text = "ContactsApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -319,18 +339,19 @@ namespace ContactsAppUI
         private System.Windows.Forms.ToolStripMenuItem removeContactToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
-        private System.Windows.Forms.Label SurenameLabel;
+        private System.Windows.Forms.Label SurnameLabel;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Label BirthdayLabel;
         private System.Windows.Forms.Label PhoneLabel;
         private System.Windows.Forms.Label EmailLabel;
         private System.Windows.Forms.Label VkLabel;
-        private System.Windows.Forms.TextBox SurenameTextBox;
+        private System.Windows.Forms.TextBox SurnameTextBox;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.TextBox PhoneTextBox;
         private System.Windows.Forms.TextBox EmailTextBox;
         private System.Windows.Forms.TextBox VkTextBox;
         private System.Windows.Forms.DateTimePicker BirthdayDateTimePicker;
+        private System.Windows.Forms.TextBox FindTextBox;
     }
 }
 

@@ -32,7 +32,7 @@ namespace ContactsAppUI
         {
             InitializeComponent();
             _contactBefore = contact;
-            SurenameTextBox.Text = _contactBefore.Surename;
+            SurnameTextBox.Text = _contactBefore.Surname;
             NameTextBox.Text = _contactBefore.Name;
             BirthdayDateTimePicker.Value = _contactBefore.BirthDay;
             string temp = "+7(" + _contactBefore.Number.Code.ToString() + ")-";
@@ -60,16 +60,16 @@ namespace ContactsAppUI
 
         public ProjectManager Manager { set => _manager = value; }
 
-        private void SurenameTextBox_TextChanged(object sender, EventArgs e)
+        private void SurnameTextBox_TextChanged(object sender, EventArgs e)
         {
 
-            if (SurenameTextBox.Text.Length > 50 || SurenameTextBox.Text.Length == 0)
+            if (SurnameTextBox.Text.Length > 50 || SurnameTextBox.Text.Length == 0)
             {
-                SurenameTextBox.BackColor = Color.Brown;
+                SurnameTextBox.BackColor = Color.Brown;
                 return;
             }
 
-            SurenameTextBox.BackColor = Color.White;
+            SurnameTextBox.BackColor = Color.White;
         }
 
         private void VkTextBox_TextChanged(object sender, EventArgs e)
@@ -165,14 +165,13 @@ namespace ContactsAppUI
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (NameTextBox.Text.Length == 0 || SurenameTextBox.Text.Length == 0 || PhoneTextBox.Text.Length < 12)
+            if (NameTextBox.Text.Length == 0 || SurnameTextBox.Text.Length == 0 || PhoneTextBox.Text.Length < 12)
             {
                 MessageBox.Show("Заполните обязательные поля.\n(Имя, фамилия, номер телефона)");
                 _dialogResult = DialogResult.Cancel;
                 return;
             }
-            //Сделать правильное сохранение номера в тип INT
-            string surename = "";
+            string surname = "";
             string name = "";
             string _number = "";
             _number += PhoneTextBox.Text[8];
@@ -186,30 +185,19 @@ namespace ContactsAppUI
             _code += PhoneTextBox.Text[3];
             _code += PhoneTextBox.Text[4];
             _code += PhoneTextBox.Text[5];
-            int number;
-            int code;
-            try
-            {
-                number = int.Parse(_number);
-                code = int.Parse(_code);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-
+            int number = int.Parse(_number);
+            int code = int.Parse(_code);
             PhoneNumber phone = new PhoneNumber(number, code);
 
             //Сохраняются Фамилия и Имя следующим образом:
-            //Первая буква всегда имеет верхний регистр.
-            surename += char.ToUpper(SurenameTextBox.Text[0]);
+            //Первая буква всегда имеет верхний регистр, остальные нижний
+            surname += char.ToUpper(SurnameTextBox.Text[0]);
             name += char.ToUpper(NameTextBox.Text[0]);
-            if (SurenameTextBox.Text.Length > 1)
+            if (SurnameTextBox.Text.Length > 1)
             {
-                for (int i = 1; i < SurenameTextBox.Text.Length; i++)
+                for (int i = 1; i < SurnameTextBox.Text.Length; i++)
                 {
-                    surename += char.ToLower(SurenameTextBox.Text[i]);
+                    surname += char.ToLower(SurnameTextBox.Text[i]);
                 }
             }
             if (NameTextBox.Text.Length > 1)
@@ -219,17 +207,25 @@ namespace ContactsAppUI
                     name += char.ToLower(NameTextBox.Text[i]);
                 }
             }
-
+            if(EmailTextBox.Text == "For example: usermail@example.com")
+            {
+                EmailTextBox.Text = "";
+            }
+            if(VkTextBox.Text == "Write here ID vk.com/")
+            {
+                VkTextBox.Text = "";
+            }
             DateTime _dateTime = BirthdayDateTimePicker.Value;
             if (_isEdit)
             {
-                _manager.EditContact(_contactBefore, new Contact(surename, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
+                _manager.EditContact(_contactBefore, new Contact(surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
             }
             else
             {
-                _manager.AddContact(new Contact(surename, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
+                _manager.AddContact(new Contact(surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
+                _manager.Serialize();
+                
             }
-
             Close();
         }
 
@@ -245,19 +241,19 @@ namespace ContactsAppUI
                 NameTextBox.Text = "Ivan";
                 NameTextBox.ForeColor = Color.Gray;
             }
-            if (SurenameTextBox.Text.Length == 0)
+            if (SurnameTextBox.Text.Length == 0)
             {
-                SurenameTextBox.Text = "Ivanov";
-                SurenameTextBox.ForeColor = Color.Gray;
+                SurnameTextBox.Text = "Ivanov";
+                SurnameTextBox.ForeColor = Color.Gray;
             }
             if (VkTextBox.Text.Length == 0)
             {
-                VkTextBox.Text = "id123123123";
+                VkTextBox.Text = "Write here ID vk.com/";
                 VkTextBox.ForeColor = Color.Gray;
             }
             if (EmailTextBox.Text.Length == 0)
             {
-                EmailTextBox.Text = "usermail@example.com";
+                EmailTextBox.Text = "For example: usermail@example.com";
                 EmailTextBox.ForeColor = Color.Gray;
             }
             BirthdayDateTimePicker.MaxDate = DateTime.Now;
@@ -274,21 +270,21 @@ namespace ContactsAppUI
             Close();
         }
 
-        private void SurenameTextBox_Enter(object sender, EventArgs e)
+        private void SurnameTextBox_Enter(object sender, EventArgs e)
         {
-            if (SurenameTextBox.ForeColor == Color.Gray)
+            if (SurnameTextBox.ForeColor == Color.Gray)
             {
-                SurenameTextBox.Text = null;
-                SurenameTextBox.ForeColor = Color.Black;
+                SurnameTextBox.Text = null;
+                SurnameTextBox.ForeColor = Color.Black;
             }
         }
 
-        private void SurenameTextBox_Leave(object sender, EventArgs e)
+        private void SurnameTextBox_Leave(object sender, EventArgs e)
         {
-            if (SurenameTextBox.Text.Length == 0)
+            if (SurnameTextBox.Text.Length == 0)
             {
-                SurenameTextBox.Text = "Ivanov";
-                SurenameTextBox.ForeColor = Color.Gray;
+                SurnameTextBox.Text = "Ivanov";
+                SurnameTextBox.ForeColor = Color.Gray;
             }
         }
 
@@ -342,7 +338,7 @@ namespace ContactsAppUI
         {
             if (EmailTextBox.Text.Length == 0)
             {
-                EmailTextBox.Text = "usermail@example.com";
+                EmailTextBox.Text = "For example: usermail@example.com";
                 EmailTextBox.ForeColor = Color.Gray;
             }
         }
@@ -361,7 +357,7 @@ namespace ContactsAppUI
         {
             if (VkTextBox.Text.Length == 0)
             {
-                VkTextBox.Text = "id123456789";
+                VkTextBox.Text = "Write here ID vk.com/";
                 VkTextBox.ForeColor = Color.Gray;
             }
         }
@@ -382,6 +378,9 @@ namespace ContactsAppUI
         private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _main.Manager = _manager;
+            _main.FirstIndex = 0;
+            _main.LastIndex = _manager.ContactsCount;
+            _main.LastActionEditForm = true;
             _main.UpdateContactsList();
             _main.Show();
         }

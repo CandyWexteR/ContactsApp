@@ -12,6 +12,11 @@ namespace ContactsApp
             _project.AddContact(contact);
         }
 
+        public void SortContacts()
+        {
+            _project.SortContactList();
+        }
+
         public void RemoveContact(int index)
         {
             _project.RemoveContact(index);
@@ -24,6 +29,10 @@ namespace ContactsApp
             _project.EditContact(before, after);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Значение массива элементов типа Contact по его индексу</returns>
         public Contact GetContact(int id) => _project.GetContact(id);
 
 

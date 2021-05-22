@@ -33,6 +33,54 @@ namespace ContactsApp
             _contact = temp;
         }
 
+
+        //Сортировка взята с:
+        //https://www.cyberforum.ru/csharp-beginners/thread377059.html
+        /// <summary>
+        /// Сортирует по алфавиту контакты.
+        /// </summary>
+        public void SortContactList()
+        {
+            string[] personSurnameAndName = new string[_contactsCount];
+            for (int i = 0; i < _contactsCount; i++)
+            {
+                personSurnameAndName[i] = _contact[i].Surname;
+                personSurnameAndName[i] += " ";
+                personSurnameAndName[i] += _contact[i].Name;
+            }
+            for (int i = 0; i < personSurnameAndName.Length; i++)
+            {
+                for (int j = 0; j < personSurnameAndName.Length - 1; j++)
+                {
+                    if (needToReOrder(personSurnameAndName[j], personSurnameAndName[j + 1]))
+                    {
+                        string s = personSurnameAndName[j];
+                        personSurnameAndName[j] = personSurnameAndName[j + 1];
+                        personSurnameAndName[j + 1] = s;
+                        Contact temp = _contact[j];
+                        _contact[j] = _contact[j + 1];
+                        _contact[j + 1] = temp;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Сравнивает ASCII коды строк.
+        /// </summary>
+        /// <param name="s1">Первая строка</param>
+        /// <param name="s2">Вторая строка</param>
+        /// <returns>true - нужно, false - нет</returns>
+        protected static bool needToReOrder(string s1, string s2)
+        {
+            for (int i = 0; i < (s1.Length > s2.Length ? s2.Length : s1.Length); i++)
+            {
+                if (s1.ToCharArray()[i] < s2.ToCharArray()[i]) return false;
+                if (s1.ToCharArray()[i] > s2.ToCharArray()[i]) return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Удаление контакта:
         /// Создается новый массив элементов типа Contact
