@@ -7,8 +7,8 @@ namespace ContactsApp
     /// </summary>
     public class Contact
     {
-        protected Contact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday, string? email,
-            string? idVk)
+        protected Contact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
+            string? email, string? idVk)
         {
             Surname = surname;
             Name = name;
@@ -16,8 +16,14 @@ namespace ContactsApp
             BirthDay = birthday;
             Email = email;
             IdVk = idVk;
+            Id = id;
         }
-        
+
+        /// <summary>
+        /// Идентификатор контакта.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Фамилия
         /// </summary>
@@ -51,6 +57,7 @@ namespace ContactsApp
         /// <summary>
         /// Создать новый контакт.
         /// </summary>
+        /// <param name="id">Идентификатор контакта.</param>
         /// <param name="surname">Фамилия. Обязательное поле. Не больше 50 символов.</param>
         /// <param name="name">Имя. Обязательное поле. Не больше 50 символов.</param>
         /// <param name="phoneNumber">Класс номера телефона. Обязательное поле.</param>
@@ -58,16 +65,15 @@ namespace ContactsApp
         /// <param name="email">Электронная почта.</param>
         /// <param name="idVk">Идентификатор ВКонтакте.</param>
         /// <returns>Экземпляр контакта(<see cref="Contact"/>).</returns>
-        public static Contact Create(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
-            string? email,
-            string? idVk)
+        public static Contact Create(int id,string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
+            string? email, string? idVk)
         {
-            return new(surname, name, phoneNumber, birthday, email, idVk);
+            return new(id, surname, name, phoneNumber, birthday, email, idVk);
         }
 
-        public Contact CopyContactInfo()
+        public Contact CopyContactInfo(int id)
         {
-            return Create(Surname, Name, PhoneNumber, BirthDay, Email, IdVk);
+            return Create(id, Surname, Name, PhoneNumber, BirthDay, Email, IdVk);
         }
     }
 }
