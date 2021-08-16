@@ -70,10 +70,5 @@ namespace ContactsApp
         {
             return new(id, surname, name, phoneNumber, birthday, email, idVk);
         }
-
-        public Contact CopyContactInfo(int id)
-        {
-            return Create(id, Surname, Name, PhoneNumber, BirthDay, Email, IdVk);
-        }
     }
 }
