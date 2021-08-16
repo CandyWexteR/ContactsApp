@@ -22,37 +22,37 @@ namespace ContactsApp
         /// <summary>
         /// Идентификатор контакта.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; protected set; }
 
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string Surname { get; set; }
+        public string Surname { get; protected set; }
 
         /// <summary>
         /// Имя
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Номер телефона
         /// </summary>
-        public PhoneNumber PhoneNumber { get; set; }
+        public PhoneNumber PhoneNumber { get; protected set; }
 
         /// <summary>
         /// Электронная почта
         /// </summary>
-        public string? Email { get; set; }
+        public string? Email { get; protected set; }
 
         /// <summary>
         /// Идентификатор социальной сети ВКонтакте
         /// </summary>
-        public string? IdVk { get; set; }
+        public string? IdVk { get; protected set; }
 
         /// <summary>
         /// Дата рождения
         /// </summary>
-        public DateTime? BirthDay { get; set; }
+        public DateTime? BirthDay { get; protected set; }
 
         /// <summary>
         /// Создать новый контакт.
