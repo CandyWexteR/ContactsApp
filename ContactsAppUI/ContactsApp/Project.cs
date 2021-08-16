@@ -14,7 +14,8 @@ namespace ContactsApp
             _contacts = contacts;
         }
 
-
+        public IReadOnlyList<Contact> Contacts => _contacts;
+        
         /// <summary>
         /// Добавление контакта.
         /// </summary>
