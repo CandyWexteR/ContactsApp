@@ -25,15 +25,6 @@ namespace ContactsApp
             _contacts.Add(newContact);
         }
 
-
-        /// <summary>
-        /// Сортирует по алфавиту контакты по указанному полю.
-        /// </summary>
-        public IReadOnlyList<Contact> SortContactList(Func<Contact,string> keySelector)
-        {
-            return _contacts.OrderBy(keySelector).ToList();
-        }
-
         /// <summary>
         /// Удаление контакта из списка.
         /// </summary>
