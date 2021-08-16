@@ -8,7 +8,7 @@ namespace ContactsApp
 {
     public class Project
     {
-        private List<Contact> _contacts { get; set; }
+        private List<Contact> _contacts;
         public Project(List<Contact> contacts)
         {
             _contacts = contacts;
