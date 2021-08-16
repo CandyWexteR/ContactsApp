@@ -48,7 +48,7 @@ namespace ContactsAppUI
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(212, 39);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ContactsApp";
+            this.label1.Text = "ContactsAppVS";
             // 
             // VersionLabel
             // 
@@ -120,7 +120,7 @@ namespace ContactsAppUI
             this.GitHubLinkLabel.Size = new System.Drawing.Size(175, 20);
             this.GitHubLinkLabel.TabIndex = 7;
             this.GitHubLinkLabel.TabStop = true;
-            this.GitHubLinkLabel.Text = "MrFostik/ContactsApp";
+            this.GitHubLinkLabel.Text = "MrFostik/ContactsAppVS";
             this.GitHubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GitHubLinkLabel_LinkClicked);
             // 
             // AboutForm

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.IO;
+﻿using System.IO;
 
 namespace ContactsApp
 {
@@ -42,7 +41,7 @@ namespace ContactsApp
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
             //Открываем поток для чтения из файла с указанием пути
-            using (StreamReader sr = new StreamReader(@"D:\ContactsApp\ContactsApp\contacts.json"))
+            using (StreamReader sr = new StreamReader(@"D:\ContactsAppVS\ContactsAppVS\contacts.json"))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 //Вызываем десериализацию и явно преобразуем результат в целевой тип данных
@@ -61,7 +60,7 @@ namespace ContactsApp
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
             //Открываем поток для записи в файл с указанием пути
-            using (StreamWriter sw = new StreamWriter(@"D:\ContactsApp\ContactsApp\contacts.json"))
+            using (StreamWriter sw = new StreamWriter(@"D:\ContactsAppVS\ContactsAppVS\contacts.json"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 //Вызываем сериализацию и передаем объект, который хотим сериализовать
