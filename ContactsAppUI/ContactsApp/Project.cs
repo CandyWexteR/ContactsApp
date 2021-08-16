@@ -1,134 +1,71 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Linq.Expressions;
+using InvalidEditOperationException = ContactsApp.Exceptions.InvalidOperationException;
+
 namespace ContactsApp
 {
     public class Project
     {
+        private List<Contact> _contacts { get; set; }
+        public Project(List<Contact> contacts)
+        {
+            _contacts = contacts;
+        }
 
-        private static int _contactsCount = 0;
-        private Contact[] _contact;
-
-        public Contact[] contact { get => _contact; set => _contact = value; }
-        public int ContatsCount { get => _contactsCount; set => _contactsCount = value; }
 
         /// <summary>
-        /// Добавление контакта:
-        /// Создается временный массив данных типа Contact
-        /// с количеством _contactsCount+1.
-        /// Копируются значения из основного массива в новый.
-        /// В последний элемент добавляется добавляемое значение.
-        /// Старый массив заменяется новым, общее количество контактов
-        /// увеличено на 1.
+        /// Добавление контакта.
         /// </summary>
         /// <param name="newContact"> - добавляемый контакт.</param>
         public void AddContact(Contact newContact)
         {
-            Contact[] temp = new Contact[_contactsCount + 1];
-            for (int i = 0; i < _contactsCount; i++)
-            {
-                temp[i] = _contact[i];
-            }
-
-            temp[_contactsCount] = newContact;
-            _contactsCount++;
-            _contact = temp;
+            _contacts.Add(newContact);
         }
 
 
-        //Сортировка взята с:
-        //https://www.cyberforum.ru/csharp-beginners/thread377059.html
         /// <summary>
-        /// Сортирует по алфавиту контакты.
+        /// Сортирует по алфавиту контакты по указанному полю.
         /// </summary>
-        public void SortContactList()
+        public IReadOnlyList<Contact> SortContactList(Func<Contact,string> keySelector)
         {
-            string[] personSurnameAndName = new string[_contactsCount];
-            for (int i = 0; i < _contactsCount; i++)
-            {
-                personSurnameAndName[i] = _contact[i].Surname;
-                personSurnameAndName[i] += " ";
-                personSurnameAndName[i] += _contact[i].Name;
-            }
-            for (int i = 0; i < personSurnameAndName.Length; i++)
-            {
-                for (int j = 0; j < personSurnameAndName.Length - 1; j++)
-                {
-                    if (needToReOrder(personSurnameAndName[j], personSurnameAndName[j + 1]))
-                    {
-                        string s = personSurnameAndName[j];
-                        personSurnameAndName[j] = personSurnameAndName[j + 1];
-                        personSurnameAndName[j + 1] = s;
-                        Contact temp = _contact[j];
-                        _contact[j] = _contact[j + 1];
-                        _contact[j + 1] = temp;
-                    }
-                }
-            }
+            return _contacts.OrderBy(keySelector).ToList();
         }
 
         /// <summary>
-        /// Сравнивает ASCII коды строк.
-        /// </summary>
-        /// <param name="s1">Первая строка</param>
-        /// <param name="s2">Вторая строка</param>
-        /// <returns>true - нужно, false - нет</returns>
-        protected static bool needToReOrder(string s1, string s2)
-        {
-            for (int i = 0; i < (s1.Length > s2.Length ? s2.Length : s1.Length); i++)
-            {
-                if (s1.ToCharArray()[i] < s2.ToCharArray()[i]) return false;
-                if (s1.ToCharArray()[i] > s2.ToCharArray()[i]) return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Удаление контакта:
-        /// Создается новый массив элементов типа Contact
-        /// с количеством значений _contactsCount-1.
-        /// Переносятся все значения, кроме удаляемого.
-        /// Количество уменьшается на 1.
+        /// Удаление контакта из списка.
         /// </summary>
         /// <param name="index"> - индекс удаляемого контакта.</param>
         public void RemoveContact(int index)
         {
-            if (ContatsCount == 1)
+            if (_contacts.Count == 0)
             {
-                _contactsCount = 0;
-                _contact = null;
-                return;
+                throw new InvalidEditOperationException("Невозможно удалить контакт из пустого списка.");
             }
-            Contact[] temp = new Contact[ContatsCount - 1];
-            for (int i = 0; i < index; i++)
-            {
-                temp[i] = _contact[i];
-            }
-            for (int i = index; i < ContatsCount - 1; i++)
-            {
-                temp[i] = _contact[i + 1];
-            }
-            _contact = temp;
-            _contactsCount--;
+
+            var toRemove = _contacts[index];
+            
+            if (!_contacts.Contains(toRemove))
+                throw new InvalidEditOperationException("Контакта уже нет в списке.");
+
+            _contacts.Remove(toRemove);
         }
 
         /// <summary>
-        /// Редактирование контакта:
-        /// Находится старый контакт и заменяется
-        /// новым экземпляром.
+        /// Редактирование контакта: Находится старый контакт и заменяется новым экземпляром.
         /// </summary>
-        /// <param name="before"> - старый контакт.</param>
-        /// <param name="after"> - новый контакт.</param>
-        public void EditContact(Contact before, Contact after)
+        /// <param name="indexBefore">Индекс старого контакта</param>
+        /// <param name="after">Новый контакт.</param>
+        public void EditContact(int indexBefore, Contact after)
         {
-            for (int i = 0; i < _contactsCount; i++)
-            {
-                if (_contact[i] == before)
-                {
-                    _contact[i] = after;
-                    break;
-                }
-            }
-        }
-        public Contact GetContact(int id) => _contact[id];
+            var old = _contacts[indexBefore];
+            if (!_contacts.Contains(old))
+                throw new InvalidEditOperationException("Редактирование несуществующего элемента.");
 
+            _contacts[indexBefore] = after;
+        }
     }
 }
