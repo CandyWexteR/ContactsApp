@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using ContactsApp.Exceptions;
 
 namespace ContactsApp
 {
@@ -68,6 +70,14 @@ namespace ContactsApp
         public static Contact Create(int id,string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
             string? email, string? idVk)
         {
+            var exceptions = new List<InvalidValueException>();
+            if (id < 0)
+                exceptions.Add(new InvalidValueException("Идентификатор не может быть меньше 0"));
+            if (string.IsNullOrWhiteSpace(surname))
+                exceptions.Add( new InvalidValueException("Фамилия не может быть пустой строкой"));
+            if (string.IsNullOrWhiteSpace(name))
+                exceptions.Add(new InvalidValueException("Имя не может быть пустой строкой"));
+            
             return new(id, surname, name, phoneNumber, birthday, email, idVk);
         }
     }

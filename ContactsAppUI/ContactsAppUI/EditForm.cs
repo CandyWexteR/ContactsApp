@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ContactsApp;
+﻿using ContactsApp;
 
-namespace ContactsAppUI
+namespace UI
 {
     public partial class EditForm : Form
     {
@@ -34,9 +25,12 @@ namespace ContactsAppUI
             _contactBefore = contact;
             SurnameTextBox.Text = _contactBefore.Surname;
             NameTextBox.Text = _contactBefore.Name;
-            BirthdayDateTimePicker.Value = _contactBefore.BirthDay;
-            string temp = "+7(" + _contactBefore.Number.Code.ToString() + ")-";
-            string numbTemp = _contactBefore.Number.NumberPhone.ToString();
+            if (_contactBefore.BirthDay is not null)
+            {
+                BirthdayDateTimePicker.Value = _contactBefore.BirthDay.Value;
+            }
+            string temp = "+7" + _contactBefore.PhoneNumber.Number.ToString();
+            string numbTemp = _contactBefore.PhoneNumber.Number.ToString();
             temp += numbTemp[0];
             temp += numbTemp[1];
             temp += numbTemp[2];
@@ -173,21 +167,8 @@ namespace ContactsAppUI
             }
             string surname = "";
             string name = "";
-            string _number = "";
-            _number += PhoneTextBox.Text[8];
-            _number += PhoneTextBox.Text[9];
-            _number += PhoneTextBox.Text[10];
-            _number += PhoneTextBox.Text[12];
-            _number += PhoneTextBox.Text[13];
-            _number += PhoneTextBox.Text[15];
-            _number += PhoneTextBox.Text[16];
-            string _code = "";
-            _code += PhoneTextBox.Text[3];
-            _code += PhoneTextBox.Text[4];
-            _code += PhoneTextBox.Text[5];
-            int number = int.Parse(_number);
-            int code = int.Parse(_code);
-            PhoneNumber phone = new PhoneNumber(number, code);
+            var number = long.Parse(PhoneTextBox.Text);
+            PhoneNumber phone = PhoneNumber.Create(number);
 
             //Сохраняются Фамилия и Имя следующим образом:
             //Первая буква всегда имеет верхний регистр, остальные нижний
@@ -218,11 +199,11 @@ namespace ContactsAppUI
             DateTime _dateTime = BirthdayDateTimePicker.Value;
             if (_isEdit)
             {
-                _manager.EditContact(_contactBefore, new Contact(surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
+                _manager.EditContact(_contactBefore.Id, Contact.Create(_contactBefore.Id, surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
             }
             else
             {
-                _manager.AddContact(new Contact(surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
+                _manager.AddContact(surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text);
                 _manager.Serialize();
                 
             }

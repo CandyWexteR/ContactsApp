@@ -11,7 +11,7 @@ namespace ContactsApp
         private Project? _project;
 
         //Для десериализации.
-        [System.Text.Json.Serialization.JsonConstructor]
+        [JsonConstructor]
         public ProjectManager(Project project)
         {
             _project = project;
@@ -24,9 +24,9 @@ namespace ContactsApp
             _project.AddContact(contact);
         }
 
-        public IReadOnlyList<Contact> GetSortedContacts(Func<Contact, string> keySelector)
+        public IReadOnlyList<Contact> GetSortedContacts()
         {
-            return _project.Contacts.OrderBy(keySelector).ToList();
+            return _project.Contacts.OrderBy(c => c.Name).OrderBy(c => c.Surname).ToList();
         }
 
         public void RemoveContact(int index)
@@ -49,17 +49,18 @@ namespace ContactsApp
         public void Deserialize()
         {
             Project? project = null;
-            //Создаём экземпляр сериализатора
-            var serializer = new JsonSerializer();
-            //Открываем поток для чтения из файла с указанием пути
-            using (var sr = new StreamReader(@"D:\ContactsAppVS\ContactsAppVS\contacts.json"))
-            using (var reader = new JsonTextReader(sr))
+            try
             {
-                //Вызываем десериализацию и явно преобразуем результат в целевой тип данных
-                project = serializer.Deserialize<Project>(reader);
+                var text = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
+
+                project = JsonConvert.DeserializeObject<Project>(text);
+            }
+            catch (Exception)
+            {
+                project = new Project(new List<Contact>());
             }
 
-            if (project != null)
+            if (project is not null)
             {
                 _project = project;
             }
@@ -71,15 +72,16 @@ namespace ContactsApp
 
         public void Serialize()
         {
-            //Создаём экземпляр сериализатора
-            var serializer = new JsonSerializer();
-            //Открываем поток для записи в файл с указанием пути
-            using (var sw = new StreamWriter(@"D:\ContactsAppVS\ContactsAppVS\contacts.json"))
-            using (var writer = new JsonTextWriter(sw))
-            {
-                //Вызываем сериализацию и передаем объект, который хотим сериализовать
-                serializer.Serialize(writer, _project);
-            }
+            var text = JsonConvert.SerializeObject(_project);
+            File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"), text);
+        }
+
+        public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
+            string? email, string? idVk)
+        {
+            var last = _project.Contacts.LastOrDefault()?.Id ?? 0;
+            var contact = Contact.Create(last + 1, surname, name, phoneNumber, birthday, email, idVk);
+            _project.AddContact(contact);
         }
     }
 }

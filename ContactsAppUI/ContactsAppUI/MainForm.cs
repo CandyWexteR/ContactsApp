@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ContactsApp;
+﻿using ContactsApp;
 
-namespace ContactsAppUI
+namespace UI
 {
     public partial class MainForm : Form
     {
-        private ProjectManager _manager = new ProjectManager();
+        private ProjectManager _manager;
         private EditForm _editForm;
         private Contact listedContact;
         private bool lastActionEditForm;
@@ -22,6 +13,8 @@ namespace ContactsAppUI
         public MainForm()
         {
             InitializeComponent();
+            _manager = new ProjectManager(null);
+            _manager.Deserialize();
         }
 
 
@@ -118,19 +111,19 @@ namespace ContactsAppUI
                 return;
             }
 
-            _manager.SortContacts();
+            var contacts = _manager.GetSortedContacts();
             ContactsList.Enabled = true;
             ContactsList.Items.Clear();
 
-            for (int i = firstIndex; i < lastIndex; i++)
+            foreach (var item in contacts)
             {
-                Contact temp = _manager.GetContact(i);
-                string s = temp.Surname;
-                s += " ";
-                s += temp.Name;
-                ContactsList.Items.Add(s);
+                ContactsList.Items.Add($"{item.Surname} {item.Name}");
             }
-            ContactsList.SelectedIndex = 0;
+
+            if (contacts.Count != 0)
+            {
+                ContactsList.SelectedIndex = 0;
+            }
         }
 
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,18 +169,17 @@ namespace ContactsAppUI
             listedContact = _manager.GetContact(ContactsList.SelectedIndex + firstIndex);
             SurnameTextBox.Text = listedContact.Surname;
             NameTextBox.Text = listedContact.Name;
-            BirthdayDateTimePicker.Value = listedContact.BirthDay;
-            string temp = "+7(" + listedContact.Number.Code.ToString() + ")-";
-            string numbTemp = listedContact.Number.NumberPhone.ToString();
-            temp += numbTemp[0];
-            temp += numbTemp[1];
-            temp += numbTemp[2];
-            temp += "-";
-            temp += numbTemp[3];
-            temp += numbTemp[4];
-            temp += "-";
-            temp += numbTemp[5];
-            temp += numbTemp[6];
+            if (listedContact.BirthDay is not null)
+            {
+                BirthdayDateTimePicker.Enabled = true;
+                BirthdayDateTimePicker.Value = listedContact.BirthDay.Value;
+            }
+            else
+            {
+                BirthdayDateTimePicker.Enabled = false;
+            }
+            string temp = "+7(" + listedContact.PhoneNumber.Number.ToString() + ")-";
+            string numbTemp = listedContact.PhoneNumber.Number.ToString();
             PhoneTextBox.Text = temp;
             EmailTextBox.Text = listedContact.Email;
             VkTextBox.Text = listedContact.IdVk;
