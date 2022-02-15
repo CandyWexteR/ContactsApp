@@ -14,7 +14,6 @@ namespace UI
         {
             InitializeComponent();
             _manager = new ProjectManager(null);
-            _manager.Deserialize();
         }
 
 
@@ -26,7 +25,7 @@ namespace UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _manager.Deserialize();
+            _manager.Deserialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
             BirthdayDateTimePicker.MaxDate = DateTime.Now;
             firstIndex = 0;
             lastIndex = _manager.ContactsCount;
@@ -187,7 +186,7 @@ namespace UI
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _manager.Serialize();
+            _manager.Serialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
         }
 
         private void RemoveContactToolStripMenuItem_Click(object sender, EventArgs e)
@@ -202,7 +201,7 @@ namespace UI
             if (res == DialogResult.OK)
             {
                 _manager.RemoveContact(ContactsList.SelectedIndex+firstIndex);
-                _manager.Serialize();
+                _manager.Serialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
                 lastIndex--;
                 UpdateContactsList();
             }

@@ -204,7 +204,7 @@ namespace UI
             else
             {
                 _manager.AddContact(surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text);
-                _manager.Serialize();
+                _manager.Serialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
                 
             }
             Close();

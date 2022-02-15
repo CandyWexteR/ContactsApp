@@ -46,18 +46,22 @@ namespace ContactsApp
         public Contact GetContact(int id) => _project.Contacts[id];
 
 
-        public void Deserialize()
+        public void Deserialize(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                path = Path.Combine(Directory.GetCurrentDirectory(), "contacts.json");
+            }
             Project? project = null;
             try
             {
-                var text = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
+                var text = File.ReadAllText(path);
 
                 project = JsonConvert.DeserializeObject<Project>(text);
             }
             catch (Exception)
             {
-                project = new Project(new List<Contact>());
+                // ignored
             }
 
             if (project is not null)
@@ -67,13 +71,14 @@ namespace ContactsApp
             else
             {
                 _project = new Project(new List<Contact>());
+                Serialize(path);
             }
         }
 
-        public void Serialize()
+        public void Serialize(string path)
         {
             var text = JsonConvert.SerializeObject(_project);
-            File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"), text);
+            File.WriteAllText(path, text);
         }
 
         public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
