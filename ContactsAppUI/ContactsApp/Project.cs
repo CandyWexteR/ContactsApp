@@ -20,9 +20,13 @@ namespace ContactsApp
         /// Добавление контакта.
         /// </summary>
         /// <param name="newContact"> - добавляемый контакт.</param>
-        public void AddContact(Contact newContact)
+        public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
+            string? email, string? idVk)
         {
-            _contacts.Add(newContact);
+            
+            var last = Contacts.LastOrDefault()?.Id ?? 0;
+            var contact = Contact.Create(last + 1, surname, name, phoneNumber, birthday, email, idVk);
+            _contacts.Add(contact);
         }
 
         /// <summary>

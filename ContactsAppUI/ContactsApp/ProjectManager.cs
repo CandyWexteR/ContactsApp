@@ -19,11 +19,6 @@ namespace ContactsApp
 
         public int ContactsCount => _project.Contacts.Count;
 
-        public void AddContact(Contact contact)
-        {
-            _project.AddContact(contact);
-        }
-
         public IReadOnlyList<Contact> GetSortedContacts()
         {
             return _project.Contacts.OrderBy(c => c.Name).OrderBy(c => c.Surname).ToList();
@@ -52,6 +47,7 @@ namespace ContactsApp
             {
                 path = Path.Combine(Directory.GetCurrentDirectory(), "contacts.json");
             }
+
             Project? project = null;
             try
             {
@@ -84,9 +80,7 @@ namespace ContactsApp
         public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
             string? email, string? idVk)
         {
-            var last = _project.Contacts.LastOrDefault()?.Id ?? 0;
-            var contact = Contact.Create(last + 1, surname, name, phoneNumber, birthday, email, idVk);
-            _project.AddContact(contact);
+            _project.AddContact(surname, name, phoneNumber, birthday, email, idVk);
         }
     }
 }
