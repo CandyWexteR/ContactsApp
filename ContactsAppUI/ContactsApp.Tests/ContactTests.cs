@@ -62,7 +62,7 @@ public class ContactTests
     }
     
     [Test]
-    [TestCase(1, "someName", "someSurname", null, null, null)]
+    [TestCase(-1, "someName", "someSurname", null, null, null)]
     public void Contact_Invalid(int id,string surname, string name, DateTime? birthday, string? email, string? idVk)
     {
         var expectedMessages = new string[]

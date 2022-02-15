@@ -24,7 +24,7 @@ namespace ContactsApp
         {
             //79539244113
             //
-            if (number is < 10000000000 or >= 100000000000)
+            if (number is < 1000000000 or >= 10000000000)
             {
                 throw new InvalidValueException($"Неправильное значение номера телефона " +
                                                 $"({nameof(PhoneNumber)}).");

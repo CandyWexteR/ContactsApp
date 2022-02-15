@@ -20,9 +20,7 @@ public class PhoneNumberTests
     [TestCase(1000000)]
     [TestCase(10000000)]
     [TestCase(100000000)]
-    [TestCase(1000000000)]
-    [TestCase(100000000000L)]
-    [TestCase(10000000000000L)]
+    [TestCase(1000000000000)]
     public void PhoneNumber_InvalidValue(long value)
     {
         if (value is < 10000000000 or >= 100000000000)
@@ -37,13 +35,13 @@ public class PhoneNumberTests
     }
 
     [Test]
-    [TestCase(10000000000L)]
-    [TestCase(10000300000L)]
-    [TestCase(10000320000L)]
-    [TestCase(90000320000L)]
+    [TestCase(1000000000L)]
+    [TestCase(1000030000L)]
+    [TestCase(1000032000L)]
+    [TestCase(9000032000L)]
     public void PhoneNumber_ValidValue(long value)
     {
-        if (value is < 10000000000 or >= 100000000000)
+        if (value is < 1000000000 or >= 10000000000)
         {
             Assert.Fail("Значение НЕ должно быть в диапазоне от 10000000000 до 100000000000");
             return;
