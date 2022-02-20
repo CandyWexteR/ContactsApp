@@ -199,7 +199,7 @@ namespace UI
             DateTime _dateTime = BirthdayDateTimePicker.Value;
             if (_isEdit)
             {
-                _manager.EditContact(_contactBefore.Id, Contact.Create(_contactBefore.Id, surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
+                _manager.EditContact(Contact.Create(_contactBefore.Id, surname, name, phone, _dateTime, EmailTextBox.Text, VkTextBox.Text));
             }
             else
             {

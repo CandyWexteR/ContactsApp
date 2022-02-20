@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using ContactsApp.Exceptions;
@@ -15,15 +14,19 @@ namespace ContactsApp
         }
 
         public IReadOnlyList<Contact> Contacts => _contacts;
-        
+
         /// <summary>
         /// Добавление контакта.
         /// </summary>
-        /// <param name="newContact"> - добавляемый контакт.</param>
+        /// <param name="surname">Фамилия</param>
+        /// <param name="name">Имя</param>
+        /// <param name="phoneNumber">Номер телефона в формате <see cref="PhoneNumber"/></param>
+        /// <param name="birthday">Дата рождения</param>
+        /// <param name="email">Адрес электронной почты</param>
+        /// <param name="idVk">Идентификатор профиля ВКонтакте</param>
         public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
             string? email, string? idVk)
         {
-            
             var last = Contacts.LastOrDefault()?.Id ?? 0;
             var contact = Contact.Create(last + 1, surname, name, phoneNumber, birthday, email, idVk);
             _contacts.Add(contact);
@@ -40,10 +43,10 @@ namespace ContactsApp
                 throw new InvalidEditOperationException("Невозможно удалить контакт из пустого списка.");
             }
 
-            var toRemove = _contacts[index];
+            var toRemove = _contacts.FirstOrDefault(e=>e.Id == index);
             
-            if (!_contacts.Contains(toRemove))
-                throw new InvalidEditOperationException("Контакта уже нет в списке.");
+            if (toRemove is null)
+                throw new InvalidEditOperationException("Этого контакта нет в списке.");
 
             _contacts.Remove(toRemove);
         }
@@ -53,13 +56,13 @@ namespace ContactsApp
         /// </summary>
         /// <param name="indexBefore">Индекс старого контакта</param>
         /// <param name="after">Новый контакт.</param>
-        public void EditContact(int indexBefore, Contact after)
+        public void EditContact(Contact after)
         {
-            var old = _contacts[indexBefore];
+            var old = _contacts[after.Id];
             if (!_contacts.Contains(old))
                 throw new InvalidEditOperationException("Редактирование несуществующего элемента.");
 
-            _contacts[indexBefore] = after;
+            _contacts[after.Id] = after;
         }
     }
 }

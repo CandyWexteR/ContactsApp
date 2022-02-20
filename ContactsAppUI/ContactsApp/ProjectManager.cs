@@ -29,9 +29,9 @@ namespace ContactsApp
             _project.RemoveContact(index);
         }
 
-        public void EditContact(int indexBefore, Contact after)
+        public void EditContact(Contact after)
         {
-            _project.EditContact(indexBefore, after);
+            _project.EditContact(after);
         }
 
         /// <summary>
