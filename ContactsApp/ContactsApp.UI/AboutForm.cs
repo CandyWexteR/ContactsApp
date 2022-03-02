@@ -1,4 +1,7 @@
-﻿namespace UI
+﻿using System;
+using System.Windows.Forms;
+
+namespace ContactsApp.UI
 {
     public partial class AboutForm : Form
     {

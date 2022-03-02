@@ -1,4 +1,7 @@
-﻿namespace UI
+﻿using System;
+using System.Windows.Forms;
+
+namespace ContactsApp.UI
 {
     static class Program
     {
@@ -10,7 +13,7 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainForm main = new MainForm();
+            var main = new MainForm();
             Application.Run(main);
         }
     }

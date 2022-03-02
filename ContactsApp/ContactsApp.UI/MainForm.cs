@@ -1,6 +1,8 @@
-﻿using ContactsApp;
+﻿using System;
+using System.IO;
+using System.Windows.Forms;
 
-namespace UI
+namespace ContactsApp.UI
 {
     public partial class MainForm : Form
     {

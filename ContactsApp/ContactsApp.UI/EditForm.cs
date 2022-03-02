@@ -1,6 +1,9 @@
-﻿using ContactsApp;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
-namespace UI
+namespace ContactsApp.UI
 {
     public partial class EditForm : Form
     {
@@ -101,60 +104,7 @@ namespace UI
 
         private void PhoneTextBox_TextChanged(object sender, EventArgs e)
         {
-            if(PhoneTextBox.Text.Length < 3)
-            {
-                PhoneTextBox.Text = "+7(";
-                PhoneTextBox.SelectionStart = PhoneTextBox.Text.Length;
-            }
-
-            string temp = "";
-
-            if (PhoneTextBox.Text[PhoneTextBox.Text.Length - 2] == ')')
-            {
-                for (int i = 0; i < PhoneTextBox.Text.Length - 2; i++)
-                {
-                    temp += PhoneTextBox.Text[i];
-                }
-                PhoneTextBox.Text = temp;
-            }
-
-            if (PhoneTextBox.Text[PhoneTextBox.Text.Length-1] == '-')
-            {
-                for(int i=0;i<PhoneTextBox.Text.Length-1;i++)
-                {
-                    temp += PhoneTextBox.Text[i];
-                }
-                PhoneTextBox.Text = temp;
-            }
-
-            if (PhoneTextBox.Text.Length == 7)
-            {
-                for (int i = 0; i < PhoneTextBox.Text.Length - 1; i++)
-                {
-                    temp += PhoneTextBox.Text[i];
-                }
-                temp += ")" + "-" + PhoneTextBox.Text[PhoneTextBox.Text.Length - 1];
-                PhoneTextBox.Text = temp;
-            }
-
-            if (PhoneTextBox.Text.Length == 12 || PhoneTextBox.Text.Length == 15)
-            {
-                for (int i = 0; i < PhoneTextBox.Text.Length - 1; i++)
-                {
-                    temp += PhoneTextBox.Text[i];
-                }
-                temp += "-" + PhoneTextBox.Text[PhoneTextBox.Text.Length - 1];
-                PhoneTextBox.Text = temp;
-            }
-
-            if (PhoneTextBox.Text.Length > 17 || PhoneTextBox.Text.Length == 3)
-            {
-                PhoneTextBox.BackColor = Color.Brown;
-                return;
-            }
-
-            PhoneTextBox.BackColor = Color.White;
-            PhoneTextBox.SelectionStart = PhoneTextBox.Text.Length;
+            
         }
 
         private void OkButton_Click(object sender, EventArgs e)
