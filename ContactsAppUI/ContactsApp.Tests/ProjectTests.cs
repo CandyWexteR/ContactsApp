@@ -156,11 +156,10 @@ public class ProjectTests
     private void AssertContact(int index, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
         string? email, string? idVk)
     {
-        var id = index + 1;
         Assert.AreEqual(email, _project.Contacts[index].Email);
         Assert.AreEqual(idVk, _project.Contacts[index].IdVk);
         Assert.AreEqual(birthday, _project.Contacts[index].BirthDay);
-        Assert.AreEqual(id, _project.Contacts[index].Id);
+        Assert.AreEqual(index, _project.Contacts[index].Id);
         Assert.AreEqual(name, _project.Contacts[index].Name);
         Assert.AreEqual(surname, _project.Contacts[index].Surname);
         Assert.AreEqual(phoneNumber, _project.Contacts[index].PhoneNumber);

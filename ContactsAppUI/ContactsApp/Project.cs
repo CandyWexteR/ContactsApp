@@ -29,7 +29,7 @@ namespace ContactsApp
         public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
             string? email, string? idVk)
         {
-            var last = Contacts.LastOrDefault()?.Id ?? 0;
+            var last = Contacts.LastOrDefault()?.Id ?? -1;
             var contact = Contact.Create(last + 1, surname, name, phoneNumber, birthday, email, idVk);
             _contacts.Add(contact);
         }
