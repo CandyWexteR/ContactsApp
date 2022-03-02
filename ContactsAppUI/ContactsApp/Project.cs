@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using ContactsApp.Exceptions;
+using Newtonsoft.Json;
 
 namespace ContactsApp
 {
     public class Project
     {
         private List<Contact> _contacts;
+        [JsonConstructor]
         public Project(List<Contact> contacts)
         {
             _contacts = contacts;
@@ -58,8 +60,8 @@ namespace ContactsApp
         /// <param name="after">Новый контакт.</param>
         public void EditContact(Contact after)
         {
-            var old = _contacts[after.Id];
-            if (!_contacts.Contains(old))
+            var old = _contacts.FirstOrDefault(c=>c.Id == after.Id);
+            if (old is null)
                 throw new InvalidEditOperationException("Редактирование несуществующего элемента.");
 
             _contacts[after.Id] = after;

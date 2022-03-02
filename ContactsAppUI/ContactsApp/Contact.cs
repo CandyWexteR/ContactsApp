@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ContactsApp.Exceptions;
+using Newtonsoft.Json;
 
 namespace ContactsApp
 {
@@ -9,6 +10,7 @@ namespace ContactsApp
     /// </summary>
     public class Contact
     {
+        [JsonConstructor]
         protected Contact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
             string? email, string? idVk)
         {

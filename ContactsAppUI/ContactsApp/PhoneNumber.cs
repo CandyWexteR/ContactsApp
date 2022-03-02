@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using ContactsApp.Exceptions;
+﻿using ContactsApp.Exceptions;
+using Newtonsoft.Json;
 
 namespace ContactsApp
 {

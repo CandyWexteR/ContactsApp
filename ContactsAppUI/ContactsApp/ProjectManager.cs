@@ -38,7 +38,7 @@ namespace ContactsApp
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Значение массива элементов типа Contact по его индексу</returns>
-        public Contact GetContact(int id) => _project.Contacts[id];
+        public Contact? GetContact(int id) => _project.Contacts.FirstOrDefault(c=>c.Id == id);
 
 
         public void Deserialize(string path)
@@ -73,7 +73,18 @@ namespace ContactsApp
 
         public void Serialize(string path)
         {
+            var directory = Path.GetDirectoryName(path);
             var text = JsonConvert.SerializeObject(_project);
+
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+            
+            if (!File.Exists(path))
+                using (var stream = File.Create(path))
+                {
+                    stream.Close();
+                }
+            
             File.WriteAllText(path, text);
         }
 

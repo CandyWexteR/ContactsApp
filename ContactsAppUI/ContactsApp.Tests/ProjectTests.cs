@@ -57,7 +57,7 @@ public class ProjectTests
     }
 
     [Test]
-    [TestCase(3, 4)]
+    [TestCase(3, 2)]
     public void ContactRemove_Valid(int count, int removingIndex)
     {
         Assert.Positive(count);
@@ -108,7 +108,7 @@ public class ProjectTests
     }
 
     [Test]
-    [TestCase(0, 0, "", "", "", "", null)]
+    [TestCase(2, 1, "2332", "2323", "2323", "232323", null)]
     public void ContactEdit_Valid(int count, int index, string surname, string name, string? email, string? idVk,
         DateTime? birthday)
     {
@@ -131,7 +131,7 @@ public class ProjectTests
     }
 
     [Test]
-    [TestCase(0, 0, "", "", "", "", null)]
+    [TestCase(1, 2, "132", "321", "2323", "323", null)]
     public void ContactEdit_Invalid(int count, int index, string surname, string name, string? email, string? idVk,
         DateTime? birthday)
     {
@@ -156,10 +156,11 @@ public class ProjectTests
     private void AssertContact(int index, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
         string? email, string? idVk)
     {
+        var id = index + 1;
         Assert.AreEqual(email, _project.Contacts[index].Email);
         Assert.AreEqual(idVk, _project.Contacts[index].IdVk);
         Assert.AreEqual(birthday, _project.Contacts[index].BirthDay);
-        Assert.AreEqual(index, _project.Contacts[index].Id);
+        Assert.AreEqual(id, _project.Contacts[index].Id);
         Assert.AreEqual(name, _project.Contacts[index].Name);
         Assert.AreEqual(surname, _project.Contacts[index].Surname);
         Assert.AreEqual(phoneNumber, _project.Contacts[index].PhoneNumber);
