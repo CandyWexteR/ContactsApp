@@ -24,12 +24,13 @@ namespace ContactsApp.UI
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.BirthdayDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FindLabel = new System.Windows.Forms.Label();
             this.ContactsList = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -52,10 +53,23 @@ namespace ContactsApp.UI
             this.PhoneTextBox = new System.Windows.Forms.TextBox();
             this.EmailTextBox = new System.Windows.Forms.TextBox();
             this.VkTextBox = new System.Windows.Forms.TextBox();
-            this.BirthdayDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FindTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // BirthdayDateTimePicker
+            // 
+            this.BirthdayDateTimePicker.Enabled = false;
+            this.BirthdayDateTimePicker.Location = new System.Drawing.Point(286, 102);
+            this.BirthdayDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2021, 5, 16, 0, 0, 0, 0);
+            this.BirthdayDateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
+            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(127, 20);
+            this.BirthdayDateTimePicker.TabIndex = 16;
+            this.BirthdayDateTimePicker.Value = new System.DateTime(2021, 5, 16, 0, 0, 0, 0);
+            this.BirthdayDateTimePicker.ValueChanged += new System.EventHandler(this.BirthdayDateTimePicker_ValueChanged);
+            this.BirthdayDateTimePicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // FindLabel
             // 
@@ -82,10 +96,7 @@ namespace ContactsApp.UI
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.fileToolStripMenuItem, this.editToolStripMenuItem, this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -96,8 +107,7 @@ namespace ContactsApp.UI
             // 
             // fileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -111,10 +121,7 @@ namespace ContactsApp.UI
             // 
             // editToolStripMenuItem
             // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addContactToolStripMenuItem,
-            this.editContactToolStripMenuItem,
-            this.removeContactToolStripMenuItem});
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.addContactToolStripMenuItem, this.editContactToolStripMenuItem, this.removeContactToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -142,8 +149,7 @@ namespace ContactsApp.UI
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem1});
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.aboutToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -188,12 +194,12 @@ namespace ContactsApp.UI
             // PhoneLabel
             // 
             this.PhoneLabel.AutoSize = true;
-            this.PhoneLabel.Location = new System.Drawing.Point(242, 128);
+            this.PhoneLabel.Location = new System.Drawing.Point(234, 128);
             this.PhoneLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PhoneLabel.Name = "PhoneLabel";
-            this.PhoneLabel.Size = new System.Drawing.Size(41, 13);
+            this.PhoneLabel.Size = new System.Drawing.Size(56, 13);
             this.PhoneLabel.TabIndex = 6;
-            this.PhoneLabel.Text = "Phone:";
+            this.PhoneLabel.Text = "Phone: +7";
             // 
             // EmailLabel
             // 
@@ -265,19 +271,6 @@ namespace ContactsApp.UI
             this.VkTextBox.TabIndex = 14;
             this.VkTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
-            // BirthdayDateTimePicker
-            // 
-            this.BirthdayDateTimePicker.Enabled = false;
-            this.BirthdayDateTimePicker.Location = new System.Drawing.Point(286, 102);
-            this.BirthdayDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
-            this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2021, 5, 16, 0, 0, 0, 0);
-            this.BirthdayDateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
-            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(127, 20);
-            this.BirthdayDateTimePicker.TabIndex = 16;
-            this.BirthdayDateTimePicker.Value = new System.DateTime(2021, 5, 16, 0, 0, 0, 0);
-            this.BirthdayDateTimePicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            // 
             // FindTextBox
             // 
             this.FindTextBox.Location = new System.Drawing.Point(41, 27);
@@ -311,7 +304,7 @@ namespace ContactsApp.UI
             this.Controls.Add(this.FindLabel);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
@@ -323,8 +316,9 @@ namespace ContactsApp.UI
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.DateTimePicker BirthdayDateTimePicker;
 
         #endregion
 
@@ -350,7 +344,6 @@ namespace ContactsApp.UI
         private System.Windows.Forms.TextBox PhoneTextBox;
         private System.Windows.Forms.TextBox EmailTextBox;
         private System.Windows.Forms.TextBox VkTextBox;
-        private System.Windows.Forms.DateTimePicker BirthdayDateTimePicker;
         private System.Windows.Forms.TextBox FindTextBox;
     }
 }

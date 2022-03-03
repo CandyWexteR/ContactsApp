@@ -172,6 +172,7 @@ namespace ContactsApp.UI
             NameTextBox.Text = listedContact.Name;
             if (listedContact.BirthDay is not null)
             {
+                
                 BirthdayDateTimePicker.Enabled = true;
                 BirthdayDateTimePicker.Value = listedContact.BirthDay.Value;
             }
@@ -179,9 +180,8 @@ namespace ContactsApp.UI
             {
                 BirthdayDateTimePicker.Enabled = false;
             }
-            string temp = "+7(" + listedContact.PhoneNumber.Number.ToString() + ")-";
-            string numbTemp = listedContact.PhoneNumber.Number.ToString();
-            PhoneTextBox.Text = temp;
+            
+            PhoneTextBox.Text = listedContact.PhoneNumber.Number.ToString();
             EmailTextBox.Text = listedContact.Email;
             VkTextBox.Text = listedContact.IdVk;
         }
@@ -322,6 +322,17 @@ namespace ContactsApp.UI
                     about.Activate();
                 }
             }
+        }
+
+        private void BirthdayDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (listedContact.BirthDay is not null)
+            {
+                BirthdayDateTimePicker.Value = listedContact.BirthDay.Value;
+                return;
+            }
+
+            BirthdayDateTimePicker.Visible = false;
         }
     }
 }

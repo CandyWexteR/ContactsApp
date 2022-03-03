@@ -109,7 +109,7 @@ namespace ContactsApp.UI
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (NameTextBox.Text.Length == 0 || SurnameTextBox.Text.Length == 0 || PhoneTextBox.Text.Length < 12)
+            if (NameTextBox.Text.Length == 0 || SurnameTextBox.Text.Length == 0 || PhoneTextBox.Text.Length != 10)
             {
                 MessageBox.Show("Заполните обязательные поля.\n(Имя, фамилия, номер телефона)");
                 _dialogResult = DialogResult.Cancel;

@@ -137,12 +137,13 @@ namespace ContactsApp.UI
             // PhoneLabel
             // 
             this.PhoneLabel.AutoSize = true;
-            this.PhoneLabel.Location = new System.Drawing.Point(20, 77);
+            this.PhoneLabel.Location = new System.Drawing.Point(7, 78);
             this.PhoneLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PhoneLabel.Name = "PhoneLabel";
-            this.PhoneLabel.Size = new System.Drawing.Size(41, 13);
+            this.PhoneLabel.Size = new System.Drawing.Size(56, 13);
             this.PhoneLabel.TabIndex = 19;
-            this.PhoneLabel.Text = "Phone:";
+            this.PhoneLabel.Text = "Phone: +7";
+            this.PhoneLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // BirthdayLabel
             // 
@@ -170,13 +171,13 @@ namespace ContactsApp.UI
             this.SurnameLabel.Location = new System.Drawing.Point(2, 9);
             this.SurnameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SurnameLabel.Name = "SurnameLabel";
-            this.SurnameLabel.Size = new System.Drawing.Size(58, 13);
+            this.SurnameLabel.Size = new System.Drawing.Size(52, 13);
             this.SurnameLabel.TabIndex = 16;
             this.SurnameLabel.Text = "Surname:";
             // 
             // OkButton
             // 
-            this.OkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
             this.OkButton.Location = new System.Drawing.Point(225, 143);
             this.OkButton.Margin = new System.Windows.Forms.Padding(2);
             this.OkButton.Name = "OkButton";
@@ -188,7 +189,7 @@ namespace ContactsApp.UI
             // 
             // CancelButton
             // 
-            this.CancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
             this.CancelButton.Location = new System.Drawing.Point(293, 143);
             this.CancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.CancelButton.Name = "CancelButton";
@@ -218,7 +219,7 @@ namespace ContactsApp.UI
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.SurnameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "EditForm";
             this.Text = "Add/Edit contact";
@@ -227,7 +228,6 @@ namespace ContactsApp.UI
             this.Shown += new System.EventHandler(this.EditForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
