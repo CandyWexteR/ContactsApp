@@ -139,6 +139,9 @@ namespace ContactsApp.UI
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var list = GetFilteredList();
+            if (list.Count == 0)
+                return;
+            
             if (ContactsList.SelectedIndex >= list.Count)
             {
                 ContactsList.SelectedIndex = 0;
