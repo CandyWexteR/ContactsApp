@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ContactsApp.Exceptions;
 using NUnit.Framework;
 
@@ -109,12 +110,12 @@ public class ProjectTests
 
     [Test]
     [TestCase(2, 1, "2332", "2323", "2323", "232323", null)]
-    public void ContactEdit_Valid(int count, int index, string surname, string name, string? email, string? idVk,
+    public void ContactEdit_Valid(int count, int id, string surname, string name, string? email, string? idVk,
         DateTime? birthday)
     {
         Assert.Positive(count);
-        Assert.Positive(index);
-        Assert.GreaterOrEqual(count, index);
+        Assert.Positive(id);
+        Assert.Greater(count, id);
 
         var list = new List<Contact>();
         var number = PhoneNumber.Create(7485746352);
@@ -125,9 +126,9 @@ public class ProjectTests
 
         _project = new Project(list);
 
-        var edit = Contact.Create(index, surname, name, number, birthday, email, idVk);
-
-        _project.EditContact(edit);
+        _project.EditContact(id, surname, name, number, birthday, email, idVk);
+        
+        AssertContact(id, surname, name, number, birthday, email, idVk);
     }
 
     [Test]
@@ -148,31 +149,22 @@ public class ProjectTests
 
         _project = new Project(list);
 
-        var edit = Contact.Create(index, surname, name, number, birthday, email, idVk);
-
-        Assert.Throws<InvalidEditOperationException>(() => _project.EditContact(edit));
+        Assert.Throws<InvalidEditOperationException>(() => _project.EditContact(index, surname, name, number, birthday, email, idVk));
     }
 
-    private void AssertContact(int index, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
+    private void AssertContact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
         string? email, string? idVk)
     {
-        Assert.AreEqual(email, _project.Contacts[index].Email);
-        Assert.AreEqual(idVk, _project.Contacts[index].IdVk);
-        Assert.AreEqual(birthday, _project.Contacts[index].BirthDay);
-        Assert.AreEqual(index, _project.Contacts[index].Id);
-        Assert.AreEqual(name, _project.Contacts[index].Name);
-        Assert.AreEqual(surname, _project.Contacts[index].Surname);
-        Assert.AreEqual(phoneNumber, _project.Contacts[index].PhoneNumber);
-    }
-
-    private void AssertContact(int index, Contact contact)
-    {
-        Assert.AreEqual(contact.Email, _project.Contacts[index].Email);
-        Assert.AreEqual(contact.IdVk, _project.Contacts[index].IdVk);
-        Assert.AreEqual(contact.BirthDay, _project.Contacts[index].BirthDay);
-        Assert.AreEqual(index, _project.Contacts[index].Id);
-        Assert.AreEqual(contact.Name, _project.Contacts[index].Name);
-        Assert.AreEqual(contact.Surname, _project.Contacts[index].Surname);
-        Assert.AreEqual(contact.PhoneNumber, _project.Contacts[index].PhoneNumber);
+        var contact = _project.Contacts.FirstOrDefault(c => c.Id == id);
+        if(contact is null)
+            Assert.Fail();
+        
+        Assert.AreEqual(email, _project.Contacts[id].Email);
+        Assert.AreEqual(idVk, _project.Contacts[id].IdVk);
+        Assert.AreEqual(birthday, _project.Contacts[id].BirthDay);
+        Assert.AreEqual(id, _project.Contacts[id].Id);
+        Assert.AreEqual(name, _project.Contacts[id].Name);
+        Assert.AreEqual(surname, _project.Contacts[id].Surname);
+        Assert.AreEqual(phoneNumber, _project.Contacts[id].PhoneNumber);
     }
 }
