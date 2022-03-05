@@ -195,19 +195,9 @@ namespace ContactsApp.UI
             }
         }
 
-        //Идея для поиска:
-        //Найти первый элемент который начинается на заданные буквы
-        //Чтобы работало изменение нужно знать его индекс, значит
-        //индекс будет равен индексу первого элемента, который начинается на заданные буквы
-        //плюс индекс выбранного в listbox
+        
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_manager.ContactsCount == 0)
-            {
-                MessageBox.Show("Невозможно найти контакты в пустом списке.");
-                return;
-            }
-
             UpdateContactsList();
         }
 
