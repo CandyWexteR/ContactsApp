@@ -230,10 +230,7 @@ namespace ContactsApp.UI
             if (_listedContact.BirthDay is not null)
             {
                 BirthdayDateTimePicker.Value = _listedContact.BirthDay.Value;
-                return;
             }
-
-            BirthdayDateTimePicker.Visible = false;
         }
 
         private List<Contact> GetFilteredList()
