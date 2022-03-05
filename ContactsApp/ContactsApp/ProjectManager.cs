@@ -8,7 +8,7 @@ namespace ContactsApp
 {
     public class ProjectManager
     {
-        private Project? _project;
+        private Project _project;
 
         //Для десериализации.
         [JsonConstructor]
@@ -24,14 +24,21 @@ namespace ContactsApp
             return _project.Contacts.OrderBy(c => c.Name).OrderBy(c => c.Surname).ToList();
         }
 
+        public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
+            string? email, string? idVk)
+        {
+            _project.AddContact(surname, name, phoneNumber, birthday, email, idVk);
+        }
+
         public void RemoveContact(int index)
         {
             _project.RemoveContact(index);
         }
 
-        public void EditContact(Contact after)
+        public void EditContact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
+            string? email, string? idVk)
         {
-            _project.EditContact(after);
+            _project.EditContact(id, surname, name, phoneNumber, birthday, email, idVk);
         }
 
         /// <summary>
@@ -86,12 +93,6 @@ namespace ContactsApp
                 }
             
             File.WriteAllText(path, text);
-        }
-
-        public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
-            string? email, string? idVk)
-        {
-            _project.AddContact(surname, name, phoneNumber, birthday, email, idVk);
         }
     }
 }

@@ -44,6 +44,7 @@ namespace ContactsApp.UI
             this.SurnameLabel = new System.Windows.Forms.Label();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.BirthDayLockerCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // BirthdayDateTimePicker
@@ -53,7 +54,7 @@ namespace ContactsApp.UI
             this.BirthdayDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.BirthdayDateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
-            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(132, 20);
+            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(118, 20);
             this.BirthdayDateTimePicker.TabIndex = 27;
             this.BirthdayDateTimePicker.Value = new System.DateTime(2021, 3, 22, 13, 44, 37, 0);
             this.BirthdayDateTimePicker.ValueChanged += new System.EventHandler(this.BirthdayDateTimePicker_ValueChanged);
@@ -87,7 +88,6 @@ namespace ContactsApp.UI
             this.PhoneTextBox.Name = "PhoneTextBox";
             this.PhoneTextBox.Size = new System.Drawing.Size(306, 20);
             this.PhoneTextBox.TabIndex = 24;
-            this.PhoneTextBox.TextChanged += new System.EventHandler(this.PhoneTextBox_TextChanged);
             this.PhoneTextBox.Enter += new System.EventHandler(this.PhoneTextBox_Enter);
             this.PhoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
             this.PhoneTextBox.Leave += new System.EventHandler(this.PhoneTextBox_Leave);
@@ -199,11 +199,22 @@ namespace ContactsApp.UI
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // BirthDayLockerCheckBox
+            // 
+            this.BirthDayLockerCheckBox.Location = new System.Drawing.Point(188, 52);
+            this.BirthDayLockerCheckBox.Name = "BirthDayLockerCheckBox";
+            this.BirthDayLockerCheckBox.Size = new System.Drawing.Size(175, 20);
+            this.BirthDayLockerCheckBox.TabIndex = 30;
+            this.BirthDayLockerCheckBox.Text = "Не указывать дату рождения";
+            this.BirthDayLockerCheckBox.UseVisualStyleBackColor = true;
+            this.BirthDayLockerCheckBox.CheckedChanged += new System.EventHandler(this.BirthDayLockerCheckBox_CheckedChanged);
+            // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 171);
+            this.Controls.Add(this.BirthDayLockerCheckBox);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.BirthdayDateTimePicker);
@@ -229,6 +240,8 @@ namespace ContactsApp.UI
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.CheckBox BirthDayLockerCheckBox;
 
         #endregion
 

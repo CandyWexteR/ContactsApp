@@ -56,15 +56,17 @@ namespace ContactsApp
         /// <summary>
         /// Редактирование контакта: Находится старый контакт и заменяется новым экземпляром.
         /// </summary>
-        /// <param name="indexBefore">Индекс старого контакта</param>
-        /// <param name="after">Новый контакт.</param>
-        public void EditContact(Contact after)
+        public void EditContact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday, string? email, string? idVk)
         {
-            var old = _contacts.FirstOrDefault(c=>c.Id == after.Id);
+            var old = _contacts.FirstOrDefault(c=>c.Id == id);
             if (old is null)
                 throw new InvalidEditOperationException("Редактирование несуществующего элемента.");
 
-            _contacts[after.Id] = after;
+            var contact = Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk);
+
+            var index = _contacts.IndexOf(old);
+            
+            _contacts[index] = contact;
         }
     }
 }
