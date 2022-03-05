@@ -1,4 +1,4 @@
-#define Name = "Contacts App"
+#define Name = "ContactsApp"
 #define Version = "1.0.0"       
 #define Publisher = "Malyshev Alexei 588-1"
 #define URL = "vk.com/mr.fostik"
@@ -30,7 +30,12 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checkablealone
 
 [Icons]
-Name: "{commondesktop}\ContactsApp"; Filename: "{app}\\ContactsApp\\ContactsApp.exe"; IconFilename: {app}\icon.ico;
+Name: "{commondesktop}\ContactsApp"; Filename: "{app}\\ContactsApp.UI.exe"; IconFilename: {app}\ContactsApp.ico; Tasks: desktopicon quicklaunchicon 
 
 [Files]
-Source: "{#SourcePath}\\..\\ContactsAppUI\bin\Release\\*"  ; DestDir: "{app}\\ContactsApp"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "{#SourcePath}\\{#Name}.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "{#SourcePath}\\..\\ContactsApp\ContactsApp.UI\bin\Release\\ContactsApp.UI.exe"  ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "{#SourcePath}\\..\\ContactsApp\ContactsApp.UI\bin\Release\\*"  ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: contacts.json;
+
+[UninstallDelete]
+Type: filesandordirs; Name: {app};
