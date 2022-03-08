@@ -8,7 +8,7 @@ namespace ContactsApp
     /// <summary>
     /// Класс контакта.
     /// </summary>
-    public class Contact
+    public class Contact:ICloneable
     {
         [JsonConstructor]
         protected Contact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
@@ -107,6 +107,11 @@ namespace ContactsApp
                 throw new AggregateException(exceptions);
 
             return new Contact(id, surname, name, phoneNumber, birthday, email, idVk);
+        }
+
+        public object Clone()
+        {
+            return new Contact(Id, Surname, Name, PhoneNumber, BirthDay, Email, IdVk);
         }
     }
 }

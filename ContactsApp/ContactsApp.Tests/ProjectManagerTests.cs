@@ -80,7 +80,7 @@ public class ProjectManagerTests
 
         foreach (var item in list)
         {
-            var contact = _manager.GetContact(item.Id);
+            var contact = _manager.Project.GetContact(item.Id);
             Assert.IsNotNull(contact);
             Assert.AreEqual(item.Id, contact.Id);
             Assert.AreEqual(item.BirthDay, contact.BirthDay);
@@ -116,7 +116,7 @@ public class ProjectManagerTests
 
         _manager.Deserialize(filePath);
 
-        Assert.AreEqual(0, _manager.ContactsCount);
+        Assert.AreEqual(0, _manager.Project.ContactsCount);
 
         var file = File.ReadAllText(filePath);
         var text = JsonConvert.SerializeObject(new Project(new List<Contact>()));

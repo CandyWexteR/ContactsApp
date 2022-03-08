@@ -17,36 +17,8 @@ namespace ContactsApp
             _project = project;
         }
 
-        public int ContactsCount => _project.Contacts.Count;
-
-        public IReadOnlyList<Contact> GetSortedContacts()
-        {
-            return _project.Contacts.OrderBy(c => c.Name).OrderBy(c => c.Surname).ToList();
-        }
-
-        public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
-            string? email, string? idVk)
-        {
-            _project.AddContact(surname, name, phoneNumber, birthday, email, idVk);
-        }
-
-        public void RemoveContact(int index)
-        {
-            _project.RemoveContact(index);
-        }
-
-        public void EditContact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
-            string? email, string? idVk)
-        {
-            _project.EditContact(id, surname, name, phoneNumber, birthday, email, idVk);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Значение массива элементов типа Contact по его индексу</returns>
-        public Contact? GetContact(int id) => _project.Contacts.FirstOrDefault(c=>c.Id == id);
-
+        public Project Project => _project;
+        
 
         public void Deserialize(string path)
         {

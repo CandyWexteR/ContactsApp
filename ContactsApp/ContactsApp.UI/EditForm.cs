@@ -11,28 +11,21 @@ namespace ContactsApp.UI
         public const string NAME_EXAMPLE_TEXT = "Ivan";
         public const string IDVK_EXAMPLE_TEXT = "Write here ID vk.com/";
         public const string EMAIL_EXAMPLE_TEXT = "For example: usermail@example.com";
-        MainForm _main;
-        private DialogResult _dialogResult;
 
-        /// <summary>
-        /// Требуется для определения действия.
-        /// Если форма открыта для редактирования - true, иначе - false.
-        /// </summary>
-        private bool _isEdit = true;
-
-        private ProjectManager _manager;
+        private Project _project;
         private Contact _contactBefore;
 
-        public EditForm(MainForm main)
+        public EditForm(Project project)
         {
+            _project = project;
             InitializeComponent();
-            _main = main;
         }
 
-        public EditForm(MainForm main, Contact contact)
+        public EditForm(Project project, Contact contact)
         {
             InitializeComponent();
             _contactBefore = contact;
+            _project = project;
             SurnameTextBox.Text = _contactBefore.Surname;
             NameTextBox.Text = _contactBefore.Name;
             if (_contactBefore.BirthDay is not null)
@@ -43,22 +36,6 @@ namespace ContactsApp.UI
             PhoneTextBox.Text = _contactBefore.PhoneNumber.Number.ToString();
             EmailTextBox.Text = _contactBefore.Email;
             VkTextBox.Text = _contactBefore.IdVk;
-            _main = main;
-        }
-
-        public Contact ContactBefore
-        {
-            set => _contactBefore = value;
-        }
-
-        public void SetIsEdit(bool obj)
-        {
-            _isEdit = obj;
-        }
-
-        public ProjectManager Manager
-        {
-            set => _manager = value;
         }
 
         private void SurnameTextBox_TextChanged(object sender, EventArgs e)
@@ -109,7 +86,6 @@ namespace ContactsApp.UI
             if (NameTextBox.Text.Length == 0 || SurnameTextBox.Text.Length == 0 || PhoneTextBox.Text.Length != 10)
             {
                 MessageBox.Show("Заполните обязательные поля.\n(Имя, фамилия, номер телефона)");
-                _dialogResult = DialogResult.Cancel;
                 return;
             }
 
@@ -145,19 +121,18 @@ namespace ContactsApp.UI
                 idVk = VkTextBox.Text;
             }
 
-            if (_isEdit)
+            if (_contactBefore is not null)
             {
-                _manager.EditContact(_contactBefore.Id, surname, name, phone,
+                _project.EditContact(_contactBefore.Id, surname, name, phone,
                     BirthdayDateTimePicker.Enabled ? BirthdayDateTimePicker.Value : null, email, idVk);
             }
             else
             {
-                _manager.AddContact(surname, name, phone,
+                _project.AddContact(surname, name, phone,
                     BirthdayDateTimePicker.Enabled ? BirthdayDateTimePicker.Value : null, email, idVk);
             }
 
-            _manager.Serialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
-
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -170,7 +145,6 @@ namespace ContactsApp.UI
             VkTextBox_Leave(sender, e);
             EmailTextBox_Leave(sender, e);
             BirthdayDateTimePicker.MaxDate = DateTime.Now;
-            _dialogResult = DialogResult.Cancel;
         }
 
         private void BirthdayDateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -179,57 +153,48 @@ namespace ContactsApp.UI
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
         private void SurnameTextBox_Enter(object sender, EventArgs e)
         {
-            if (SurnameTextBox.ForeColor == Color.Gray)
-            {
-                SurnameTextBox.Text = null;
-                SurnameTextBox.ForeColor = Color.Black;
-                SurnameTextBox.BackColor = Color.White;
-            }
+            if (SurnameTextBox.ForeColor != Color.Gray) return;
+            SurnameTextBox.Text = null;
+            SurnameTextBox.ForeColor = Color.Black;
+            SurnameTextBox.BackColor = Color.White;
         }
 
         private void SurnameTextBox_Leave(object sender, EventArgs e)
         {
-            if (SurnameTextBox.Text.Length == 0)
-            {
-                SurnameTextBox.Text = SURNAME_EXAMPLE_TEXT;
-                SurnameTextBox.ForeColor = Color.Gray;
-                SurnameTextBox.BackColor = Color.Brown;
-            }
+            if (SurnameTextBox.Text.Length != 0) return;
+            SurnameTextBox.Text = SURNAME_EXAMPLE_TEXT;
+            SurnameTextBox.ForeColor = Color.Gray;
+            SurnameTextBox.BackColor = Color.Brown;
         }
 
         private void NameTextBox_Enter(object sender, EventArgs e)
         {
-            if (NameTextBox.ForeColor == Color.Gray)
-            {
-                NameTextBox.Text = null;
-                NameTextBox.ForeColor = Color.Black;
-                NameTextBox.BackColor = Color.White;
-            }
+            if (NameTextBox.ForeColor != Color.Gray) return;
+            NameTextBox.Text = null;
+            NameTextBox.ForeColor = Color.Black;
+            NameTextBox.BackColor = Color.White;
         }
 
         private void NameTextBox_Leave(object sender, EventArgs e)
         {
-            if (NameTextBox.Text.Length == 0)
-            {
-                NameTextBox.Text = NAME_EXAMPLE_TEXT;
-                NameTextBox.ForeColor = Color.Gray;
-                NameTextBox.BackColor = Color.Brown;
-            }
+            if (NameTextBox.Text.Length != 0) return;
+            NameTextBox.Text = NAME_EXAMPLE_TEXT;
+            NameTextBox.ForeColor = Color.Gray;
+            NameTextBox.BackColor = Color.Brown;
         }
 
         private void PhoneTextBox_Enter(object sender, EventArgs e) //Происходит когда элемент становится активным
         {
-            if (PhoneTextBox.ForeColor == Color.Gray)
-            {
-                PhoneTextBox.Text = null;
-                PhoneTextBox.ForeColor = Color.Black;
-                PhoneTextBox.BackColor = Color.White;
-            }
+            if (PhoneTextBox.ForeColor != Color.Gray) return;
+            PhoneTextBox.Text = null;
+            PhoneTextBox.ForeColor = Color.Black;
+            PhoneTextBox.BackColor = Color.White;
         }
 
         private void PhoneTextBox_Leave(object sender, EventArgs e)
@@ -243,44 +208,32 @@ namespace ContactsApp.UI
 
         private void EmailTextBox_Enter(object sender, EventArgs e)
         {
-            if (EmailTextBox.ForeColor == Color.Gray)
-            {
-                EmailTextBox.Text = null;
-                EmailTextBox.ForeColor = Color.Black;
-                EmailTextBox.BackColor = Color.White;
-            }
+            if (EmailTextBox.ForeColor != Color.Gray) return;
+            EmailTextBox.Text = null;
+            EmailTextBox.ForeColor = Color.Black;
+            EmailTextBox.BackColor = Color.White;
         }
 
         private void EmailTextBox_Leave(object sender, EventArgs e)
         {
-            if (EmailTextBox.Text.Length == 0)
-            {
-                EmailTextBox.Text = EMAIL_EXAMPLE_TEXT;
-                EmailTextBox.ForeColor = Color.Gray;
-            }
+            if (EmailTextBox.Text.Length != 0) return;
+            EmailTextBox.Text = EMAIL_EXAMPLE_TEXT;
+            EmailTextBox.ForeColor = Color.Gray;
         }
 
         private void VkTextBox_Enter(object sender, EventArgs e)
         {
-            if (VkTextBox.ForeColor == Color.Gray)
-            {
-                VkTextBox.Text = null;
-                VkTextBox.ForeColor = Color.Black;
-                VkTextBox.BackColor = Color.White;
-            }
+            if (VkTextBox.ForeColor != Color.Gray) return;
+            VkTextBox.Text = null;
+            VkTextBox.ForeColor = Color.Black;
+            VkTextBox.BackColor = Color.White;
         }
 
         private void VkTextBox_Leave(object sender, EventArgs e)
         {
-            if (VkTextBox.Text.Length == 0)
-            {
-                VkTextBox.Text = IDVK_EXAMPLE_TEXT;
-                VkTextBox.ForeColor = Color.Gray;
-            }
-        }
-
-        private void EditForm_Shown(object sender, EventArgs e)
-        {
+            if (VkTextBox.Text.Length != 0) return;
+            VkTextBox.Text = IDVK_EXAMPLE_TEXT;
+            VkTextBox.ForeColor = Color.Gray;
         }
 
         private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -289,19 +242,6 @@ namespace ContactsApp.UI
             {
                 e.Handled = true;
             }
-        }
-
-        private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            _main.Manager = _manager;
-            _main.LastActionEditForm = true;
-            _main.UpdateContactsList();
-            _main.Show();
-        }
-
-        private void BirthDayLockerCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            BirthdayDateTimePicker.Enabled = !BirthDayLockerCheckBox.Checked;
         }
     }
 }

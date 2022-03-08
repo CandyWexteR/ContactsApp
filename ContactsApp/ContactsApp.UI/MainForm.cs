@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ContactsApp.UI
@@ -9,9 +10,9 @@ namespace ContactsApp.UI
     public partial class MainForm : Form
     {
         private ProjectManager _manager;
-        private EditForm _editForm;
         private Contact _listedContact;
         private bool _lastActionEditForm;
+        private readonly string _pathToContactsFile = Path.Combine(Directory.GetCurrentDirectory(), "contacts.json");
 
         public MainForm()
         {
@@ -54,7 +55,7 @@ namespace ContactsApp.UI
                 _lastActionEditForm = false;
             }
 
-            var contacts = GetFilteredList();
+            var contacts = _manager.Project.GetSortedContacts(FindTextBox.Text, 0, 0);
 
             if (contacts.Count == 0)
             {
@@ -99,27 +100,28 @@ namespace ContactsApp.UI
 
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _editForm = new EditForm(this);
-            _editForm.SetIsEdit(false);
-            _editForm.Manager = _manager;
-            _editForm.Show();
-            this.Hide();
+            var editForm = new EditForm(_manager.Project);
+            editForm.Owner = this;
+            var result = editForm.ShowDialog(this);
+            if (result != DialogResult.OK) return;
+            _manager.Serialize(_pathToContactsFile);
+            UpdateContactsList();
         }
 
         private void EditContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_manager.ContactsCount == 0)
+            if (_manager.Project.ContactsCount == 0)
             {
                 MessageBox.Show("Отсутствуют контакты в списке!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            _editForm = new EditForm(this, _listedContact);
-            _editForm.SetIsEdit(true);
-            _editForm.Manager = _manager;
-            _editForm.ContactBefore = _listedContact;
-            _editForm.Show();
-            Hide();
+            var editForm = new EditForm(_manager.Project, _listedContact);
+            editForm.Owner = this;
+            var result = editForm.ShowDialog(this);
+            if (result != DialogResult.OK) return;
+            _manager.Serialize(_pathToContactsFile);
+            UpdateContactsList();
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -138,11 +140,11 @@ namespace ContactsApp.UI
 
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var list = GetFilteredList();
+            var list = _manager.Project.GetSortedContacts(FindTextBox.Text, 0, 0);
             if (list.Count == 0)
                 return;
             
-            if (ContactsList.SelectedIndex >= list.Count)
+            if (ContactsList.SelectedIndex >= list.Count || ContactsList.SelectedIndex < 0)
             {
                 ContactsList.SelectedIndex = 0;
                 return;
@@ -174,7 +176,7 @@ namespace ContactsApp.UI
 
         private void RemoveContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_manager.ContactsCount == 0)
+            if (_manager.Project.ContactsCount == 0)
             {
                 MessageBox.Show("Отсутствуют контакты в списке!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -183,16 +185,11 @@ namespace ContactsApp.UI
             var res = MessageBox.Show(
                 "Вы уверены, что хотите удалить контакт '" + _listedContact.Surname + " " + _listedContact.Name + "'?",
                 "Подтвердите удаление контакта", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (res == DialogResult.OK)
-            {
-                _manager.RemoveContact(_listedContact.Id);
-                _manager.Serialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
-                UpdateContactsList();
-            }
-            else
-            {
-                return;
-            }
+            if (res != DialogResult.OK) return;
+            
+            _manager.Project.RemoveContact(_listedContact.Id);
+            _manager.Serialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
+            UpdateContactsList();
         }
 
         
@@ -205,16 +202,7 @@ namespace ContactsApp.UI
         {
             if (e.KeyCode == Keys.F1)
             {
-                var about = (AboutForm) Application.OpenForms["AboutForm"];
-                if (about == null)
-                {
-                    about = new AboutForm();
-                    about.Show();
-                }
-                else
-                {
-                    about.Activate();
-                }
+                AboutToolStripMenuItem_Click(sender, e);
             }
         }
 
@@ -224,13 +212,6 @@ namespace ContactsApp.UI
             {
                 BirthdayDateTimePicker.Value = _listedContact.BirthDay.Value;
             }
-        }
-
-        private List<Contact> GetFilteredList()
-        {
-            return _manager.GetSortedContacts()
-                .Where(c => $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(FindTextBox.Text.ToUpper()))
-                .ToList();
         }
     }
 }
