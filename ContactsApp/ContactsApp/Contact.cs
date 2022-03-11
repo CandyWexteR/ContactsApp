@@ -11,8 +11,8 @@ namespace ContactsApp
     public class Contact : ICloneable
     {
         [JsonConstructor]
-        protected Contact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime? birthday,
-            string? email, string? idVk)
+        protected Contact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime birthday,
+            string email, string idVk)
         {
             Surname = surname;
             Name = name;
@@ -46,17 +46,17 @@ namespace ContactsApp
         /// <summary>
         /// Электронная почта
         /// </summary>
-        public string? Email { get; protected set; }
+        public string Email { get; protected set; }
 
         /// <summary>
         /// Идентификатор социальной сети ВКонтакте
         /// </summary>
-        public string? IdVk { get; protected set; }
+        public string IdVk { get; protected set; }
 
         /// <summary>
         /// Дата рождения
         /// </summary>
-        public DateTime? BirthDay { get; protected set; }
+        public DateTime BirthDay { get; protected set; }
 
         /// <summary>
         /// Создать новый контакт.

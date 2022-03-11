@@ -28,10 +28,7 @@ namespace ContactsApp.UI
             _project = project;
             SurnameTextBox.Text = _contactBefore.Surname;
             NameTextBox.Text = _contactBefore.Name;
-            if (_contactBefore.BirthDay is not null)
-            {
-                BirthdayDateTimePicker.Value = _contactBefore.BirthDay.Value;
-            }
+            BirthdayDateTimePicker.Value = _contactBefore.BirthDay;
 
             PhoneTextBox.Text = _contactBefore.PhoneNumber.Number.ToString();
             EmailTextBox.Text = _contactBefore.Email;

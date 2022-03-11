@@ -125,16 +125,7 @@ namespace ContactsApp.UI
             _listedContact = list[ContactsList.SelectedIndex];
             SurnameTextBox.Text = _listedContact.Surname;
             NameTextBox.Text = _listedContact.Name;
-            if (_listedContact.BirthDay is not null)
-            {
-                BirthdayDateTimePicker.Enabled = true;
-                BirthdayDateTimePicker.Value = _listedContact.BirthDay.Value;
-            }
-            else
-            {
-                BirthdayDateTimePicker.Enabled = false;
-                BirthdayDateTimePicker.Value = BirthdayDateTimePicker.MinDate;
-            }
+            BirthdayDateTimePicker.Value = _listedContact.BirthDay;
 
             PhoneTextBox.Text = _listedContact.PhoneNumber.Number.ToString();
             EmailTextBox.Text = _listedContact.Email;
@@ -180,10 +171,7 @@ namespace ContactsApp.UI
 
         private void BirthdayDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (_listedContact.BirthDay is not null)
-            {
-                BirthdayDateTimePicker.Value = _listedContact.BirthDay.Value;
-            }
+            BirthdayDateTimePicker.Value = _listedContact.BirthDay;
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
