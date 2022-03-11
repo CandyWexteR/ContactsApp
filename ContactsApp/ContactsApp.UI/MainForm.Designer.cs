@@ -55,6 +55,10 @@ namespace ContactsApp.UI
             this.VkTextBox = new System.Windows.Forms.TextBox();
             this.FindTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.AddButton = new System.Windows.Forms.Button();
+            this.EditButton = new System.Windows.Forms.Button();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -270,7 +274,7 @@ namespace ContactsApp.UI
             // FindTextBox
             // 
             this.FindTextBox.Location = new System.Drawing.Point(55, 33);
-            this.FindTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FindTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.FindTextBox.Name = "FindTextBox";
             this.FindTextBox.Size = new System.Drawing.Size(212, 22);
             this.FindTextBox.TabIndex = 17;
@@ -296,13 +300,74 @@ namespace ContactsApp.UI
             this.panel1.Size = new System.Drawing.Size(515, 165);
             this.panel1.TabIndex = 18;
             // 
+            // AddButton
+            // 
+            this.AddButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.AddButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AddButton.BackgroundImage")));
+            this.AddButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.AddButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.AddButton.Location = new System.Drawing.Point(12, 463);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(32, 32);
+            this.AddButton.TabIndex = 19;
+            this.AddButton.UseVisualStyleBackColor = false;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // EditButton
+            // 
+            this.EditButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.EditButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("EditButton.BackgroundImage")));
+            this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.EditButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.EditButton.Location = new System.Drawing.Point(50, 463);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(32, 32);
+            this.EditButton.TabIndex = 20;
+            this.EditButton.UseVisualStyleBackColor = false;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.RemoveButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RemoveButton.BackgroundImage")));
+            this.RemoveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.RemoveButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RemoveButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.RemoveButton.Location = new System.Drawing.Point(88, 463);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(32, 32);
+            this.RemoveButton.TabIndex = 21;
+            this.RemoveButton.UseVisualStyleBackColor = false;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
+            // ExitButton
+            // 
+            this.ExitButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ExitButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ExitButton.BackgroundImage")));
+            this.ExitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ExitButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ExitButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ExitButton.Location = new System.Drawing.Point(126, 463);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(32, 32);
+            this.ExitButton.TabIndex = 22;
+            this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(800, 497);
+            this.ClientSize = new System.Drawing.Size(800, 501);
+            this.Controls.Add(this.ExitButton);
+            this.Controls.Add(this.RemoveButton);
+            this.Controls.Add(this.EditButton);
+            this.Controls.Add(this.AddButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.FindTextBox);
             this.Controls.Add(this.ContactsList);
@@ -313,7 +378,9 @@ namespace ContactsApp.UI
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(810, 540);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(810, 540);
             this.Name = "MainForm";
             this.Text = "ContactsApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -326,6 +393,14 @@ namespace ContactsApp.UI
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button EditButton;
+
+        private System.Windows.Forms.Button RemoveButton;
+
+        private System.Windows.Forms.Button ExitButton;
+
+        private System.Windows.Forms.Button AddButton;
 
         private System.Windows.Forms.Panel panel1;
 

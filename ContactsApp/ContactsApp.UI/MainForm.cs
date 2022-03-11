@@ -185,5 +185,25 @@ namespace ContactsApp.UI
                 BirthdayDateTimePicker.Value = _listedContact.BirthDay.Value;
             }
         }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            ExitToolStripMenuItem_Click(sender, e);
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            RemoveContactToolStripMenuItem_Click(sender, e);
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            AddContactToolStripMenuItem_Click(sender, e);
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            EditContactToolStripMenuItem_Click(sender, e);
+        }
     }
 }
