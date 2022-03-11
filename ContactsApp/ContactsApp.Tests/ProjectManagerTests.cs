@@ -17,9 +17,11 @@ public class ProjectManagerTests
         Assert.Greater(count, 0);
         var list = new List<Contact>();
         var number = PhoneNumber.Create(7485746352);
+        var date = DateTime.Now;
+        
         for (var i = 0; i < count; i++)
         {
-            list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, null, null, null));
+            list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, date, null, null));
         }
 
         var project = new Project(list);
@@ -47,15 +49,16 @@ public class ProjectManagerTests
     }
 
     [Test]
-    [TestCase(4)]
-    public void Deserialize_ValidPath(int count)
+    [TestCase(4, "1231213123", "xcvcxvxcvcxv", null, "asdsad", "dsadasdad")]
+    public void Deserialize_ValidPath(int count, string surname, string name, DateTime date, string email, string idVk)
     {
         Assert.Greater(count, 0);
         var list = new List<Contact>();
         var number = PhoneNumber.Create(7485746352);
+        
         for (var i = 0; i < count; i++)
         {
-            list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, null, null, null));
+            list.Add(Contact.Create(i, surname, name, number, date, email, idVk));
         }
 
         var project = new Project(list);
@@ -105,19 +108,17 @@ public class ProjectManagerTests
         Assert.Greater(count, 1);
         var list = new List<Contact>();
         var number = PhoneNumber.Create(7485746352);
+        var date = DateTime.Now;
+        
         for (var i = 0; i < count; i++)
         {
-            list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, null, null, null));
+            list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, date, null, null));
         }
-
         _manager = new ProjectManager(new Project(list));
         var dirPath = Path.Combine(Directory.GetCurrentDirectory(), "tests");
         var filePath = Path.Combine(dirPath, "text.json");
-
         _manager.Deserialize(filePath);
-
         Assert.AreEqual(0, _manager.Project.ContactsCount);
-
         var file = File.ReadAllText(filePath);
         var text = JsonConvert.SerializeObject(new Project(new List<Contact>()));
         Assert.AreEqual(text, file);

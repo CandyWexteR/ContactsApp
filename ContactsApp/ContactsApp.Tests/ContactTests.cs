@@ -19,7 +19,7 @@ public class ContactTests
     
     [Test]
     [TestCase(1, "someName", "someSurname", null, null, null)]
-    public void Contact_Valid(int id,string surname, string name, DateTime? birthday, string? email, string? idVk)
+    public void Contact_Valid(int id,string surname, string name, DateTime birthday, string email, string idVk)
     {
         if (id < 0)
             Assert.Fail(("Идентификатор не может быть меньше 0"));
@@ -40,7 +40,7 @@ public class ContactTests
             Assert.Fail((
                     "Длина адреса ВКонтакте должна быть быть в диапазоне от 1 до 15 символов"));
             
-        if (birthday is not null && birthday > DateTime.Now)
+        if (birthday > DateTime.Now)
             Assert.Fail((
                     "День рождения должен быть указан не позднее текущей даты"));
             
@@ -63,7 +63,7 @@ public class ContactTests
     
     [Test]
     [TestCase(-1, "someName", "someSurname", null, null, null)]
-    public void Contact_Invalid(int id,string surname, string name, DateTime? birthday, string? email, string? idVk)
+    public void Contact_Invalid(int id,string surname, string name, DateTime birthday, string email, string idVk)
     {
         var expectedMessages = new string[]
         {

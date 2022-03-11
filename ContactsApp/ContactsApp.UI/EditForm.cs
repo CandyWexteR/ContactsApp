@@ -123,13 +123,11 @@ namespace ContactsApp.UI
 
             if (_contactBefore is not null)
             {
-                _project.EditContact(_contactBefore.Id, surname, name, phone,
-                    BirthdayDateTimePicker.Enabled ? BirthdayDateTimePicker.Value : null, email, idVk);
+                _project.EditContact(_contactBefore.Id, surname, name, phone, BirthdayDateTimePicker.Value, email, idVk);
             }
             else
             {
-                _project.AddContact(surname, name, phone,
-                    BirthdayDateTimePicker.Enabled ? BirthdayDateTimePicker.Value : null, email, idVk);
+                _project.AddContact(surname, name, phone, BirthdayDateTimePicker.Value, email, idVk);
             }
 
             DialogResult = DialogResult.OK;
