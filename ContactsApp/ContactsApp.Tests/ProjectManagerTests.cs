@@ -16,7 +16,7 @@ public class ProjectManagerTests
     {
         Assert.Greater(count, 0);
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         var date = DateTime.Now;
         
         for (var i = 0; i < count; i++)
@@ -54,7 +54,7 @@ public class ProjectManagerTests
     {
         Assert.Greater(count, 0);
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         
         for (var i = 0; i < count; i++)
         {
@@ -107,7 +107,7 @@ public class ProjectManagerTests
     {
         Assert.Greater(count, 1);
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         var date = DateTime.Now;
         
         for (var i = 0; i < count; i++)

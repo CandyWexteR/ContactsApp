@@ -48,7 +48,7 @@ public class ContactTests
             Assert.Fail((
                     "Длина адреса электронной почты должна быть быть в диапазоне от 1 до 50 символов"));
         
-        var phoneNumber = PhoneNumber.Create(2569234220);
+        var phoneNumber = 2569234220;
         
         var contact = Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk);
         
@@ -57,7 +57,7 @@ public class ContactTests
         Assert.AreEqual(name, contact.Name);
         Assert.AreEqual(birthday, contact.BirthDay);
         Assert.AreEqual(email, contact.Email);
-        Assert.AreEqual(phoneNumber, contact.PhoneNumber);
+        Assert.AreEqual(phoneNumber, contact.PhoneNumber.Number);
         Assert.AreEqual(idVk, contact.IdVk);
     }
     
@@ -76,7 +76,7 @@ public class ContactTests
             "День рождения должен быть указан не позднее текущей даты",
             "Длина адреса электронной почты должна быть быть в диапазоне от 1 до 50 символов"
         };
-        var phoneNumber = PhoneNumber.Create(2569234220);
+        var phoneNumber = 2569234220;
 
 
         Assert.Catch<AggregateException>(() => Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk));

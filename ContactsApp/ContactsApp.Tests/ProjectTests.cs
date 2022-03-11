@@ -23,7 +23,7 @@ public class ProjectTests
     public void Project_AddFirstOnly(string surname, string name)
     {
         _project = new Project(new List<Contact>());
-        var number = PhoneNumber.Create(7463728499);
+        var number = 7463728499L;
         _project.AddContact(surname, name, number, _date, null, null);
 
         AssertContact(0, surname, name, number, _date, null, null);
@@ -36,10 +36,10 @@ public class ProjectTests
         _project = new Project(new List<Contact>());
         for (int i = 0; i < currentListItemsCount; i++)
         {
-            _project.AddContact("surname" + i, "name" + i, PhoneNumber.Create(6467462364), date, email, idVk);
+            _project.AddContact("surname" + i, "name" + i, 6467462364, date, email, idVk);
         }
 
-        var number = PhoneNumber.Create(7463728499);
+        var number = 7463728499;
         _project.AddContact(surname, name, number, date, email, idVk);
 
         AssertContact(currentListItemsCount, surname, name, number, date, email, idVk);
@@ -50,7 +50,7 @@ public class ProjectTests
     public void ExistingContactsAssers(int count)
     {
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         
         for (var i = 0; i < count; i++)
         {
@@ -74,7 +74,7 @@ public class ProjectTests
         Assert.Greater(count, removingIndex);
 
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
@@ -94,7 +94,7 @@ public class ProjectTests
         Assert.GreaterOrEqual(removingIndex, count);
 
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
@@ -126,7 +126,7 @@ public class ProjectTests
         Assert.Greater(count, id);
 
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, birthday, null, null));
@@ -149,7 +149,7 @@ public class ProjectTests
         Assert.Greater(index, count);
 
         var list = new List<Contact>();
-        var number = PhoneNumber.Create(7485746352);
+        var number = 7485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, birthday, null, null));
@@ -160,7 +160,7 @@ public class ProjectTests
         Assert.Throws<InvalidEditOperationException>(() => _project.EditContact(index, surname, name, number, birthday, email, idVk));
     }
 
-    private void AssertContact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime birthday,
+    private void AssertContact(int id, string surname, string name, long phoneNumber, DateTime birthday,
         string email, string idVk)
     {
         var contact = _project.GetContact(id);
@@ -173,6 +173,6 @@ public class ProjectTests
         Assert.AreEqual(id, contact.Id);
         Assert.AreEqual(name, contact.Name);
         Assert.AreEqual(surname, contact.Surname);
-        Assert.AreEqual(phoneNumber, contact.PhoneNumber);
+        Assert.AreEqual(phoneNumber, contact.PhoneNumber.Number);
     }
 }
