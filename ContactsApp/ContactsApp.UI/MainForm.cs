@@ -98,16 +98,9 @@ namespace ContactsApp.UI
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var about = (AboutForm) Application.OpenForms["AboutForm"];
-            if (about == null)
-            {
-                about = new AboutForm();
-                about.Show();
-            }
-            else
-            {
-                about.Activate();
-            }
+            var about = new AboutForm();
+            about.Owner = this;
+            about.ShowDialog(this);
         }
 
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -192,6 +185,11 @@ namespace ContactsApp.UI
         private void EditButton_Click(object sender, EventArgs e)
         {
             EditContactToolStripMenuItem_Click(sender, e);
+        }
+
+        private void AboutButton_Click(object sender, EventArgs e)
+        {
+            AboutToolStripMenuItem_Click(sender, e);
         }
     }
 }

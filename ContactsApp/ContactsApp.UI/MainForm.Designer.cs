@@ -59,6 +59,7 @@ namespace ContactsApp.UI
             this.EditButton = new System.Windows.Forms.Button();
             this.RemoveButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
+            this.AboutButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -350,12 +351,27 @@ namespace ContactsApp.UI
             this.ExitButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ExitButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ExitButton.Location = new System.Drawing.Point(126, 463);
+            this.ExitButton.Location = new System.Drawing.Point(164, 463);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(32, 32);
             this.ExitButton.TabIndex = 22;
             this.ExitButton.UseVisualStyleBackColor = false;
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
+            // AboutButton
+            // 
+            this.AboutButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.AboutButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AboutButton.BackgroundImage")));
+            this.AboutButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.AboutButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AboutButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.AboutButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AboutButton.Location = new System.Drawing.Point(126, 463);
+            this.AboutButton.Name = "AboutButton";
+            this.AboutButton.Size = new System.Drawing.Size(32, 32);
+            this.AboutButton.TabIndex = 23;
+            this.AboutButton.UseVisualStyleBackColor = false;
+            this.AboutButton.Click += new System.EventHandler(this.AboutButton_Click);
             // 
             // MainForm
             // 
@@ -364,6 +380,7 @@ namespace ContactsApp.UI
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(800, 501);
+            this.Controls.Add(this.AboutButton);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.EditButton);
@@ -393,6 +410,8 @@ namespace ContactsApp.UI
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button AboutButton;
 
         private System.Windows.Forms.Button EditButton;
 
