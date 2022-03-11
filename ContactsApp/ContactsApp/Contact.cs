@@ -69,7 +69,7 @@ namespace ContactsApp
         /// <param name="email">Электронная почта.</param>
         /// <param name="idVk">Идентификатор ВКонтакте.</param>
         /// <returns>Экземпляр контакта(<see cref="Contact"/>).</returns>
-        public static Contact Create(int id, string surname, string name, PhoneNumber phoneNumber, DateTime birthday,
+        public static Contact Create(int id, string surname, string name, long phoneNumber, DateTime birthday,
             string email, string idVk)
         {
             var exceptions = new List<InvalidValueException>();
@@ -84,7 +84,6 @@ namespace ContactsApp
             {
                 exceptions.Add(new InvalidValueException("Длина фамилии не может быть больше 50 символов"));
             }
-
 
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -108,10 +107,22 @@ namespace ContactsApp
                 exceptions.Add(new InvalidValueException(
                         "Длина адреса электронной почты должна быть быть в диапазоне от 1 до 50 символов"));
 
+            PhoneNumber phone = null;
+            
+            try
+            {
+                phone = PhoneNumber.Create(phoneNumber);
+            }
+            catch (InvalidValueException e)
+            {
+                exceptions.Add(e);
+            }
+            
+            
             if (exceptions.Count > 0)
                 throw new AggregateException(exceptions);
 
-            return new Contact(id, surname, name, phoneNumber, birthday, email, idVk);
+            return new Contact(id, surname, name, phone, birthday, email, idVk);
         }
 
         public object Clone()

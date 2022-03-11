@@ -61,7 +61,7 @@ namespace ContactsApp
         /// <param name="birthday">Дата рождения</param>
         /// <param name="email">Адрес электронной почты</param>
         /// <param name="idVk">Идентификатор профиля ВКонтакте</param>
-        public void AddContact(string surname, string name, PhoneNumber phoneNumber, DateTime birthday,
+        public void AddContact(string surname, string name, long phoneNumber, DateTime birthday,
             string email, string idVk)
         {
             var last = _contacts.LastOrDefault()?.Id ?? -1;
@@ -90,7 +90,7 @@ namespace ContactsApp
         /// <summary>
         /// Редактирование контакта: Находится старый контакт и заменяется новым экземпляром.
         /// </summary>
-        public void EditContact(int id, string surname, string name, PhoneNumber phoneNumber, DateTime birthday,
+        public void EditContact(int id, string surname, string name, long phoneNumber, DateTime birthday,
             string email, string idVk)
         {
             var old = _contacts.FirstOrDefault(c => c.Id == id);

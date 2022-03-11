@@ -18,7 +18,7 @@ namespace ContactsApp
         /// <summary>
         /// Номер телефона.
         /// </summary>
-        public long Number { get; set; }
+        public long Number { get; protected set; }
 
         public static PhoneNumber Create(long number)
         {
@@ -26,8 +26,8 @@ namespace ContactsApp
             //
             if (number is < 1000000000 or >= 10000000000)
             {
-                throw new InvalidValueException($"Неправильное значение номера телефона " +
-                                                $"({nameof(PhoneNumber)}).");
+                throw new InvalidValueException($"Неправильное значение номера телефона. Номер должен начинаться" +
+                                                $"не с 0 и должен состоять из 10 символов.");
             }
 
             return new(number);

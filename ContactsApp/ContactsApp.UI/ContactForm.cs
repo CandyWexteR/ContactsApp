@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
+using ContactsApp.Exceptions;
 
 namespace ContactsApp.UI
 {
@@ -11,6 +13,7 @@ namespace ContactsApp.UI
         public const string NAME_EXAMPLE_TEXT = "Ivan";
         public const string IDVK_EXAMPLE_TEXT = "Write here ID vk.com/";
         public const string EMAIL_EXAMPLE_TEXT = "For example: usermail@example.com";
+        public const string PHONE_EXAMPLE_TEXT = "9876543210";
 
         private Project _project;
         private Contact _contactBefore;
@@ -80,16 +83,10 @@ namespace ContactsApp.UI
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (NameTextBox.Text.Length == 0 || SurnameTextBox.Text.Length == 0 || PhoneTextBox.Text.Length != 10)
-            {
-                MessageBox.Show("Заполните обязательные поля.\n(Имя, фамилия, номер телефона)");
-                return;
-            }
-
             var surname = string.Empty;
             var name = string.Empty;
-            var number = long.Parse(PhoneTextBox.Text);
-            var phone = PhoneNumber.Create(number);
+            var parsed = long.TryParse(PhoneTextBox.Text == PHONE_EXAMPLE_TEXT 
+                    ? "0" : PhoneTextBox.Text, out var number);
 
             //Сохраняются Фамилия и Имя следующим образом:
             //Первая буква всегда имеет верхний регистр, остальные нижний
@@ -105,17 +102,29 @@ namespace ContactsApp.UI
                 name += NameTextBox.Text.Remove(0, 1);
             }
 
-            if (_contactBefore is not null)
+            try
             {
-                _project.EditContact(_contactBefore.Id, surname, name, phone, BirthdayDateTimePicker.Value,
-                    EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
-                    VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
+                if (_contactBefore is not null)
+                {
+                    _project.EditContact(_contactBefore.Id, surname, name, number, BirthdayDateTimePicker.Value,
+                        EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
+                        VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
+                }
+                else
+                {
+                    _project.AddContact(surname, name, number, BirthdayDateTimePicker.Value,
+                        EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
+                        VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
+                }
             }
-            else
+            catch (AggregateException exception)
             {
-                _project.AddContact(surname, name, phone, BirthdayDateTimePicker.Value,
-                    EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
-                    VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
+                var msgs = exception.InnerExceptions.Select(s => $"{s.Message}\n");
+                var msg = msgs.Aggregate(string.Empty, (current, str) => current + str);
+
+                MessageBox.Show(msg, "Ошибка при создании/редактировании контакта", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
             }
 
             DialogResult = DialogResult.OK;
@@ -187,7 +196,7 @@ namespace ContactsApp.UI
         {
             if (PhoneTextBox.Text.Length != 0) return;
 
-            PhoneTextBox.Text = "9876543210";
+            PhoneTextBox.Text = PHONE_EXAMPLE_TEXT;
             PhoneTextBox.ForeColor = Color.Gray;
             PhoneTextBox.BackColor = Color.Brown;
         }
