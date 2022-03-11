@@ -96,7 +96,7 @@ namespace ContactsApp
             }
 
 
-            if (idVk != string.Empty && (idVk.Length > 15 || string.IsNullOrWhiteSpace(idVk)))
+            if (!string.IsNullOrWhiteSpace(idVk) && (idVk.Length > 15 || string.IsNullOrWhiteSpace(idVk)))
                 exceptions.Add(
                     new InvalidValueException(
                         "Длина адреса ВКонтакте должна быть быть в диапазоне от 1 до 15 символов"));
@@ -104,7 +104,7 @@ namespace ContactsApp
             if (birthday > DateTime.Now)
                 exceptions.Add(new InvalidValueException("День рождения должен быть указан не позднее текущей даты"));
 
-            if (email != string.Empty && (email.Length > 50 || string.IsNullOrWhiteSpace(email)))
+            if (!string.IsNullOrWhiteSpace(email) && (email.Length > 50 || string.IsNullOrWhiteSpace(email)))
                 exceptions.Add(new InvalidValueException(
                         "Длина адреса электронной почты должна быть быть в диапазоне от 1 до 50 символов"));
 
