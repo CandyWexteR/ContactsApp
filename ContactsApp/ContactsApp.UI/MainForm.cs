@@ -88,8 +88,15 @@ namespace ContactsApp.UI
             var editForm = new ContactForm(_manager.Project);
             editForm.Owner = this;
             var result = editForm.ShowDialog(this);
-            if (result != DialogResult.OK) return;
-            _manager.Serialize(_pathToContactsFile);
+            if (result == DialogResult.OK)
+            {
+                _manager.Serialize(_pathToContactsFile);
+            }
+            else
+            {
+                _manager.Deserialize(_pathToContactsFile);
+            }
+
             UpdateContactsList();
         }
 
@@ -104,8 +111,15 @@ namespace ContactsApp.UI
             var editForm = new ContactForm(_manager.Project, _listedContact);
             editForm.Owner = this;
             var result = editForm.ShowDialog(this);
-            if (result != DialogResult.OK) return;
-            _manager.Serialize(_pathToContactsFile);
+            if (result == DialogResult.OK)
+            {
+                _manager.Serialize(_pathToContactsFile);
+            }
+            else
+            {
+                _manager.Deserialize(_pathToContactsFile);
+            }
+
             UpdateContactsList();
         }
 

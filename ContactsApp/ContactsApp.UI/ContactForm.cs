@@ -108,26 +108,17 @@ namespace ContactsApp.UI
                 name += NameTextBox.Text.Remove(0, 1);
             }
 
-            string? email = null;
-
-            if (EmailTextBox.Text != EMAIL_EXAMPLE_TEXT)
-            {
-                email = EmailTextBox.Text;
-            }
-
-            string? idVk = null;
-            if (VkTextBox.Text != IDVK_EXAMPLE_TEXT)
-            {
-                idVk = VkTextBox.Text;
-            }
-
             if (_contactBefore is not null)
             {
-                _project.EditContact(_contactBefore.Id, surname, name, phone, BirthdayDateTimePicker.Value, email, idVk);
+                _project.EditContact(_contactBefore.Id, surname, name, phone, BirthdayDateTimePicker.Value,
+                    EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
+                    VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
             }
             else
             {
-                _project.AddContact(surname, name, phone, BirthdayDateTimePicker.Value, email, idVk);
+                _project.AddContact(surname, name, phone, BirthdayDateTimePicker.Value,
+                    EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
+                    VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
             }
 
             DialogResult = DialogResult.OK;
