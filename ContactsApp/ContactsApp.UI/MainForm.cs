@@ -33,7 +33,7 @@ namespace ContactsApp.UI
         }
 
 
-        public void UpdateContactsList()
+        private void UpdateContactsList()
         {
             var contacts = _manager.Project.GetSortedContacts(FindTextBox.Text, 0, 0);
 
@@ -41,12 +41,13 @@ namespace ContactsApp.UI
             var visible = contacts.Count != 0;
             panel1.Visible = visible;
             ContactsList.Enabled = visible;
-            if (!visible)
-            {
-                return;
-            }
             
             ContactsList.Items.Clear();
+            if (!visible)
+            {
+                ContactsList.Items.Add("Список контактов пуст");
+                return;
+            }
 
             foreach (var item in contacts)
             {
