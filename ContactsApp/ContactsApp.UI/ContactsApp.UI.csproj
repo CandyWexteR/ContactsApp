@@ -49,14 +49,14 @@
     <ItemGroup>
         <Compile Include="AboutForm.cs" />
         <Compile Include="AboutForm.Designer.cs" />
-        <Compile Include="EditForm.cs" />
-        <Compile Include="EditForm.Designer.cs" />
+        <Compile Include="ContactForm.cs" />
+        <Compile Include="ContactForm.Designer.cs" />
         <Compile Include="MainForm.cs" />
         <Compile Include="MainForm.Designer.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <EmbeddedResource Include="AboutForm.resx" />
-        <EmbeddedResource Include="EditForm.resx" />
+        <EmbeddedResource Include="ContactForm.resx" />
         <EmbeddedResource Include="MainForm.resx" />
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>

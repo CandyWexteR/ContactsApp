@@ -11,20 +11,12 @@ namespace ContactsApp.UI
     {
         private ProjectManager _manager;
         private Contact _listedContact;
-        private bool _lastActionEditForm;
         private readonly string _pathToContactsFile = Path.Combine(Directory.GetCurrentDirectory(), "contacts.json");
 
         public MainForm()
         {
             InitializeComponent();
             _manager = new ProjectManager(null);
-        }
-
-
-        public bool LastActionEditForm
-        {
-            set => _lastActionEditForm = value;
-            get => _lastActionEditForm;
         }
 
         public ProjectManager Manager
@@ -36,7 +28,6 @@ namespace ContactsApp.UI
         {
             _manager.Deserialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
             BirthdayDateTimePicker.MinDate = DateTime.Now.AddYears(-130);
-            _lastActionEditForm = false;
             BirthdayDateTimePicker.MaxDate = DateTime.Now;
             UpdateContactsList();
         }
@@ -49,12 +40,6 @@ namespace ContactsApp.UI
 
         public void UpdateContactsList()
         {
-            if (_lastActionEditForm)
-            {
-                FindTextBox.Text = null;
-                _lastActionEditForm = false;
-            }
-
             var contacts = _manager.Project.GetSortedContacts(FindTextBox.Text, 0, 0);
 
             if (contacts.Count == 0)
@@ -100,7 +85,7 @@ namespace ContactsApp.UI
 
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var editForm = new EditForm(_manager.Project);
+            var editForm = new ContactForm(_manager.Project);
             editForm.Owner = this;
             var result = editForm.ShowDialog(this);
             if (result != DialogResult.OK) return;
@@ -116,7 +101,7 @@ namespace ContactsApp.UI
                 return;
             }
 
-            var editForm = new EditForm(_manager.Project, _listedContact);
+            var editForm = new ContactForm(_manager.Project, _listedContact);
             editForm.Owner = this;
             var result = editForm.ShowDialog(this);
             if (result != DialogResult.OK) return;

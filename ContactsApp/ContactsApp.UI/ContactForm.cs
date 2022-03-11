@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ContactsApp.UI
 {
-    public partial class EditForm : Form
+    public partial class ContactForm : Form
     {
         public const string SURNAME_EXAMPLE_TEXT = "Ivanov";
         public const string NAME_EXAMPLE_TEXT = "Ivan";
@@ -15,13 +15,13 @@ namespace ContactsApp.UI
         private Project _project;
         private Contact _contactBefore;
 
-        public EditForm(Project project)
+        public ContactForm(Project project)
         {
             _project = project;
             InitializeComponent();
         }
 
-        public EditForm(Project project, Contact contact)
+        public ContactForm(Project project, Contact contact)
         {
             InitializeComponent();
             _contactBefore = contact;
