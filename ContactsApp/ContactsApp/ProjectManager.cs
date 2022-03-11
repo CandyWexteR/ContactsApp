@@ -6,19 +6,19 @@ using Newtonsoft.Json;
 
 namespace ContactsApp
 {
+    /// <summary>
+    /// Менеджер проекта. Отвечает за сериализацию/десериализацию и за взаимодействие с проектом.
+    /// </summary>
     public class ProjectManager
     {
-        private Project _project;
-
         //Для десериализации.
         [JsonConstructor]
         public ProjectManager(Project project)
         {
-            _project = project;
+            Project = project;
         }
 
-        public Project Project => _project;
-        
+        public Project Project { get; protected set; }
 
         public void Deserialize(string path)
         {
@@ -41,11 +41,11 @@ namespace ContactsApp
 
             if (project is not null)
             {
-                _project = project;
+                Project = project;
             }
             else
             {
-                _project = new Project(new List<Contact>());
+                Project = new Project(new List<Contact>());
                 Serialize(path);
             }
         }
@@ -53,7 +53,7 @@ namespace ContactsApp
         public void Serialize(string path)
         {
             var directory = Path.GetDirectoryName(path);
-            var text = JsonConvert.SerializeObject(_project);
+            var text = JsonConvert.SerializeObject(Project);
 
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
