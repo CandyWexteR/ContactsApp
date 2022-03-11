@@ -10,7 +10,7 @@ namespace ContactsApp
     public class Project
     {
         private List<Contact> _contacts;
-        
+
         [JsonConstructor]
         public Project(List<Contact> contacts)
         {
@@ -41,13 +41,15 @@ namespace ContactsApp
         /// <returns></returns>
         public IReadOnlyList<Contact> GetSortedContacts(string nameSurnameFilter, int page, int pageSize) =>
             pageSize > 0 && page > 0
-                ? _contacts.OrderBy(c => $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(nameSurnameFilter.ToUpper()) ||
-                                         $"{c.Name} {c.Surname}".Contains(nameSurnameFilter) ||
-                                         c.Name.Contains(nameSurnameFilter) || c.Surname.Contains(nameSurnameFilter))
+                ? _contacts.OrderBy(c => $"{c.Surname} {c.Name}").Where(c =>
+                        $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(nameSurnameFilter.ToUpper()) ||
+                        $"{c.Name} {c.Surname}".Contains(nameSurnameFilter) ||
+                        c.Name.Contains(nameSurnameFilter) || c.Surname.Contains(nameSurnameFilter))
                     .Skip((page - 1) * pageSize).Take(pageSize).ToList()
-                : _contacts.OrderBy(c => $"{c.Surname} {c.Name}".Contains(nameSurnameFilter) ||
-                                         $"{c.Name} {c.Surname}".Contains(nameSurnameFilter) ||
-                                         c.Name.Contains(nameSurnameFilter) || c.Surname.Contains(nameSurnameFilter))
+                : _contacts.OrderBy(c => $"{c.Surname} {c.Name}").Where(c =>
+                        $"{c.Surname} {c.Name}".Contains(nameSurnameFilter) ||
+                        $"{c.Name} {c.Surname}".Contains(nameSurnameFilter) ||
+                        c.Name.Contains(nameSurnameFilter) || c.Surname.Contains(nameSurnameFilter))
                     .ToList();
 
         /// <summary>
@@ -81,7 +83,7 @@ namespace ContactsApp
             var toRemove = _contacts.FirstOrDefault(e => e.Id == index);
             if (toRemove is null)
                 throw new InvalidEditOperationException("Этого контакта нет в списке.");
-            
+
             _contacts.Remove(toRemove);
         }
 

@@ -61,15 +61,11 @@ namespace ContactsApp.UI
             var editForm = new ContactForm(_manager.Project);
             editForm.Owner = this;
             var result = editForm.ShowDialog(this);
-            if (result == DialogResult.OK)
-            {
-                _manager.Serialize(_pathToContactsFile);
-            }
-            else
-            {
-                _manager.Deserialize(_pathToContactsFile);
-            }
+            
+            if (result != DialogResult.OK)
+                return;
 
+            _manager.Serialize(_pathToContactsFile);
             UpdateContactsList();
         }
 
@@ -84,15 +80,10 @@ namespace ContactsApp.UI
             var editForm = new ContactForm(_manager.Project, _listedContact);
             editForm.Owner = this;
             var result = editForm.ShowDialog(this);
-            if (result == DialogResult.OK)
-            {
-                _manager.Serialize(_pathToContactsFile);
-            }
-            else
-            {
-                _manager.Deserialize(_pathToContactsFile);
-            }
+            if (result != DialogResult.OK)
+                return;
 
+            _manager.Serialize(_pathToContactsFile);
             UpdateContactsList();
         }
 
@@ -108,13 +99,13 @@ namespace ContactsApp.UI
             var list = _manager.Project.GetSortedContacts(FindTextBox.Text, 0, 0);
             if (list.Count == 0)
                 return;
-            
+
             if (ContactsList.SelectedIndex >= list.Count || ContactsList.SelectedIndex < 0)
             {
                 ContactsList.SelectedIndex = 0;
                 return;
             }
-            
+
             _listedContact = list[ContactsList.SelectedIndex];
             SurnameTextBox.Text = _listedContact.Surname;
             NameTextBox.Text = _listedContact.Name;
@@ -142,13 +133,13 @@ namespace ContactsApp.UI
                 "Вы уверены, что хотите удалить контакт '" + _listedContact.Surname + " " + _listedContact.Name + "'?",
                 "Подтвердите удаление контакта", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (res != DialogResult.OK) return;
-            
+
             _manager.Project.RemoveContact(_listedContact.Id);
             _manager.Serialize(_pathToContactsFile);
             UpdateContactsList();
         }
 
-        
+
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateContactsList();
