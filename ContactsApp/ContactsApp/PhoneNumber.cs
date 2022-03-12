@@ -22,12 +22,11 @@ namespace ContactsApp
 
         public static PhoneNumber Create(long number)
         {
-            //79539244113
-            //
-            if (number is < 1000000000 or >= 10000000000)
+            //85746354637
+            if (number < 80000000000 || number >= 90000000000)
             {
                 throw new InvalidValueException($"Неправильное значение номера телефона. Номер должен начинаться" +
-                                                $"не с 0 и должен состоять из 10 символов.");
+                                                $"с 8 и должен состоять из 11 символов.");
             }
 
             return new(number);

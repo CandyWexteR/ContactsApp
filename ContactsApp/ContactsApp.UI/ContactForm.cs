@@ -18,7 +18,7 @@ namespace ContactsApp.UI
         public ContactForm()
         {
             InitializeComponent();
-            _contactId = -1;
+            _contactId = int.MaxValue;
         }
 
         public ContactForm(Contact contact)
@@ -37,49 +37,6 @@ namespace ContactsApp.UI
         private readonly int _contactId;
 
         public Contact Contact { get; protected set; }
-        
-        private void SurnameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (SurnameTextBox.Text.Length > 50 || SurnameTextBox.Text.Length == 0)
-            {
-                SurnameTextBox.BackColor = Color.Brown;
-                return;
-            }
-
-            SurnameTextBox.BackColor = Color.White;
-        }
-
-        private void VkTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (VkTextBox.Text.Length > 15 && VkTextBox.Text != IDVK_EXAMPLE_TEXT)
-            {
-                VkTextBox.BackColor = Color.Brown;
-                return;
-            }
-
-            VkTextBox.BackColor = Color.White;
-        }
-
-        private void EmailTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (EmailTextBox.Text.Length > 50)
-            {
-                EmailTextBox.BackColor = Color.Brown;
-                return;
-            }
-
-            EmailTextBox.BackColor = Color.White;
-        }
-
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NameTextBox.Text.Length > 50 || NameTextBox.Text.Length == 0)
-            {
-                NameTextBox.BackColor = Color.Brown;
-            }
-
-            NameTextBox.BackColor = Color.White;
-        }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
@@ -105,7 +62,7 @@ namespace ContactsApp.UI
 
             try
             {
-                Contact = Contact.Create(int.MaxValue, surname, name, number, BirthdayDateTimePicker.Value,
+                Contact = Contact.Create(_contactId, surname, name, parsed ? number : 0L, BirthdayDateTimePicker.Value,
                     EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
                     VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
             }

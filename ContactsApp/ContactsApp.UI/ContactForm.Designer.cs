@@ -66,7 +66,6 @@ namespace ContactsApp.UI
             this.VkTextBox.Name = "VkTextBox";
             this.VkTextBox.Size = new System.Drawing.Size(355, 22);
             this.VkTextBox.TabIndex = 26;
-            this.VkTextBox.TextChanged += new System.EventHandler(this.VkTextBox_TextChanged);
             this.VkTextBox.Enter += new System.EventHandler(this.VkTextBox_Enter);
             this.VkTextBox.Leave += new System.EventHandler(this.VkTextBox_Leave);
             // 
@@ -78,7 +77,6 @@ namespace ContactsApp.UI
             this.EmailTextBox.Name = "EmailTextBox";
             this.EmailTextBox.Size = new System.Drawing.Size(355, 22);
             this.EmailTextBox.TabIndex = 25;
-            this.EmailTextBox.TextChanged += new System.EventHandler(this.EmailTextBox_TextChanged);
             this.EmailTextBox.Enter += new System.EventHandler(this.EmailTextBox_Enter);
             this.EmailTextBox.Leave += new System.EventHandler(this.EmailTextBox_Leave);
             // 
@@ -102,7 +100,6 @@ namespace ContactsApp.UI
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(355, 22);
             this.NameTextBox.TabIndex = 23;
-            this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             this.NameTextBox.Enter += new System.EventHandler(this.NameTextBox_Enter);
             this.NameTextBox.Leave += new System.EventHandler(this.NameTextBox_Leave);
             // 
@@ -114,7 +111,6 @@ namespace ContactsApp.UI
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.Size = new System.Drawing.Size(355, 22);
             this.SurnameTextBox.TabIndex = 22;
-            this.SurnameTextBox.TextChanged += new System.EventHandler(this.SurnameTextBox_TextChanged);
             this.SurnameTextBox.Enter += new System.EventHandler(this.SurnameTextBox_Enter);
             this.SurnameTextBox.Leave += new System.EventHandler(this.SurnameTextBox_Leave);
             // 

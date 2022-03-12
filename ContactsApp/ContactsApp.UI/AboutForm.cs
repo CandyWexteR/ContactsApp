@@ -10,11 +10,6 @@ namespace ContactsApp.UI
             InitializeComponent();
         }
 
-        private void AboutForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void GitHubLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/MrFostik/ContactsApp/tree/develop");
