@@ -13,7 +13,7 @@ namespace ContactsApp.UI
         public const string NAME_EXAMPLE_TEXT = "Ivan";
         public const string IDVK_EXAMPLE_TEXT = "Write here ID vk.com/";
         public const string EMAIL_EXAMPLE_TEXT = "For example: usermail@example.com";
-        public const string PHONE_EXAMPLE_TEXT = "9876543210";
+        public const string PHONE_EXAMPLE_TEXT = "87654321098";
 
         public ContactForm()
         {
@@ -82,12 +82,15 @@ namespace ContactsApp.UI
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            PhoneTextBox.MaxLength = 10;
-            PhoneTextBox_Leave(sender, e);
-            NameTextBox_Leave(sender, e);
-            SurnameTextBox_Leave(sender, e);
-            VkTextBox_Leave(sender, e);
-            EmailTextBox_Leave(sender, e);
+            SurnameTextBox.MaxLength = 50;
+            EmailTextBox.MaxLength = 50;
+            VkTextBox.MaxLength = 15;
+            PhoneTextBox.MaxLength = 11;
+            PhoneTextBoxLeave();
+            NameTextBoxLeave();
+            SurnameTextBoxLeave();
+            VkTextBoxLeave();
+            EmailTextBoxLeave();
             BirthdayDateTimePicker.MaxDate = DateTime.Now;
         }
 
@@ -107,10 +110,7 @@ namespace ContactsApp.UI
 
         private void SurnameTextBox_Leave(object sender, EventArgs e)
         {
-            if (SurnameTextBox.Text.Length != 0) return;
-            SurnameTextBox.Text = SURNAME_EXAMPLE_TEXT;
-            SurnameTextBox.ForeColor = Color.Gray;
-            SurnameTextBox.BackColor = Color.Brown;
+            SurnameTextBoxLeave();
         }
 
         private void NameTextBox_Enter(object sender, EventArgs e)
@@ -123,13 +123,10 @@ namespace ContactsApp.UI
 
         private void NameTextBox_Leave(object sender, EventArgs e)
         {
-            if (NameTextBox.Text.Length != 0) return;
-            NameTextBox.Text = NAME_EXAMPLE_TEXT;
-            NameTextBox.ForeColor = Color.Gray;
-            NameTextBox.BackColor = Color.Brown;
+            NameTextBoxLeave();
         }
 
-        private void PhoneTextBox_Enter(object sender, EventArgs e) //Происходит когда элемент становится активным
+        private void PhoneTextBox_Enter(object sender, EventArgs e) 
         {
             if (PhoneTextBox.ForeColor != Color.Gray) return;
             PhoneTextBox.Text = null;
@@ -139,11 +136,7 @@ namespace ContactsApp.UI
 
         private void PhoneTextBox_Leave(object sender, EventArgs e)
         {
-            if (PhoneTextBox.Text.Length != 0) return;
-
-            PhoneTextBox.Text = PHONE_EXAMPLE_TEXT;
-            PhoneTextBox.ForeColor = Color.Gray;
-            PhoneTextBox.BackColor = Color.Brown;
+            PhoneTextBoxLeave();
         }
 
         private void EmailTextBox_Enter(object sender, EventArgs e)
@@ -156,9 +149,7 @@ namespace ContactsApp.UI
 
         private void EmailTextBox_Leave(object sender, EventArgs e)
         {
-            if (EmailTextBox.Text.Length != 0) return;
-            EmailTextBox.Text = EMAIL_EXAMPLE_TEXT;
-            EmailTextBox.ForeColor = Color.Gray;
+            EmailTextBoxLeave();
         }
 
         private void VkTextBox_Enter(object sender, EventArgs e)
@@ -171,11 +162,43 @@ namespace ContactsApp.UI
 
         private void VkTextBox_Leave(object sender, EventArgs e)
         {
+            VkTextBoxLeave();
+        }
+
+        private void PhoneTextBoxLeave()
+        {
+            if (PhoneTextBox.Text.Length != 0) return;
+
+            PhoneTextBox.Text = PHONE_EXAMPLE_TEXT;
+            PhoneTextBox.ForeColor = Color.Gray;
+            PhoneTextBox.BackColor = Color.Brown;
+        }
+        private void NameTextBoxLeave()
+        {
+            if (NameTextBox.Text.Length != 0) return;
+            NameTextBox.Text = NAME_EXAMPLE_TEXT;
+            NameTextBox.ForeColor = Color.Gray;
+            NameTextBox.BackColor = Color.Brown;
+        }
+        private void VkTextBoxLeave()
+        {
             if (VkTextBox.Text.Length != 0) return;
             VkTextBox.Text = IDVK_EXAMPLE_TEXT;
             VkTextBox.ForeColor = Color.Gray;
         }
-
+        private void EmailTextBoxLeave()
+        {
+            if (EmailTextBox.Text.Length != 0) return;
+            EmailTextBox.Text = EMAIL_EXAMPLE_TEXT;
+            EmailTextBox.ForeColor = Color.Gray;
+        }
+        private void SurnameTextBoxLeave()
+        {
+            if (SurnameTextBox.Text.Length != 0) return;
+            SurnameTextBox.Text = SURNAME_EXAMPLE_TEXT;
+            SurnameTextBox.ForeColor = Color.Gray;
+            SurnameTextBox.BackColor = Color.Brown;
+        }
         private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) //Проверка введена ли цифра
