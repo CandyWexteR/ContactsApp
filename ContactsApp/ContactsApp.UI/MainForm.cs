@@ -35,7 +35,7 @@ namespace ContactsApp.UI
 
         private void UpdateContactsList()
         {
-            var contacts = _manager.Project.GetSortedContacts(FindTextBox.Text, 0, 0);
+            var contacts = _manager.Project.GetSortedContacts(FindTextBox.Text);
 
 
             var visible = contacts.Count != 0;
@@ -75,7 +75,7 @@ namespace ContactsApp.UI
 
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var list = _manager.Project.GetSortedContacts(FindTextBox.Text, 0, 0);
+            var list = _manager.Project.GetSortedContacts(FindTextBox.Text);
             if (list.Count == 0)
                 return;
 

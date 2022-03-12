@@ -36,22 +36,18 @@ namespace ContactsApp
         /// </summary>
         /// <param name="nameSurnameFilter">Фильтр по имени и фамилии. Проверяется на наличие в строках:
         /// "{ФАМИЛИЯ}", "{ИМЯ}", "{ФАМИЛИЯ} {ИМЯ}", "{ИМЯ} {ФАМИЛИЯ}"</param>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IReadOnlyList<Contact> GetSortedContacts(string nameSurnameFilter, int page, int pageSize) =>
-            pageSize > 0 && page > 0
-                ? _contacts.OrderBy(c => $"{c.Surname} {c.Name}").Where(c =>
-                        $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(nameSurnameFilter.ToUpper()) ||
-                        $"{c.Name} {c.Surname}".Contains(nameSurnameFilter) ||
-                        c.Name.Contains(nameSurnameFilter) || c.Surname.Contains(nameSurnameFilter))
-                    .Skip((page - 1) * pageSize).Take(pageSize).ToList()
-                : _contacts.OrderBy(c => $"{c.Surname} {c.Name}").Where(c =>
-                        $"{c.Surname} {c.Name}".Contains(nameSurnameFilter) ||
-                        $"{c.Name} {c.Surname}".Contains(nameSurnameFilter) ||
-                        c.Name.Contains(nameSurnameFilter) || c.Surname.Contains(nameSurnameFilter))
-                    .ToList();
-
+        public IReadOnlyList<Contact> GetSortedContacts(string nameSurnameFilter)
+        {
+            var upperFilter = nameSurnameFilter.ToUpper();
+            return _contacts
+                .Where(c => $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(upperFilter) 
+                            || $"{c.Name.ToUpper()} {c.Surname.ToUpper()}".Contains(upperFilter) 
+                            || c.Name.ToUpper().Contains(upperFilter) 
+                            || c.Surname.ToUpper().Contains(upperFilter))
+                .OrderBy(c => $"{c.Surname} {c.Name}").ToList();
+        }
+            
         /// <summary>
         /// Добавление контакта.
         /// </summary>
