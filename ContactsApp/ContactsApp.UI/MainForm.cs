@@ -59,44 +59,18 @@ namespace ContactsApp.UI
 
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var editForm = new ContactForm();
-            var result = editForm.ShowDialog(this);
-
-            if (result != DialogResult.OK)
-                return;
-
-            _manager.Project.AddContact(editForm.Contact.Surname, editForm.Contact.Name,
-                editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
-                editForm.Contact.IdVk);
-            
-            _manager.Serialize(_pathToContactsFile);
-            UpdateContactsList();
+            AddContact();
         }
 
         private void EditContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_manager.Project.ContactsCount == 0)
-            {
-                MessageBox.Show("Отсутствуют контакты в списке!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var editForm = new ContactForm(_listedContact);
-            var result = editForm.ShowDialog(this);
-            if (result != DialogResult.OK)
-                return;
-
-            _manager.Project.EditContact(_listedContact.Id, editForm.Contact.Surname, editForm.Contact.Name,
-                editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
-                editForm.Contact.IdVk);
-            _manager.Serialize(_pathToContactsFile);
-            UpdateContactsList();
+            EditContact();
         }
+
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var about = new AboutForm();
-            about.ShowDialog(this);
+            RunAbout();
         }
 
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,6 +102,67 @@ namespace ContactsApp.UI
 
         private void RemoveContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            RemoveContact();
+        }
+
+
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateContactsList();
+        }
+
+        private void F1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                RunAbout();
+            }
+        }
+
+        private void BirthdayDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            BirthdayDateTimePicker.Value = _listedContact.BirthDay;
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            RemoveContact();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            AddContact();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            EditContact();
+        }
+
+        private void RunAbout()
+        {
+            var about = new AboutForm();
+            about.ShowDialog(this);
+        }
+
+        private void AddContact()
+        {
+            var editForm = new ContactForm();
+            var result = editForm.ShowDialog(this);
+
+            if (result != DialogResult.OK)
+                return;
+
+            _manager.Project.AddContact(editForm.Contact.Surname, editForm.Contact.Name,
+                editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
+                editForm.Contact.IdVk);
+            
+            _manager.Serialize(_pathToContactsFile);
+            UpdateContactsList();
+        }
+
+        private void RemoveContact()
+        {
             if (_manager.Project.ContactsCount == 0)
             {
                 MessageBox.Show("Отсутствуют контакты в списке!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -143,49 +178,25 @@ namespace ContactsApp.UI
             _manager.Serialize(_pathToContactsFile);
             UpdateContactsList();
         }
-
-
-        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        
+        private void EditContact()
         {
-            UpdateContactsList();
-        }
-
-        private void F1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F1)
+            if (_manager.Project.ContactsCount == 0)
             {
-                AboutToolStripMenuItem_Click(sender, e);
+                MessageBox.Show("Отсутствуют контакты в списке!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-        }
 
-        private void BirthdayDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            BirthdayDateTimePicker.Value = _listedContact.BirthDay;
-        }
+            var editForm = new ContactForm(_listedContact);
+            var result = editForm.ShowDialog(this);
+            if (result != DialogResult.OK)
+                return;
 
-        private void ExitButton_Click(object sender, EventArgs e)
-        {
-            ExitToolStripMenuItem_Click(sender, e);
-        }
-
-        private void RemoveButton_Click(object sender, EventArgs e)
-        {
-            RemoveContactToolStripMenuItem_Click(sender, e);
-        }
-
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            AddContactToolStripMenuItem_Click(sender, e);
-        }
-
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            EditContactToolStripMenuItem_Click(sender, e);
-        }
-
-        private void AboutButton_Click(object sender, EventArgs e)
-        {
-            AboutToolStripMenuItem_Click(sender, e);
+            _manager.Project.EditContact(_listedContact.Id, editForm.Contact.Surname, editForm.Contact.Name,
+                editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
+                editForm.Contact.IdVk);
+            _manager.Serialize(_pathToContactsFile);
+            UpdateContactsList();
         }
     }
 }
