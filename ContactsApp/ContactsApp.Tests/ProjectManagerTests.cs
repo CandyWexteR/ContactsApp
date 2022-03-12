@@ -16,7 +16,7 @@ public class ProjectManagerTests
     {
         Assert.Greater(count, 0);
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         var date = DateTime.Now;
         
         for (var i = 0; i < count; i++)
@@ -30,31 +30,20 @@ public class ProjectManagerTests
 
         var expected = JsonConvert.SerializeObject(project);
 
-        var dirPath = Path.Combine(Directory.GetCurrentDirectory(), "tests");
-        var filePath = Path.Combine(dirPath, "text.json");
-        if (Directory.Exists(dirPath))
-            Directory.CreateDirectory(dirPath);
+        _manager.Serialize();
 
-        _manager.Serialize(filePath);
-
-        var file = File.ReadAllText(filePath);
+        var file = File.ReadAllText(_manager.FullPath);
 
         Assert.AreEqual(expected, file);
-
-        if (File.Exists(filePath))
-            File.Delete(filePath);
-
-        if (Directory.Exists(dirPath))
-            Directory.Delete(dirPath);
     }
 
     [Test]
-    [TestCase(4, "1231213123", "xcvcxvxcvcxv", null, "asdsad", "dsadasdad")]
+    [TestCase(4, "1231213123", "xcvcxvxcvcxv", null, "mail@example.com", "dsadasdad")]
     public void Deserialize_ValidPath(int count, string surname, string name, DateTime date, string email, string idVk)
     {
         Assert.Greater(count, 0);
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         
         for (var i = 0; i < count; i++)
         {
@@ -67,19 +56,11 @@ public class ProjectManagerTests
 
         var expected = JsonConvert.SerializeObject(project);
 
-        var dirPath = Path.Combine(Directory.GetCurrentDirectory(), "tests");
-        var filePath = Path.Combine(dirPath, "text.json");
 
-        if (Directory.Exists(dirPath))
-            Directory.CreateDirectory(dirPath);
 
-        _manager.Serialize(filePath);
+        _manager.Serialize();
 
-        var file = File.ReadAllText(filePath);
-
-        Assert.AreEqual(expected, file);
-
-        _manager.Deserialize(filePath);
+        _manager.Deserialize();
 
         foreach (var item in list)
         {
@@ -93,12 +74,6 @@ public class ProjectManagerTests
             Assert.AreEqual(item.Name, contact.Name);
             Assert.AreEqual(item.Surname, contact.Surname);
         }
-
-        if (File.Exists(filePath))
-            File.Delete(filePath);
-
-        if (Directory.Exists(dirPath))
-            Directory.Delete(dirPath);
     }
 
     [Test]
@@ -107,7 +82,7 @@ public class ProjectManagerTests
     {
         Assert.Greater(count, 1);
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         var date = DateTime.Now;
         
         for (var i = 0; i < count; i++)
@@ -115,11 +90,10 @@ public class ProjectManagerTests
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, date, null, null));
         }
         _manager = new ProjectManager(new Project(list));
-        var dirPath = Path.Combine(Directory.GetCurrentDirectory(), "tests");
-        var filePath = Path.Combine(dirPath, "text.json");
-        _manager.Deserialize(filePath);
+        _manager.ChangeFilename(Path.GetRandomFileName());
+        _manager.Deserialize();
         Assert.AreEqual(0, _manager.Project.ContactsCount);
-        var file = File.ReadAllText(filePath);
+        var file = File.ReadAllText(Path.Combine(_manager.FullPath));
         var text = JsonConvert.SerializeObject(new Project(new List<Contact>()));
         Assert.AreEqual(text, file);
     }

@@ -23,7 +23,7 @@ public class ProjectTests
     public void Project_AddFirstOnly(string surname, string name)
     {
         _project = new Project(new List<Contact>());
-        var number = 7463728499L;
+        var number = 87485746352L;
         _project.AddContact(surname, name, number, _date, null, null);
 
         AssertContact(0, surname, name, number, _date, null, null);
@@ -36,10 +36,10 @@ public class ProjectTests
         _project = new Project(new List<Contact>());
         for (int i = 0; i < currentListItemsCount; i++)
         {
-            _project.AddContact("surname" + i, "name" + i, 6467462364, date, email, idVk);
+            _project.AddContact("surname" + i, "name" + i, 86467462364, date, email, idVk);
         }
 
-        var number = 7463728499;
+        var number = 87485746352;
         _project.AddContact(surname, name, number, date, email, idVk);
 
         AssertContact(currentListItemsCount, surname, name, number, date, email, idVk);
@@ -50,7 +50,7 @@ public class ProjectTests
     public void ExistingContactsAssers(int count)
     {
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         
         for (var i = 0; i < count; i++)
         {
@@ -74,7 +74,7 @@ public class ProjectTests
         Assert.Greater(count, removingIndex);
 
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
@@ -94,7 +94,7 @@ public class ProjectTests
         Assert.GreaterOrEqual(removingIndex, count);
 
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
@@ -117,7 +117,7 @@ public class ProjectTests
     }
 
     [Test]
-    [TestCase(2, 1, "2332", "2323", "2323", "232323", null)]
+    [TestCase(2, 1, "2332", "2323", "mail@example.com", "232323", null)]
     public void ContactEdit_Valid(int count, int id, string surname, string name, string email, string idVk,
         DateTime birthday)
     {
@@ -126,7 +126,7 @@ public class ProjectTests
         Assert.Greater(count, id);
 
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, birthday, null, null));
@@ -149,7 +149,7 @@ public class ProjectTests
         Assert.Greater(index, count);
 
         var list = new List<Contact>();
-        var number = 7485746352;
+        var number = 87485746352;
         for (var i = 0; i < count; i++)
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, birthday, null, null));

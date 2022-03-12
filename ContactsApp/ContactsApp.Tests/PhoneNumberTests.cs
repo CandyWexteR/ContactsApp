@@ -23,7 +23,7 @@ public class PhoneNumberTests
     [TestCase(1000000000000)]
     public void PhoneNumber_InvalidValue(long value)
     {
-        if (value is < 10000000000 or >= 100000000000)
+        if (value is < 800000000000 or >= 900000000000)
         {
             Assert.Throws<InvalidValueException>(() => PhoneNumber.Create(value),
                 $"Неправильное значение номера телефона " +
@@ -35,17 +35,14 @@ public class PhoneNumberTests
     }
 
     [Test]
-    [TestCase(1000000000L)]
-    [TestCase(1000030000L)]
-    [TestCase(1000032000L)]
-    [TestCase(9000032000L)]
+    [TestCase(89180000000L)]
+    [TestCase(81000030000L)]
+    [TestCase(81000032000L)]
+    [TestCase(89000032000L)]
     public void PhoneNumber_ValidValue(long value)
     {
-        if (value is < 1000000000 or >= 10000000000)
-        {
-            Assert.Fail("Значение НЕ должно быть в диапазоне от 10000000000 до 100000000000");
-            return;
-        }
+        Assert.GreaterOrEqual(value, 80000000000);
+        Assert.Less(value, 90000000000);
 
         var number = PhoneNumber.Create(value);
         

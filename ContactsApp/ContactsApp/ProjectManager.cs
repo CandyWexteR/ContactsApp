@@ -11,6 +11,14 @@ namespace ContactsApp
     /// </summary>
     public class ProjectManager
     {
+        /// <summary>
+        /// Базовый путь к контактам
+        /// </summary>
+        public static string DefaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ContactsApp");
+        public static string Filename = "contacts.json";
+
+        public string FullPath => Path.Combine(DefaultPath, Filename);
+        
         //Для десериализации.
         [JsonConstructor]
         public ProjectManager(Project project)
@@ -20,17 +28,22 @@ namespace ContactsApp
 
         public Project Project { get; protected set; }
 
-        public void Deserialize(string path)
+        public void ChangePath(string path)
         {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                path = Path.Combine(Directory.GetCurrentDirectory(), "contacts.json");
-            }
-
+            DefaultPath = path;
+        }
+        
+        public void ChangeFilename(string name)
+        {
+            Filename = name;
+        }
+        
+        public void Deserialize()
+        {
             Project? project = null;
             try
             {
-                var text = File.ReadAllText(path);
+                var text = File.ReadAllText(FullPath);
 
                 project = JsonConvert.DeserializeObject<Project>(text);
             }
@@ -46,25 +59,24 @@ namespace ContactsApp
             else
             {
                 Project = new Project(new List<Contact>());
-                Serialize(path);
+                Serialize();
             }
         }
 
-        public void Serialize(string path)
+        public void Serialize()
         {
-            var directory = Path.GetDirectoryName(path);
             var text = JsonConvert.SerializeObject(Project);
 
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
+            if (!Directory.Exists(DefaultPath))
+                Directory.CreateDirectory(DefaultPath);
             
-            if (!File.Exists(path))
-                using (var stream = File.Create(path))
+            if (!File.Exists(FullPath))
+                using (var stream = File.Create(FullPath))
                 {
                     stream.Close();
                 }
             
-            File.WriteAllText(path, text);
+            File.WriteAllText(FullPath, text);
         }
     }
 }

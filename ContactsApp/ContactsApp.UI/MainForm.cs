@@ -11,7 +11,6 @@ namespace ContactsApp.UI
     {
         private readonly ProjectManager _manager;
         private Contact _listedContact;
-        private readonly string _pathToContactsFile = Path.Combine(Directory.GetCurrentDirectory(), "contacts.json");
 
         public MainForm()
         {
@@ -21,7 +20,7 @@ namespace ContactsApp.UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _manager.Deserialize(_pathToContactsFile);
+            _manager.Deserialize();
             BirthdayDateTimePicker.MinDate = DateTime.Now.AddYears(-130);
             BirthdayDateTimePicker.MaxDate = DateTime.Now;
             UpdateContactsList();
@@ -97,7 +96,7 @@ namespace ContactsApp.UI
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _manager.Serialize(Path.Combine(Directory.GetCurrentDirectory(), "contacts.json"));
+            _manager.Serialize();
         }
 
         private void RemoveContactToolStripMenuItem_Click(object sender, EventArgs e)
@@ -157,7 +156,7 @@ namespace ContactsApp.UI
                 editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
                 editForm.Contact.IdVk);
             
-            _manager.Serialize(_pathToContactsFile);
+            _manager.Serialize();
             UpdateContactsList();
         }
 
@@ -175,7 +174,7 @@ namespace ContactsApp.UI
             if (res != DialogResult.OK) return;
 
             _manager.Project.RemoveContact(_listedContact.Id);
-            _manager.Serialize(_pathToContactsFile);
+            _manager.Serialize();
             UpdateContactsList();
         }
         
@@ -195,7 +194,7 @@ namespace ContactsApp.UI
             _manager.Project.EditContact(_listedContact.Id, editForm.Contact.Surname, editForm.Contact.Name,
                 editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
                 editForm.Contact.IdVk);
-            _manager.Serialize(_pathToContactsFile);
+            _manager.Serialize();
             UpdateContactsList();
         }
     }
