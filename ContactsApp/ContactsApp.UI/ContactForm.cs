@@ -9,10 +9,10 @@ namespace ContactsApp.UI
 {
     public partial class ContactForm : Form
     {
-        public const string SURNAME_EXAMPLE_TEXT = "Ivanov";
-        public const string NAME_EXAMPLE_TEXT = "Ivan";
-        public const string IDVK_EXAMPLE_TEXT = "Write here ID vk.com/";
-        public const string EMAIL_EXAMPLE_TEXT = "For example: usermail@example.com";
+        public const string SURNAME_EXAMPLE_TEXT = "Иванов";
+        public const string NAME_EXAMPLE_TEXT = "Иван";
+        public const string IDVK_EXAMPLE_TEXT = "Тут вписать ID vk.com/{id}";
+        public const string EMAIL_EXAMPLE_TEXT = "Пример: usermail@example.com";
         public const string PHONE_EXAMPLE_TEXT = "87654321098";
 
         public ContactForm()

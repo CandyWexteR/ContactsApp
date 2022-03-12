@@ -147,11 +147,11 @@ namespace ContactsApp.UI
             // BirthdayLabel
             // 
             this.BirthdayLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.BirthdayLabel.Location = new System.Drawing.Point(6, 144);
+            this.BirthdayLabel.Location = new System.Drawing.Point(0, 144);
             this.BirthdayLabel.Name = "BirthdayLabel";
-            this.BirthdayLabel.Size = new System.Drawing.Size(115, 17);
+            this.BirthdayLabel.Size = new System.Drawing.Size(121, 17);
             this.BirthdayLabel.TabIndex = 18;
-            this.BirthdayLabel.Text = "День рождения";
+            this.BirthdayLabel.Text = "Дата рождения";
             this.BirthdayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // NameLabel

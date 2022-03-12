@@ -187,9 +187,9 @@ namespace ContactsApp.UI
             // 
             // BirthdayLabel
             // 
-            this.BirthdayLabel.Location = new System.Drawing.Point(7, 133);
+            this.BirthdayLabel.Location = new System.Drawing.Point(3, 133);
             this.BirthdayLabel.Name = "BirthdayLabel";
-            this.BirthdayLabel.Size = new System.Drawing.Size(118, 21);
+            this.BirthdayLabel.Size = new System.Drawing.Size(122, 21);
             this.BirthdayLabel.TabIndex = 5;
             this.BirthdayLabel.Text = "Дата рождения:";
             this.BirthdayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
