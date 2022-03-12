@@ -15,29 +15,29 @@ namespace ContactsApp.UI
         public const string EMAIL_EXAMPLE_TEXT = "For example: usermail@example.com";
         public const string PHONE_EXAMPLE_TEXT = "9876543210";
 
-        private Project _project;
-        private Contact _contactBefore;
-
-        public ContactForm(Project project)
-        {
-            _project = project;
-            InitializeComponent();
-        }
-
-        public ContactForm(Project project, Contact contact)
+        public ContactForm()
         {
             InitializeComponent();
-            _contactBefore = contact;
-            _project = project;
-            SurnameTextBox.Text = _contactBefore.Surname;
-            NameTextBox.Text = _contactBefore.Name;
-            BirthdayDateTimePicker.Value = _contactBefore.BirthDay;
-
-            PhoneTextBox.Text = _contactBefore.PhoneNumber.Number.ToString();
-            EmailTextBox.Text = _contactBefore.Email;
-            VkTextBox.Text = _contactBefore.IdVk;
+            _contactId = -1;
         }
 
+        public ContactForm(Contact contact)
+        {
+            InitializeComponent();
+            SurnameTextBox.Text = contact.Surname;
+            NameTextBox.Text = contact.Name;
+            BirthdayDateTimePicker.Value = contact.BirthDay;
+
+            PhoneTextBox.Text = contact.PhoneNumber.Number.ToString();
+            EmailTextBox.Text = contact.Email;
+            VkTextBox.Text = contact.IdVk;
+            _contactId = contact.Id;
+        }
+
+        private readonly int _contactId;
+
+        public Contact Contact { get; protected set; }
+        
         private void SurnameTextBox_TextChanged(object sender, EventArgs e)
         {
             if (SurnameTextBox.Text.Length > 50 || SurnameTextBox.Text.Length == 0)
@@ -85,8 +85,9 @@ namespace ContactsApp.UI
         {
             var surname = string.Empty;
             var name = string.Empty;
-            var parsed = long.TryParse(PhoneTextBox.Text == PHONE_EXAMPLE_TEXT 
-                    ? "0" : PhoneTextBox.Text, out var number);
+            var parsed = long.TryParse(PhoneTextBox.Text == PHONE_EXAMPLE_TEXT
+                ? "0"
+                : PhoneTextBox.Text, out var number);
 
             //Сохраняются Фамилия и Имя следующим образом:
             //Первая буква всегда имеет верхний регистр, остальные нижний
@@ -104,18 +105,9 @@ namespace ContactsApp.UI
 
             try
             {
-                if (_contactBefore is not null)
-                {
-                    _project.EditContact(_contactBefore.Id, surname, name, number, BirthdayDateTimePicker.Value,
-                        EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
-                        VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
-                }
-                else
-                {
-                    _project.AddContact(surname, name, number, BirthdayDateTimePicker.Value,
-                        EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
-                        VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
-                }
+                Contact = Contact.Create(int.MaxValue, surname, name, number, BirthdayDateTimePicker.Value,
+                    EmailTextBox.Text != EMAIL_EXAMPLE_TEXT ? EmailTextBox.Text : string.Empty,
+                    VkTextBox.Text != IDVK_EXAMPLE_TEXT ? VkTextBox.Text : string.Empty);
             }
             catch (AggregateException exception)
             {
@@ -140,10 +132,6 @@ namespace ContactsApp.UI
             VkTextBox_Leave(sender, e);
             EmailTextBox_Leave(sender, e);
             BirthdayDateTimePicker.MaxDate = DateTime.Now;
-        }
-
-        private void BirthdayDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

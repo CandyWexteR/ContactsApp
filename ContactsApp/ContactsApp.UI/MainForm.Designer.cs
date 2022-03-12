@@ -58,8 +58,6 @@ namespace ContactsApp.UI
             this.AddButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
             this.RemoveButton = new System.Windows.Forms.Button();
-            this.ExitButton = new System.Windows.Forms.Button();
-            this.AboutButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -67,12 +65,12 @@ namespace ContactsApp.UI
             // BirthdayDateTimePicker
             // 
             this.BirthdayDateTimePicker.Enabled = false;
-            this.BirthdayDateTimePicker.Location = new System.Drawing.Point(105, 132);
+            this.BirthdayDateTimePicker.Location = new System.Drawing.Point(131, 132);
             this.BirthdayDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2021, 5, 16, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
-            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(168, 22);
+            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(158, 22);
             this.BirthdayDateTimePicker.TabIndex = 16;
             this.BirthdayDateTimePicker.Value = new System.DateTime(2021, 5, 16, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.ValueChanged += new System.EventHandler(this.BirthdayDateTimePicker_ValueChanged);
@@ -81,11 +79,12 @@ namespace ContactsApp.UI
             // FindLabel
             // 
             this.FindLabel.AutoSize = true;
-            this.FindLabel.Location = new System.Drawing.Point(15, 37);
+            this.FindLabel.Location = new System.Drawing.Point(12, 40);
             this.FindLabel.Name = "FindLabel";
-            this.FindLabel.Size = new System.Drawing.Size(43, 17);
+            this.FindLabel.Size = new System.Drawing.Size(52, 17);
             this.FindLabel.TabIndex = 0;
-            this.FindLabel.Text = "Find: ";
+            this.FindLabel.Text = "Поиск:";
+            this.FindLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ContactsList
             // 
@@ -116,168 +115,168 @@ namespace ContactsApp.UI
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.exitToolStripMenuItem });
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
+            this.fileToolStripMenuItem.Text = "Файл";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
+            this.exitToolStripMenuItem.Text = "Выход";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.addContactToolStripMenuItem, this.editContactToolStripMenuItem, this.removeContactToolStripMenuItem });
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.editToolStripMenuItem.Text = "Редактировать";
             // 
             // addContactToolStripMenuItem
             // 
             this.addContactToolStripMenuItem.Name = "addContactToolStripMenuItem";
-            this.addContactToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
-            this.addContactToolStripMenuItem.Text = "Add Contact";
+            this.addContactToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
+            this.addContactToolStripMenuItem.Text = "Добавить контакт";
             this.addContactToolStripMenuItem.Click += new System.EventHandler(this.AddContactToolStripMenuItem_Click);
             // 
             // editContactToolStripMenuItem
             // 
             this.editContactToolStripMenuItem.Name = "editContactToolStripMenuItem";
-            this.editContactToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
-            this.editContactToolStripMenuItem.Text = "Edit Contact";
+            this.editContactToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
+            this.editContactToolStripMenuItem.Text = "Изменить контакт";
             this.editContactToolStripMenuItem.Click += new System.EventHandler(this.EditContactToolStripMenuItem_Click);
             // 
             // removeContactToolStripMenuItem
             // 
             this.removeContactToolStripMenuItem.Name = "removeContactToolStripMenuItem";
-            this.removeContactToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
-            this.removeContactToolStripMenuItem.Text = "Remove Contact";
+            this.removeContactToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
+            this.removeContactToolStripMenuItem.Text = "Удалить контакт";
             this.removeContactToolStripMenuItem.Click += new System.EventHandler(this.RemoveContactToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutToolStripMenuItem1 });
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.helpToolStripMenuItem.Text = "Помощь";
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(119, 24);
-            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(173, 24);
+            this.aboutToolStripMenuItem1.Text = "О программе";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // SurnameLabel
             // 
             this.SurnameLabel.Location = new System.Drawing.Point(7, 5);
             this.SurnameLabel.Name = "SurnameLabel";
-            this.SurnameLabel.Size = new System.Drawing.Size(92, 21);
+            this.SurnameLabel.Size = new System.Drawing.Size(118, 21);
             this.SurnameLabel.TabIndex = 3;
-            this.SurnameLabel.Text = "Surname:";
+            this.SurnameLabel.Text = "Фамилия:";
             this.SurnameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // NameLabel
             // 
             this.NameLabel.Location = new System.Drawing.Point(7, 31);
             this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(92, 21);
+            this.NameLabel.Size = new System.Drawing.Size(118, 21);
             this.NameLabel.TabIndex = 4;
-            this.NameLabel.Text = "Name:";
+            this.NameLabel.Text = "Имя:";
             this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // BirthdayLabel
             // 
             this.BirthdayLabel.Location = new System.Drawing.Point(7, 133);
             this.BirthdayLabel.Name = "BirthdayLabel";
-            this.BirthdayLabel.Size = new System.Drawing.Size(92, 21);
+            this.BirthdayLabel.Size = new System.Drawing.Size(118, 21);
             this.BirthdayLabel.TabIndex = 5;
-            this.BirthdayLabel.Text = "Birthday:";
+            this.BirthdayLabel.Text = "Дата рождения:";
             this.BirthdayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PhoneLabel
             // 
             this.PhoneLabel.Location = new System.Drawing.Point(7, 55);
             this.PhoneLabel.Name = "PhoneLabel";
-            this.PhoneLabel.Size = new System.Drawing.Size(92, 21);
+            this.PhoneLabel.Size = new System.Drawing.Size(118, 21);
             this.PhoneLabel.TabIndex = 6;
-            this.PhoneLabel.Text = "Phone: +7";
+            this.PhoneLabel.Text = "Номер:";
             this.PhoneLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // EmailLabel
             // 
             this.EmailLabel.Location = new System.Drawing.Point(7, 81);
             this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(92, 21);
+            this.EmailLabel.Size = new System.Drawing.Size(118, 21);
             this.EmailLabel.TabIndex = 7;
-            this.EmailLabel.Text = "E-mail:";
+            this.EmailLabel.Text = "Почта:";
             this.EmailLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // VkLabel
             // 
             this.VkLabel.Location = new System.Drawing.Point(7, 107);
             this.VkLabel.Name = "VkLabel";
-            this.VkLabel.Size = new System.Drawing.Size(92, 21);
+            this.VkLabel.Size = new System.Drawing.Size(118, 21);
             this.VkLabel.TabIndex = 8;
-            this.VkLabel.Text = "vk.com:";
+            this.VkLabel.Text = "ID ВКонтакте:";
             this.VkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // SurnameTextBox
             // 
-            this.SurnameTextBox.Location = new System.Drawing.Point(105, 2);
+            this.SurnameTextBox.Location = new System.Drawing.Point(131, 2);
             this.SurnameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.ReadOnly = true;
-            this.SurnameTextBox.Size = new System.Drawing.Size(407, 22);
+            this.SurnameTextBox.Size = new System.Drawing.Size(381, 22);
             this.SurnameTextBox.TabIndex = 9;
             this.SurnameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(105, 28);
+            this.NameTextBox.Location = new System.Drawing.Point(131, 28);
             this.NameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.ReadOnly = true;
-            this.NameTextBox.Size = new System.Drawing.Size(407, 22);
+            this.NameTextBox.Size = new System.Drawing.Size(381, 22);
             this.NameTextBox.TabIndex = 10;
             this.NameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // PhoneTextBox
             // 
-            this.PhoneTextBox.Location = new System.Drawing.Point(105, 54);
+            this.PhoneTextBox.Location = new System.Drawing.Point(131, 54);
             this.PhoneTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PhoneTextBox.Name = "PhoneTextBox";
             this.PhoneTextBox.ReadOnly = true;
-            this.PhoneTextBox.Size = new System.Drawing.Size(407, 22);
+            this.PhoneTextBox.Size = new System.Drawing.Size(381, 22);
             this.PhoneTextBox.TabIndex = 12;
             this.PhoneTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // EmailTextBox
             // 
-            this.EmailTextBox.Location = new System.Drawing.Point(105, 80);
+            this.EmailTextBox.Location = new System.Drawing.Point(131, 80);
             this.EmailTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EmailTextBox.Name = "EmailTextBox";
             this.EmailTextBox.ReadOnly = true;
-            this.EmailTextBox.Size = new System.Drawing.Size(407, 22);
+            this.EmailTextBox.Size = new System.Drawing.Size(381, 22);
             this.EmailTextBox.TabIndex = 13;
             this.EmailTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // VkTextBox
             // 
-            this.VkTextBox.Location = new System.Drawing.Point(105, 106);
+            this.VkTextBox.Location = new System.Drawing.Point(131, 106);
             this.VkTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.VkTextBox.Name = "VkTextBox";
             this.VkTextBox.ReadOnly = true;
-            this.VkTextBox.Size = new System.Drawing.Size(407, 22);
+            this.VkTextBox.Size = new System.Drawing.Size(381, 22);
             this.VkTextBox.TabIndex = 14;
             this.VkTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
             // 
             // FindTextBox
             // 
-            this.FindTextBox.Location = new System.Drawing.Point(55, 33);
+            this.FindTextBox.Location = new System.Drawing.Point(71, 37);
             this.FindTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.FindTextBox.Name = "FindTextBox";
-            this.FindTextBox.Size = new System.Drawing.Size(212, 22);
+            this.FindTextBox.Size = new System.Drawing.Size(196, 22);
             this.FindTextBox.TabIndex = 17;
             this.FindTextBox.TextChanged += new System.EventHandler(this.FindTextBox_TextChanged);
             this.FindTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
@@ -343,36 +342,6 @@ namespace ContactsApp.UI
             this.RemoveButton.UseVisualStyleBackColor = false;
             this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // ExitButton
-            // 
-            this.ExitButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ExitButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ExitButton.BackgroundImage")));
-            this.ExitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ExitButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ExitButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ExitButton.Location = new System.Drawing.Point(164, 463);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(32, 32);
-            this.ExitButton.TabIndex = 22;
-            this.ExitButton.UseVisualStyleBackColor = false;
-            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
-            // 
-            // AboutButton
-            // 
-            this.AboutButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.AboutButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AboutButton.BackgroundImage")));
-            this.AboutButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.AboutButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AboutButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.AboutButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.AboutButton.Location = new System.Drawing.Point(126, 463);
-            this.AboutButton.Name = "AboutButton";
-            this.AboutButton.Size = new System.Drawing.Size(32, 32);
-            this.AboutButton.TabIndex = 23;
-            this.AboutButton.UseVisualStyleBackColor = false;
-            this.AboutButton.Click += new System.EventHandler(this.AboutButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -380,8 +349,6 @@ namespace ContactsApp.UI
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(800, 501);
-            this.Controls.Add(this.AboutButton);
-            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.EditButton);
             this.Controls.Add(this.AddButton);
@@ -411,13 +378,9 @@ namespace ContactsApp.UI
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button AboutButton;
-
         private System.Windows.Forms.Button EditButton;
 
         private System.Windows.Forms.Button RemoveButton;
-
-        private System.Windows.Forms.Button ExitButton;
 
         private System.Windows.Forms.Button AddButton;
 

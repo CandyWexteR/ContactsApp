@@ -41,7 +41,7 @@ namespace ContactsApp.UI
             var visible = contacts.Count != 0;
             panel1.Visible = visible;
             ContactsList.Enabled = visible;
-            
+
             ContactsList.Items.Clear();
             if (!visible)
             {
@@ -53,18 +53,22 @@ namespace ContactsApp.UI
             {
                 ContactsList.Items.Add($"{item.Surname} {item.Name}");
             }
+
             ContactsList.SelectedIndex = 0;
         }
 
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var editForm = new ContactForm(_manager.Project);
-            editForm.Owner = this;
+            var editForm = new ContactForm();
             var result = editForm.ShowDialog(this);
-            
+
             if (result != DialogResult.OK)
                 return;
 
+            _manager.Project.AddContact(editForm.Contact.Surname, editForm.Contact.Name,
+                editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
+                editForm.Contact.IdVk);
+            
             _manager.Serialize(_pathToContactsFile);
             UpdateContactsList();
         }
@@ -77,12 +81,14 @@ namespace ContactsApp.UI
                 return;
             }
 
-            var editForm = new ContactForm(_manager.Project, _listedContact);
-            editForm.Owner = this;
+            var editForm = new ContactForm(_listedContact);
             var result = editForm.ShowDialog(this);
             if (result != DialogResult.OK)
                 return;
 
+            _manager.Project.EditContact(_listedContact.Id, editForm.Contact.Surname, editForm.Contact.Name,
+                editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
+                editForm.Contact.IdVk);
             _manager.Serialize(_pathToContactsFile);
             UpdateContactsList();
         }
@@ -90,7 +96,6 @@ namespace ContactsApp.UI
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about = new AboutForm();
-            about.Owner = this;
             about.ShowDialog(this);
         }
 

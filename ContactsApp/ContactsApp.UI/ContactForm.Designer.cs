@@ -50,22 +50,21 @@ namespace ContactsApp.UI
             // 
             this.BirthdayDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.BirthdayDateTimePicker.CustomFormat = "";
-            this.BirthdayDateTimePicker.Location = new System.Drawing.Point(85, 141);
+            this.BirthdayDateTimePicker.Location = new System.Drawing.Point(127, 141);
             this.BirthdayDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BirthdayDateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
-            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(169, 22);
+            this.BirthdayDateTimePicker.Size = new System.Drawing.Size(355, 22);
             this.BirthdayDateTimePicker.TabIndex = 27;
             this.BirthdayDateTimePicker.Value = new System.DateTime(2021, 3, 22, 13, 44, 37, 0);
-            this.BirthdayDateTimePicker.ValueChanged += new System.EventHandler(this.BirthdayDateTimePicker_ValueChanged);
             // 
             // VkTextBox
             // 
             this.VkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.VkTextBox.Location = new System.Drawing.Point(85, 115);
+            this.VkTextBox.Location = new System.Drawing.Point(127, 115);
             this.VkTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.VkTextBox.Name = "VkTextBox";
-            this.VkTextBox.Size = new System.Drawing.Size(397, 22);
+            this.VkTextBox.Size = new System.Drawing.Size(355, 22);
             this.VkTextBox.TabIndex = 26;
             this.VkTextBox.TextChanged += new System.EventHandler(this.VkTextBox_TextChanged);
             this.VkTextBox.Enter += new System.EventHandler(this.VkTextBox_Enter);
@@ -74,10 +73,10 @@ namespace ContactsApp.UI
             // EmailTextBox
             // 
             this.EmailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EmailTextBox.Location = new System.Drawing.Point(85, 89);
+            this.EmailTextBox.Location = new System.Drawing.Point(127, 89);
             this.EmailTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EmailTextBox.Name = "EmailTextBox";
-            this.EmailTextBox.Size = new System.Drawing.Size(397, 22);
+            this.EmailTextBox.Size = new System.Drawing.Size(355, 22);
             this.EmailTextBox.TabIndex = 25;
             this.EmailTextBox.TextChanged += new System.EventHandler(this.EmailTextBox_TextChanged);
             this.EmailTextBox.Enter += new System.EventHandler(this.EmailTextBox_Enter);
@@ -86,10 +85,10 @@ namespace ContactsApp.UI
             // PhoneTextBox
             // 
             this.PhoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.PhoneTextBox.Location = new System.Drawing.Point(85, 63);
+            this.PhoneTextBox.Location = new System.Drawing.Point(127, 63);
             this.PhoneTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PhoneTextBox.Name = "PhoneTextBox";
-            this.PhoneTextBox.Size = new System.Drawing.Size(397, 22);
+            this.PhoneTextBox.Size = new System.Drawing.Size(355, 22);
             this.PhoneTextBox.TabIndex = 24;
             this.PhoneTextBox.Enter += new System.EventHandler(this.PhoneTextBox_Enter);
             this.PhoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
@@ -98,10 +97,10 @@ namespace ContactsApp.UI
             // NameTextBox
             // 
             this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameTextBox.Location = new System.Drawing.Point(85, 37);
+            this.NameTextBox.Location = new System.Drawing.Point(127, 37);
             this.NameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(397, 22);
+            this.NameTextBox.Size = new System.Drawing.Size(355, 22);
             this.NameTextBox.TabIndex = 23;
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             this.NameTextBox.Enter += new System.EventHandler(this.NameTextBox_Enter);
@@ -110,10 +109,10 @@ namespace ContactsApp.UI
             // SurnameTextBox
             // 
             this.SurnameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.SurnameTextBox.Location = new System.Drawing.Point(85, 11);
+            this.SurnameTextBox.Location = new System.Drawing.Point(127, 11);
             this.SurnameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SurnameTextBox.Name = "SurnameTextBox";
-            this.SurnameTextBox.Size = new System.Drawing.Size(397, 22);
+            this.SurnameTextBox.Size = new System.Drawing.Size(355, 22);
             this.SurnameTextBox.TabIndex = 22;
             this.SurnameTextBox.TextChanged += new System.EventHandler(this.SurnameTextBox_TextChanged);
             this.SurnameTextBox.Enter += new System.EventHandler(this.SurnameTextBox_Enter);
@@ -124,9 +123,9 @@ namespace ContactsApp.UI
             this.VkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.VkLabel.Location = new System.Drawing.Point(6, 118);
             this.VkLabel.Name = "VkLabel";
-            this.VkLabel.Size = new System.Drawing.Size(73, 17);
+            this.VkLabel.Size = new System.Drawing.Size(115, 17);
             this.VkLabel.TabIndex = 21;
-            this.VkLabel.Text = "vk.com:";
+            this.VkLabel.Text = "ID ВКонтакте";
             this.VkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // EmailLabel
@@ -134,9 +133,9 @@ namespace ContactsApp.UI
             this.EmailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.EmailLabel.Location = new System.Drawing.Point(6, 92);
             this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(73, 17);
+            this.EmailLabel.Size = new System.Drawing.Size(115, 17);
             this.EmailLabel.TabIndex = 20;
-            this.EmailLabel.Text = "E-mail:";
+            this.EmailLabel.Text = "Почта:";
             this.EmailLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PhoneLabel
@@ -144,9 +143,9 @@ namespace ContactsApp.UI
             this.PhoneLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.PhoneLabel.Location = new System.Drawing.Point(8, 66);
             this.PhoneLabel.Name = "PhoneLabel";
-            this.PhoneLabel.Size = new System.Drawing.Size(71, 17);
+            this.PhoneLabel.Size = new System.Drawing.Size(113, 17);
             this.PhoneLabel.TabIndex = 19;
-            this.PhoneLabel.Text = "Phone: +7";
+            this.PhoneLabel.Text = "Номер:";
             this.PhoneLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // BirthdayLabel
@@ -154,9 +153,9 @@ namespace ContactsApp.UI
             this.BirthdayLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.BirthdayLabel.Location = new System.Drawing.Point(6, 144);
             this.BirthdayLabel.Name = "BirthdayLabel";
-            this.BirthdayLabel.Size = new System.Drawing.Size(73, 17);
+            this.BirthdayLabel.Size = new System.Drawing.Size(115, 17);
             this.BirthdayLabel.TabIndex = 18;
-            this.BirthdayLabel.Text = "Birthday:";
+            this.BirthdayLabel.Text = "День рождения";
             this.BirthdayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // NameLabel
@@ -164,20 +163,19 @@ namespace ContactsApp.UI
             this.NameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.NameLabel.Location = new System.Drawing.Point(14, 40);
             this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(67, 17);
+            this.NameLabel.Size = new System.Drawing.Size(107, 17);
             this.NameLabel.TabIndex = 17;
-            this.NameLabel.Text = "Name:";
+            this.NameLabel.Text = "Имя:";
             this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // SurnameLabel
             // 
             this.SurnameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.SurnameLabel.AutoSize = true;
             this.SurnameLabel.Location = new System.Drawing.Point(14, 14);
             this.SurnameLabel.Name = "SurnameLabel";
-            this.SurnameLabel.Size = new System.Drawing.Size(69, 17);
+            this.SurnameLabel.Size = new System.Drawing.Size(107, 17);
             this.SurnameLabel.TabIndex = 16;
-            this.SurnameLabel.Text = "Surname:";
+            this.SurnameLabel.Text = "Фамилия:";
             this.SurnameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // OkButton

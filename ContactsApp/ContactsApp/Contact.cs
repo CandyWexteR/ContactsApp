@@ -94,7 +94,6 @@ namespace ContactsApp
                 exceptions.Add(new InvalidValueException("Длина имени не может быть больше 50 символов"));
             }
 
-
             if (!string.IsNullOrWhiteSpace(idVk) && (idVk.Length > 15 || string.IsNullOrWhiteSpace(idVk)))
                 exceptions.Add(
                     new InvalidValueException(
