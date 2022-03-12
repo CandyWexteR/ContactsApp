@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ContactsApp.Exceptions;
 using Newtonsoft.Json;
 
@@ -102,11 +103,22 @@ namespace ContactsApp
             if (birthday > DateTime.Now)
                 exceptions.Add(new InvalidValueException("День рождения должен быть указан не позднее текущей даты"));
 
-            //TODO: Условие: наличие точки после @.
-            if (!string.IsNullOrWhiteSpace(email) && (email.Length > 50 || ((!email.Contains("@") || !email.Contains(".")))))
-                exceptions.Add(new InvalidValueException(
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                if (email.Contains("@"))
+                {
+                    var str = email.Split('@').Last();
+                    if (!str.Contains("."))
+                    {
+                        exceptions.Add(new InvalidValueException(
+                            "Адрес электронной почты должен вводиться в формате user.mail@mail.domain.ru"));
+                    }
+                }
+                if(email.Length > 50)
+                    exceptions.Add(new InvalidValueException(
                         "Длина адреса электронной почты должна быть быть в диапазоне от 1 до 50 символов"));
-
+            }
+            
             PhoneNumber phone = null;
             
             try
