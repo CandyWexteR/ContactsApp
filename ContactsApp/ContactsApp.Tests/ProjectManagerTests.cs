@@ -57,13 +57,14 @@ public class ProjectManagerTests
         var expected = JsonConvert.SerializeObject(project);
 
 
-
+        //TODO: Загружать эталонные файлы так как сериализация тоже тестируется
         _manager.Serialize();
 
         _manager.Deserialize();
 
         foreach (var item in list)
         {
+            //TODO: Реализовать IEquitable<T> и избавиться от множества AreEqual
             var contact = _manager.Project.GetContact(item.Id);
             Assert.IsNotNull(contact);
             Assert.AreEqual(item.Id, contact.Id);

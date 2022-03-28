@@ -41,11 +41,15 @@ public class PhoneNumberTests
     [TestCase(89000032000L)]
     public void PhoneNumber_ValidValue(long value)
     {
+        //TODO: Проверять только выходные значения с ожидаемыми
         Assert.GreaterOrEqual(value, 80000000000);
         Assert.Less(value, 90000000000);
 
+        //TODO: При проверке нужно использовать actual - реальное значение, и expected - ожидаемое значение.
         var number = PhoneNumber.Create(value);
         
+        //TODO: Разделить на AAA: 
+        //TODO:
         Assert.AreEqual(value, number.Number);
     }
 }

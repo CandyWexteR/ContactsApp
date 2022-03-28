@@ -59,7 +59,7 @@ namespace ContactsApp.UI
                 name += char.ToUpper(NameTextBox.Text[0]);
                 name += NameTextBox.Text.Remove(0, 1);
             }
-
+            //TODO: Максимум 1 пустая строка во всем проекте
             try
             {
                 Contact = Contact.Create(_contactId, surname, name, parsed ? number : 0L, BirthdayDateTimePicker.Value,
@@ -68,6 +68,7 @@ namespace ContactsApp.UI
             }
             catch (AggregateException exception)
             {
+                //TODO: Сокращения переименовать в нормальные названия
                 var msgs = exception.InnerExceptions.Select(s => $"{s.Message}\n");
                 var msg = msgs.Aggregate(string.Empty, (current, str) => current + str);
 
@@ -83,6 +84,7 @@ namespace ContactsApp.UI
         private void EditForm_Load(object sender, EventArgs e)
         {
             SurnameTextBox.MaxLength = 50;
+            NameTextBox.MaxLength = 50;
             EmailTextBox.MaxLength = 50;
             VkTextBox.MaxLength = 15;
             PhoneTextBox.MaxLength = 11;
@@ -130,6 +132,7 @@ namespace ContactsApp.UI
         {
             if (PhoneTextBox.ForeColor != Color.Gray) return;
             PhoneTextBox.Text = null;
+            //TODO: В константы цвета
             PhoneTextBox.ForeColor = Color.Black;
             PhoneTextBox.BackColor = Color.White;
         }

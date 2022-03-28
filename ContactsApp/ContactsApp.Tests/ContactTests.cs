@@ -6,10 +6,12 @@ using NUnit.Framework.Internal;
 
 namespace ContactsApp.Tests;
 
+//TODO: Тесты с атрибутом [TestFixture]
 public class ContactTests
 {
     private static DateTime _previousDate;
     private static DateTime _forthcomingDate;
+    //TODO: Избавиться от [SetUp]
     [SetUp]
     public void Setup()
     {
