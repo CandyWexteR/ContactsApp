@@ -12,17 +12,15 @@ public class ProjectTests
 {
     private Project _project;
     private DateTime _date;
-
-    [SetUp]
     public void SetUp()
     {
-        _date = DateTime.Now;
     }
 
     [Test]
     [TestCase("SuRName", "Naaameee")]
     public void Project_AddFirstOnly(string surname, string name)
     {
+        _date = DateTime.Now;
         _project = new Project(new List<Contact>());
         var number = 87485746352L;
         _project.AddContact(surname, name, number, _date, null, null);
@@ -34,6 +32,7 @@ public class ProjectTests
     [TestCase(3, "SuRRRnaaameEEE", "Nameeeeee", null, null, null)]
     public void Project_AddSecondOrGreater(int currentListItemsCount, string surname, string name, DateTime date, string email, string idVk)
     {
+        _date = DateTime.Now;
         _project = new Project(new List<Contact>());
         for (int i = 0; i < currentListItemsCount; i++)
         {
@@ -50,6 +49,7 @@ public class ProjectTests
     [TestCase(3)]
     public void ExistingContactsAssers(int count)
     {
+        _date = DateTime.Now;
         var list = new List<Contact>();
         var number = 87485746352;
         
@@ -70,6 +70,7 @@ public class ProjectTests
     [TestCase(3, 2)]
     public void ContactRemove_Valid(int count, int removingIndex)
     {
+        _date = DateTime.Now;
         Assert.Positive(count);
         Assert.Positive(removingIndex);
         Assert.Greater(count, removingIndex);
@@ -90,6 +91,7 @@ public class ProjectTests
     [TestCase(3, 4)]
     public void ContactRemove_InvalidId(int count, int removingIndex)
     {
+        _date = DateTime.Now;
         Assert.Positive(count);
         Assert.Positive(removingIndex);
         Assert.GreaterOrEqual(removingIndex, count);
@@ -110,7 +112,7 @@ public class ProjectTests
     [TestCase(3)]
     public void ContactRemove_InvalidId(int removingIndex)
     {
-        Assert.Positive(removingIndex);
+        _date = DateTime.Now;
 
         _project = new Project(new List<Contact>());
 
@@ -122,10 +124,6 @@ public class ProjectTests
     public void ContactEdit_Valid(int count, int id, string surname, string name, string email, string idVk,
         DateTime birthday)
     {
-        Assert.Positive(count);
-        Assert.Positive(id);
-        Assert.Greater(count, id);
-
         var list = new List<Contact>();
         var number = 87485746352;
         for (var i = 0; i < count; i++)

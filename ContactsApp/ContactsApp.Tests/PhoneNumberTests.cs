@@ -6,11 +6,6 @@ namespace ContactsApp.Tests;
 [TestFixture]
 public class PhoneNumberTests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     [TestCase(1)]
     [TestCase(10)]
@@ -24,15 +19,7 @@ public class PhoneNumberTests
     [TestCase(1000000000000)]
     public void PhoneNumber_InvalidValue(long value)
     {
-        if (value is < 800000000000 or >= 900000000000)
-        {
-            Assert.Throws<InvalidValueException>(() => PhoneNumber.Create(value),
-                $"Неправильное значение номера телефона " +
-                $"({nameof(PhoneNumber)}).");
-            return;
-        }
-
-        Assert.Fail("Значение НЕ должно быть в диапазоне от 10000000000 до 100000000000");
+        Assert.Throws<InvalidValueException>(() => PhoneNumber.Create(value));
     }
 
     [Test]
@@ -40,17 +27,10 @@ public class PhoneNumberTests
     [TestCase(81000030000L)]
     [TestCase(81000032000L)]
     [TestCase(89000032000L)]
-    public void PhoneNumber_ValidValue(long value)
+    public void PhoneNumber_ValidValue(long expected)
     {
-        //TODO: Проверять только выходные значения с ожидаемыми
-        Assert.GreaterOrEqual(value, 80000000000);
-        Assert.Less(value, 90000000000);
-
-        //TODO: При проверке нужно использовать actual - реальное значение, и expected - ожидаемое значение.
-        var number = PhoneNumber.Create(value);
+        var actual = PhoneNumber.Create(expected);
         
-        //TODO: Разделить на AAA: 
-        //TODO:
-        Assert.AreEqual(value, number.Number);
+        Assert.AreEqual(expected, actual.Number);
     }
 }
