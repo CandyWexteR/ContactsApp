@@ -9,15 +9,6 @@ namespace ContactsApp.Tests;
 [TestFixture]
 public class ContactTests
 {
-    private static DateTime _previousDate;
-    private static DateTime _forthcomingDate;
-    //TODO: Избавиться от [SetUp]
-    [SetUp]
-    public void Setup()
-    {
-        _previousDate = DateTime.Now.AddDays(-1);
-        _forthcomingDate = DateTime.Now.AddDays(1);
-    }
     
     [Test]
     [TestCase(1, "someName", "someSurname", null, null)]
