@@ -20,88 +20,31 @@ public class ContactTests
     }
     
     [Test]
-    [TestCase(1, "someName", "someSurname", null, null, null)]
-    public void Contact_Valid(int id,string surname, string name, DateTime birthday, string email, string idVk)
+    [TestCase(1, "someName", "someSurname", null, null)]
+    public void Contact_Valid(int expectedId,string expectedSurname, string expectedName, string expectedEmail, string expectedIdVk)
     {
-        if (id < 0)
-            Assert.Fail(("Идентификатор не может быть меньше 0"));
-
-        if (string.IsNullOrWhiteSpace(surname))
-            Assert.Fail(("Фамилия не может быть пустой строкой"));
-
-        if (string.IsNullOrWhiteSpace(name))
-            Assert.Fail(("Имя не может быть пустой строкой"));
-
-        if (surname.Length > 50)
-            Assert.Fail(("Длина фамилии не может быть больше 50 символов"));
-
-        if (name.Length > 50)
-            Assert.Fail(("Длина имени не может быть больше 50 символов"));
-
-        if (idVk is not null && (idVk.Length > 15 || string.IsNullOrWhiteSpace(idVk)))
-            Assert.Fail((
-                    "Длина адреса ВКонтакте должна быть быть в диапазоне от 1 до 15 символов"));
-            
-        if (birthday > DateTime.Now)
-            Assert.Fail((
-                    "День рождения должен быть указан не позднее текущей даты"));
-            
-        if (email is not null && (email.Length > 50 || string.IsNullOrWhiteSpace(email)))
-            Assert.Fail((
-                    "Длина адреса электронной почты должна быть быть в диапазоне от 1 до 50 символов"));
+        var expectedDateTime = DateTime.Now;
+        var expectedPhoneNumber = 82569234220;
         
-        var phoneNumber = 82569234220;
+        var actualContact = Contact.Create(expectedId, expectedSurname, expectedName, expectedPhoneNumber, expectedDateTime, expectedEmail, expectedIdVk);
         
-        var contact = Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk);
-        
-        Assert.AreEqual(id, contact.Id);
-        Assert.AreEqual(surname, contact.Surname);
-        Assert.AreEqual(name, contact.Name);
-        Assert.AreEqual(birthday, contact.BirthDay);
-        Assert.AreEqual(email, contact.Email);
-        Assert.AreEqual(phoneNumber, contact.PhoneNumber.Number);
-        Assert.AreEqual(idVk, contact.IdVk);
+        Assert.AreEqual(expectedId, actualContact.Id);
+        Assert.AreEqual(expectedSurname, actualContact.Surname);
+        Assert.AreEqual(expectedName, actualContact.Name);
+        Assert.AreEqual(expectedDateTime, actualContact.BirthDay);
+        Assert.AreEqual(expectedEmail, actualContact.Email);
+        Assert.AreEqual(expectedPhoneNumber, actualContact.PhoneNumber.Number);
+        Assert.AreEqual(expectedIdVk, actualContact.IdVk);
     }
     
     [Test]
     [TestCase(-1, "someName", "someSurname", null, null, null)]
+    [TestCase(-1, "", "someSurname", null, null, null)]
+    [TestCase(-1, "", "", null, null, null)]
     public void Contact_Invalid(int id,string surname, string name, DateTime birthday, string email, string idVk)
     {
-        var expectedMessages = new string[]
-        {
-            "Идентификатор не может быть меньше 0",
-            "Фамилия не может быть пустой строкой",
-            "Имя не может быть пустой строкой",
-            "Длина фамилии не может быть больше 50 символов",
-            "Длина имени не может быть больше 50 символов",
-            "Длина адреса ВКонтакте должна быть быть в диапазоне от 1 до 15 символов",
-            "День рождения должен быть указан не позднее текущей даты",
-            "Длина адреса электронной почты должна быть быть в диапазоне от 1 до 50 символов"
-        };
         var phoneNumber = 82569234220;
-
-
+        
         Assert.Catch<AggregateException>(() => Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk));
-
-        try
-        {
-            var contact = Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk);
-        }
-        catch (AggregateException e)
-        {
-            Assert.Greater(e.InnerExceptions.Count, 0);
-            foreach (var item in e.InnerExceptions)
-            {
-                if (item is InvalidValueException ex)
-                {
-                    Assert.AreEqual(typeof(InvalidValueException), ex.GetType());
-                    Assert.That(expectedMessages.Contains(ex.Message));
-                    continue;
-                }
-                    
-                Assert.Fail("Тип ошибки не соответствует ожиданию");
-
-            }
-        }
     }
 }
