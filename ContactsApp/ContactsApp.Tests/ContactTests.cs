@@ -6,7 +6,7 @@ using NUnit.Framework.Internal;
 
 namespace ContactsApp.Tests;
 
-//TODO: Тесты с атрибутом [TestFixture]
+[TestFixture]
 public class ContactTests
 {
     private static DateTime _previousDate;

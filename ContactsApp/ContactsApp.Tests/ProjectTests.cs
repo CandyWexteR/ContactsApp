@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace ContactsApp.Tests;
 
+[TestFixture]
 public class ProjectTests
 {
     private Project _project;

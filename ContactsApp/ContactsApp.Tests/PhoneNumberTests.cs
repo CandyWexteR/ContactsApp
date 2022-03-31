@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace ContactsApp.Tests;
 
+[TestFixture]
 public class PhoneNumberTests
 {
     [SetUp]
