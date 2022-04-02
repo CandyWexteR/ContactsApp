@@ -19,6 +19,7 @@ public class ProjectTests
     public void Project_AddContact(int itemsCount, string surname, string name, DateTime date,
         string email, string idVk)
     {
+        // Setup
         _date = DateTime.Now;
         _project = new Project(new List<Contact>());
         var number = 87485746352;
@@ -28,9 +29,11 @@ public class ProjectTests
             _project.AddContact("surname" + i, "name" + i, number, date, email, idVk);
         }
 
+        // Act
         _project.AddContact(surname, name, number, _date, null, null);
         var actual = _project.Contacts.First(f => f.Id == itemsCount);
 
+        // Assert
         Assert.AreEqual(expected, actual);
     }
 
@@ -38,6 +41,7 @@ public class ProjectTests
     [TestCase(3)]
     public void GetById_Valid(int count)
     {
+        // Setup
         _date = DateTime.Now;
         var list = new List<Contact>();
         var number = 87485746352;
@@ -51,7 +55,9 @@ public class ProjectTests
 
         foreach (var expected in list)
         {
+            // Act
             var actual = _project.GetContact(expected.Id);
+            // Assert
             Assert.AreEqual(expected, actual);
         }
     }
@@ -60,6 +66,7 @@ public class ProjectTests
     [TestCase(3, 4)]
     public void GetById_Invalid(int count, int id)
     {
+        // Setup
         _date = DateTime.Now;
         var list = new List<Contact>();
         var number = 87485746352;
@@ -69,8 +76,10 @@ public class ProjectTests
         }
         _project = new Project(list);
 
+        // Act
         var actual = _project.GetContact(id);
         
+        // Assert
         Assert.Null(actual);
     }
 
@@ -78,6 +87,7 @@ public class ProjectTests
     [TestCase(3, 2)]
     public void ContactRemove_Valid(int count, int removingId)
     {
+        // Setup
         _date = DateTime.Now;
         var list = new List<Contact>();
         var number = 87485746352;
@@ -85,11 +95,14 @@ public class ProjectTests
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
         }
-
         var expectedRemovedContact = list.First(f => f.Id == removingId);
         _project = new Project(list);
+        
+        // Act
+        TestDelegate testDelegate = () => _project.RemoveContact(removingId);
 
-        Assert.DoesNotThrow(() => _project.RemoveContact(removingId));
+        // Assert
+        Assert.DoesNotThrow(testDelegate);
         Assert.IsFalse(list.Contains(expectedRemovedContact));
     }
 
@@ -98,6 +111,7 @@ public class ProjectTests
     [TestCase(0, 4)]
     public void ContactRemove_InvalidId(int count, int removingIndex)
     {
+        // Setup
         _date = DateTime.Now;
         var list = new List<Contact>();
         var number = 87485746352;
@@ -108,7 +122,10 @@ public class ProjectTests
 
         _project = new Project(list);
 
-        Assert.Throws<InvalidEditOperationException>(() => _project.RemoveContact(removingIndex));
+        // Act
+        TestDelegate testDelegate = () => _project.RemoveContact(removingIndex);
+        // Assert
+        Assert.Throws<InvalidEditOperationException>(testDelegate);
     }
 
     [Test]
@@ -116,6 +133,7 @@ public class ProjectTests
     public void ContactEdit_Valid(int count, int id, string surname, string name, string email, string idVk,
         DateTime birthday)
     {
+        // Setup
         var list = new List<Contact>();
         var number = 87485746352;
         var expected = Contact.Create(id, surname, name, number, birthday, email, idVk);
@@ -126,7 +144,10 @@ public class ProjectTests
 
         _project = new Project(list);
 
+        // Act
         _project.EditContact(id, surname, name, number, birthday, email, idVk);
+        
+        // Assert
         var actual = _project.Contacts.First(f => f.Id == id);
         Assert.AreEqual(expected, actual);
     }
@@ -136,6 +157,7 @@ public class ProjectTests
     public void ContactEdit_Invalid(int count, int id, string surname, string name, string email, string idVk,
         DateTime birthday)
     {
+        // Setup
         var list = new List<Contact>();
         var number = 87485746352;
         for (var i = 0; i < count; i++)
@@ -144,8 +166,11 @@ public class ProjectTests
         }
 
         _project = new Project(list);
+        
+        // Act
+        TestDelegate actual = () => _project.EditContact(id, surname, name, number, birthday, email, idVk);
 
-        Assert.Throws<InvalidEditOperationException>(() =>
-            _project.EditContact(id, surname, name, number, birthday, email, idVk));
+        // Assert
+        Assert.Throws<InvalidEditOperationException>(actual);
     }
 }

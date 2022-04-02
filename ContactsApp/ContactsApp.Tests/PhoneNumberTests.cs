@@ -19,7 +19,11 @@ public class PhoneNumberTests
     [TestCase(1000000000000)]
     public void PhoneNumber_InvalidValue(long value)
     {
-        Assert.Throws<InvalidValueException>(() => PhoneNumber.Create(value));
+        // Act
+        TestDelegate testDelegate = () => PhoneNumber.Create(value);
+        
+        //Assert
+        Assert.Throws<InvalidValueException>(testDelegate);
     }
 
     [Test]
@@ -29,8 +33,10 @@ public class PhoneNumberTests
     [TestCase(89000032000L)]
     public void PhoneNumber_ValidValue(long expected)
     {
+        // Act
         var actual = PhoneNumber.Create(expected);
         
+        //Assert
         Assert.AreEqual(expected, actual.Number);
     }
 }

@@ -14,12 +14,15 @@ public class ContactTests
     [TestCase(1, "someName", "someSurname", null, null)]
     public void Contact_Valid(int expectedId,string expectedSurname, string expectedName, string expectedEmail, string expectedIdVk)
     {
+        // Setup
         var expectedDateTime = DateTime.Now;
         var expectedPhoneNumber = 82569234220;
         
+        // Act
         var actual = Contact.Create(expectedId, expectedSurname, expectedName, expectedPhoneNumber, expectedDateTime, 
             expectedEmail, expectedIdVk);
         
+        // Assert
         Assert.AreEqual(expectedId, actual.Id);
         Assert.AreEqual(expectedSurname, actual.Surname);
         Assert.AreEqual(expectedName, actual.Name);
@@ -35,8 +38,13 @@ public class ContactTests
     [TestCase(1, "", "", null, null, null)]
     public void Contact_Invalid(int id,string surname, string name, DateTime birthday, string email, string idVk)
     {
+        // Setup
         var phoneNumber = 82569234220;
+
+        //Act
+        TestDelegate testDelegate = () => Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk);
         
-        Assert.Catch<AggregateException>(() => Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk));
+        // Assert
+        Assert.Catch<AggregateException>(testDelegate);
     }
 }

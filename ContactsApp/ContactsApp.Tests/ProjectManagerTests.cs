@@ -17,6 +17,7 @@ public class ProjectManagerTests
     [TestCase(2)]
     public void Serialize(int count)
     {
+        // Setup
         var manager = GetManager();
         var number = 87485746352;
         var date = DateTime.Now;
@@ -28,8 +29,10 @@ public class ProjectManagerTests
 
         var expected = JsonConvert.SerializeObject(manager.Project);
 
+        // Act
         manager.Serialize();
 
+        // Assert
         var file = File.ReadAllText(manager.FullPath);
 
         Assert.AreEqual(expected, file);
@@ -39,6 +42,7 @@ public class ProjectManagerTests
     [TestCase(23)]
     public void Deserialize_ValidPath(int count)
     {
+        // Setup
         var number = 87485746352;
         var date = DateTime.Now;
         
@@ -50,10 +54,12 @@ public class ProjectManagerTests
         }
         var validPath = Path.Combine(Directory.GetCurrentDirectory(), TestFileName);
         var json = JsonConvert.SerializeObject(project);
-        SerializeFile(json, validPath);
+        SaveTextInFile(json, validPath);
         
+        // Act
         manager.Deserialize(validPath);
         
+        // Assert
         Assert.Greater(manager.Project.ContactsCount, 0);
         foreach (var actual in project.Contacts)
         {
@@ -68,13 +74,16 @@ public class ProjectManagerTests
     [Test]
     public void Deserialize_InvalidPath()
     {
+        // Setup
         var invalidPath = Path.Combine(Directory.GetCurrentDirectory(), Path.GetRandomFileName());
         var expected = JsonConvert.SerializeObject(new Project(new List<Contact>()));
         var manager = GetManager();
         
+        // Act
         manager.Deserialize(invalidPath);
-        var actual = JsonConvert.SerializeObject(manager.Project);
         
+        // Assert
+        var actual = JsonConvert.SerializeObject(manager.Project);
         Assert.AreEqual(0, manager.Project.ContactsCount);
         Assert.AreEqual(expected, actual);
         
@@ -85,22 +94,26 @@ public class ProjectManagerTests
     [Test]
     public void Deserialize_InvalidFile()
     {
+        // Setup
         var expected = JsonConvert.SerializeObject(new Project(new List<Contact>()));
         var path = Path.Combine(Directory.GetCurrentDirectory(), TestFileName);
         var brokenFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "json", "broken.json");
         var brokenFileText = File.ReadAllText(brokenFilePath);
-        SerializeFile(brokenFileText, path);
+        SaveTextInFile(brokenFileText, path);
         var manager = GetManager();
         
+        // Act
         manager.Deserialize(path);
-        var actual = JsonConvert.SerializeObject(manager.Project);
         
+        // Assert
+        var actual = JsonConvert.SerializeObject(manager.Project);
         Assert.AreEqual(expected, actual);
+        
         if(File.Exists(path))
             File.Delete(path);
     }
 
-    private void SerializeFile(string text, string path)
+    private void SaveTextInFile(string text, string path)
     {
         if(!File.Exists(path))
             using (var stream = File.Create(path))
