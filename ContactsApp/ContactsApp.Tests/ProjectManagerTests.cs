@@ -73,7 +73,7 @@ public class ProjectManagerTests
         var manager = GetManager();
         
         manager.Deserialize(invalidPath);
-        var actual = File.ReadAllText(invalidPath);
+        var actual = JsonConvert.SerializeObject(manager.Project);
         
         Assert.AreEqual(0, manager.Project.ContactsCount);
         Assert.AreEqual(expected, actual);
@@ -87,14 +87,13 @@ public class ProjectManagerTests
     {
         var expected = JsonConvert.SerializeObject(new Project(new List<Contact>()));
         var path = Path.Combine(Directory.GetCurrentDirectory(), TestFileName);
-        
         var brokenFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "json", "broken.json");
         var brokenFileText = File.ReadAllText(brokenFilePath);
         SerializeFile(brokenFileText, path);
-        
         var manager = GetManager();
+        
         manager.Deserialize(path);
-        var actual = File.ReadAllText(path);
+        var actual = JsonConvert.SerializeObject(manager.Project);
         
         Assert.AreEqual(expected, actual);
         if(File.Exists(path))

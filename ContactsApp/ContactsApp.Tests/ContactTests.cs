@@ -17,21 +17,22 @@ public class ContactTests
         var expectedDateTime = DateTime.Now;
         var expectedPhoneNumber = 82569234220;
         
-        var actualContact = Contact.Create(expectedId, expectedSurname, expectedName, expectedPhoneNumber, expectedDateTime, expectedEmail, expectedIdVk);
+        var actual = Contact.Create(expectedId, expectedSurname, expectedName, expectedPhoneNumber, expectedDateTime, 
+            expectedEmail, expectedIdVk);
         
-        Assert.AreEqual(expectedId, actualContact.Id);
-        Assert.AreEqual(expectedSurname, actualContact.Surname);
-        Assert.AreEqual(expectedName, actualContact.Name);
-        Assert.AreEqual(expectedDateTime, actualContact.BirthDay);
-        Assert.AreEqual(expectedEmail, actualContact.Email);
-        Assert.AreEqual(expectedPhoneNumber, actualContact.PhoneNumber.Number);
-        Assert.AreEqual(expectedIdVk, actualContact.IdVk);
+        Assert.AreEqual(expectedId, actual.Id);
+        Assert.AreEqual(expectedSurname, actual.Surname);
+        Assert.AreEqual(expectedName, actual.Name);
+        Assert.AreEqual(expectedDateTime, actual.BirthDay);
+        Assert.AreEqual(expectedEmail, actual.Email);
+        Assert.AreEqual(expectedPhoneNumber, actual.PhoneNumber.Number);
+        Assert.AreEqual(expectedIdVk, actual.IdVk);
     }
     
     [Test]
     [TestCase(-1, "someName", "someSurname", null, null, null)]
-    [TestCase(-1, "", "someSurname", null, null, null)]
-    [TestCase(-1, "", "", null, null, null)]
+    [TestCase(1, "", "someSurname", null, null, null)]
+    [TestCase(1, "", "", null, null, null)]
     public void Contact_Invalid(int id,string surname, string name, DateTime birthday, string email, string idVk)
     {
         var phoneNumber = 82569234220;
