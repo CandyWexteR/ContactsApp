@@ -46,7 +46,7 @@ namespace ContactsApp.UI
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(212, 39);
+            this.label1.Size = new System.Drawing.Size(258, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "ContactsAppVS";
             // 
@@ -117,7 +117,7 @@ namespace ContactsApp.UI
             this.GitHubLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GitHubLinkLabel.Location = new System.Drawing.Point(85, 191);
             this.GitHubLinkLabel.Name = "GitHubLinkLabel";
-            this.GitHubLinkLabel.Size = new System.Drawing.Size(175, 20);
+            this.GitHubLinkLabel.Size = new System.Drawing.Size(197, 20);
             this.GitHubLinkLabel.TabIndex = 7;
             this.GitHubLinkLabel.TabStop = true;
             this.GitHubLinkLabel.Text = "MrFostik/ContactsAppVS";
@@ -142,10 +142,9 @@ namespace ContactsApp.UI
             this.Name = "AboutForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "About";
+            this.Text = "О программе";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

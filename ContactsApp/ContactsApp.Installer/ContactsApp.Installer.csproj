@@ -11,7 +11,7 @@
         <AssemblyName>ContactsApp.Installer</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
-        <ExecutionCommand>"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "D:\RiderProjects\ContactsApp\Installer\ContactsApp.iss"</ExecutionCommand>
+        <ExecutionCommand>"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "$(SolutionDir)\..\Installer\ContactsApp.iss"</ExecutionCommand>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>

@@ -227,6 +227,7 @@ namespace ContactsApp.UI
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ContactForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Добавить/Редактировать контакт";
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
