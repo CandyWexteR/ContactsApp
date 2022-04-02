@@ -42,7 +42,7 @@ namespace ContactsApp
                 // ignored
             }
 
-            if (project is not null)
+            if (project != null && project.Contacts != null)
             {
                 Project = project;
             }
