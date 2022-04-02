@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp", "ContactsApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.Tests", "ContactsApp.Tests\ContactsApp.Tests.csproj", "{4E30D1B6-0473-42FA-A402-01504702C0F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.Installer", "ContactsApp.Installer\ContactsApp.Installer.csproj", "{C64D3C31-6A0C-4077-B6A5-6B41D1E560FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
