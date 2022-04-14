@@ -105,18 +105,18 @@ namespace ContactsApp
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                var msg = "Адрес электронной почты должен вводиться в формате user.mail@mail.domain.ru";
+                var emailMessage = "Адрес электронной почты должен вводиться в формате user.mail@mail.domain.ru";
                 if (email.Contains("@"))
                 {
                     var str = email.Split('@').Last();
                     if (!str.Contains("."))
                     {
-                        exceptions.Add(new InvalidValueException(msg));
+                        exceptions.Add(new InvalidValueException(emailMessage));
                     }
                 }
                 else
                 {
-                    exceptions.Add(new InvalidValueException(msg));
+                    exceptions.Add(new InvalidValueException(emailMessage));
                 }
 
                 if (email.Length > 50)

@@ -33,20 +33,23 @@ public class ContactTests
     }
     
     [Test]
-    [TestCase(-1, "someName", "someSurname", null, null, null)]
-    [TestCase(1, "", "someSurname", null, null, null)]
-    [TestCase(1, "", "", null, null, null)]
-    [TestCase(1, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "", null, null, null)]
-    [TestCase(1, "", "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", null, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", null)]
-    [TestCase(1, "", "", null, null, null)]
-    [TestCase(1, "", "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", null, null, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")]
-    public void Contact_Invalid(int id,string surname, string name, DateTime birthday, string email, string idVk)
+    [TestCase(-1, "someName", "someSurname", 82569234220, null,  null)]
+    [TestCase(1, "", "someSurname", 82569234220,  null, null)]
+    [TestCase(1, "", "someSurname", 82569234220,  "asd@msdasd", null)]
+    [TestCase(1, "", "", 82569234220, null,  null)]
+    [TestCase(1, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "", 82569234220, null, null)]
+    [TestCase(1, "", "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", 82569234220, null, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")]
+    [TestCase(1, "", "", 82569234220, null,  null)]
+    [TestCase(1, "", "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", 82569234220, null, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")]
+    [TestCase(1, "", "sdsdsd", 82569232224220, null,  "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")]
+    [TestCase(1, "", "sdsdsd", 82569232224220, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", null)]
+    public void Contact_Invalid(int id,string surname, string name, long phoneNumber, string email, string idVk)
     {
-        // Setup
-        var phoneNumber = 82569234220;
-
+        //Setup
+        var invalidDate = DateTime.Now.AddMonths(1);
+        
         //Act
-        TestDelegate testDelegate = () => Contact.Create(id, surname, name, phoneNumber, birthday, email, idVk);
+        TestDelegate testDelegate = () => Contact.Create(id, surname, name, phoneNumber, invalidDate, email, idVk);
         
         // Assert
         Assert.Catch<AggregateException>(testDelegate);
