@@ -12,6 +12,7 @@ public class ProjectManagerTests
 {
     private ProjectManager GetManager() => new ProjectManager(new Project(new List<Contact>()));
     public string TestFileName => "test.json";
+    public string TestFolderName => "testJson";
 
     [Test]
     [TestCase(2)]
@@ -21,7 +22,7 @@ public class ProjectManagerTests
         var manager = GetManager();
         var number = 87485746352;
         var date = DateTime.Now;
-        
+
         for (var i = 0; i < count; i++)
         {
             manager.Project.AddContact($"Surname {i}", $"Name {i}", number, date, null, null);
@@ -45,82 +46,110 @@ public class ProjectManagerTests
         // Setup
         var number = 87485746352;
         var date = DateTime.Now;
-        
+
         var manager = GetManager();
         var project = new Project(new List<Contact>());
         for (var i = 0; i < count; i++)
         {
             project.AddContact($"Surname {i}", $"Name {i}", number, date, null, null);
         }
-        var validPath = Path.Combine(Directory.GetCurrentDirectory(), TestFileName);
+
+        var validPath = Path.Combine(Directory.GetCurrentDirectory(), TestFolderName, TestFileName);
         var json = JsonConvert.SerializeObject(project);
         SaveTextInFile(json, validPath);
-        
+
         // Act
         manager.Deserialize(validPath);
-        
+
         // Assert
         Assert.Greater(manager.Project.ContactsCount, 0);
         foreach (var actual in project.Contacts)
         {
-            var expected = project.Contacts.First(f=> f.Id == actual.Id);
-            Assert.AreEqual(expected ,actual);
+            var expected = project.Contacts.First(f => f.Id == actual.Id);
+            Assert.AreEqual(expected, actual);
         }
-        
-        if(File.Exists(validPath))
+
+        var dir = Path.GetDirectoryName(validPath);
+
+        if (File.Exists(validPath))
             File.Delete(validPath);
+
+        if (Directory.Exists(dir))
+            Directory.Delete(dir);
     }
 
     [Test]
-    public void Deserialize_InvalidPath()
+    [TestCase("TestFolder")]
+    [TestCase(null)]
+    public void Deserialize_InvalidPath(string testFolder)
     {
         // Setup
-        var invalidPath = Path.Combine(Directory.GetCurrentDirectory(), Path.GetRandomFileName());
+        var invalidPath = string.IsNullOrEmpty(testFolder)
+            ? Path.Combine(Directory.GetCurrentDirectory(), Path.GetRandomFileName())
+            : Path.Combine(Directory.GetCurrentDirectory(), testFolder, Path.GetRandomFileName());
         var expected = JsonConvert.SerializeObject(new Project(new List<Contact>()));
         var manager = GetManager();
-        
+
         // Act
         manager.Deserialize(invalidPath);
-        
+
         // Assert
         var actual = JsonConvert.SerializeObject(manager.Project);
         Assert.AreEqual(0, manager.Project.ContactsCount);
         Assert.AreEqual(expected, actual);
-        
-        if(File.Exists(invalidPath))
+
+        var dir = Path.GetDirectoryName(invalidPath);
+
+        if (File.Exists(invalidPath) && !string.IsNullOrEmpty(testFolder))
             File.Delete(invalidPath);
+
+        if (Directory.Exists(dir) && !string.IsNullOrEmpty(testFolder))
+            Directory.Delete(dir);
     }
 
     [Test]
-    public void Deserialize_InvalidFile()
+    [TestCase("123123")]
+    [TestCase(null)]
+    public void Deserialize_InvalidFile(string testFolder)
     {
         // Setup
         var expected = JsonConvert.SerializeObject(new Project(new List<Contact>()));
-        var path = Path.Combine(Directory.GetCurrentDirectory(), TestFileName);
+        var path = string.IsNullOrEmpty(testFolder)
+            ? Path.Combine(Directory.GetCurrentDirectory(), Path.GetRandomFileName())
+            : Path.Combine(Directory.GetCurrentDirectory(), testFolder, Path.GetRandomFileName());
         var brokenFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "json", "broken.json");
         var brokenFileText = File.ReadAllText(brokenFilePath);
         SaveTextInFile(brokenFileText, path);
         var manager = GetManager();
-        
+
         // Act
         manager.Deserialize(path);
-        
+
         // Assert
         var actual = JsonConvert.SerializeObject(manager.Project);
         Assert.AreEqual(expected, actual);
-        
-        if(File.Exists(path))
+
+        var dir = Path.GetDirectoryName(path);
+
+        if (File.Exists(path))
             File.Delete(path);
+
+        if (Directory.Exists(dir) && !string.IsNullOrEmpty(testFolder))
+            Directory.Delete(dir);
     }
 
     private void SaveTextInFile(string text, string path)
     {
-        if(!File.Exists(path))
+        var dir = Path.GetDirectoryName(path);
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        if (!File.Exists(path))
             using (var stream = File.Create(path))
             {
                 stream.Close();
             }
-        
+
         File.WriteAllText(path, text);
     }
 }

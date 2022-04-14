@@ -38,6 +38,37 @@ public class ProjectTests
     }
 
     [Test]
+    [TestCase("", 8)]
+    [TestCase("2", 6)]
+    public void GetSortedTest(string nameFilter, int count)
+    {
+        // Setup
+        _date = DateTime.Now;
+        var list = new List<Contact>();
+        var number = 87485746352;
+
+        for (var i = 0; i < count; i++)
+        {
+            list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
+        }
+
+        var project = new Project(list);
+
+        var upperFilter = nameFilter.ToUpper();
+        var expected = list
+            .Where(c => $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(upperFilter)
+                        || $"{c.Name.ToUpper()} {c.Surname.ToUpper()}".Contains(upperFilter)
+                        || c.Name.ToUpper().Contains(upperFilter)
+                        || c.Surname.ToUpper().Contains(upperFilter))
+            .OrderBy(c => $"{c.Surname} {c.Name}").ToList();
+
+        // Act
+        var actual = project.GetSortedContacts(nameFilter);
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test]
     [TestCase(3)]
     public void GetById_Valid(int count)
     {
@@ -74,11 +105,12 @@ public class ProjectTests
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
         }
+
         _project = new Project(list);
 
         // Act
         var actual = _project.GetContact(id);
-        
+
         // Assert
         Assert.Null(actual);
     }
@@ -95,9 +127,10 @@ public class ProjectTests
         {
             list.Add(Contact.Create(i, $"Surname {i}", $"Name {i}", number, _date, null, null));
         }
+
         var expectedRemovedContact = list.First(f => f.Id == removingId);
         _project = new Project(list);
-        
+
         // Act
         TestDelegate testDelegate = () => _project.RemoveContact(removingId);
 
@@ -146,7 +179,7 @@ public class ProjectTests
 
         // Act
         _project.EditContact(id, surname, name, number, birthday, email, idVk);
-        
+
         // Assert
         var actual = _project.Contacts.First(f => f.Id == id);
         Assert.AreEqual(expected, actual);
@@ -166,7 +199,7 @@ public class ProjectTests
         }
 
         _project = new Project(list);
-        
+
         // Act
         TestDelegate actual = () => _project.EditContact(id, surname, name, number, birthday, email, idVk);
 

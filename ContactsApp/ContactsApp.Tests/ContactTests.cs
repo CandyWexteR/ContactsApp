@@ -36,6 +36,10 @@ public class ContactTests
     [TestCase(-1, "someName", "someSurname", null, null, null)]
     [TestCase(1, "", "someSurname", null, null, null)]
     [TestCase(1, "", "", null, null, null)]
+    [TestCase(1, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "", null, null, null)]
+    [TestCase(1, "", "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", null, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", null)]
+    [TestCase(1, "", "", null, null, null)]
+    [TestCase(1, "", "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", null, null, "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")]
     public void Contact_Invalid(int id,string surname, string name, DateTime birthday, string email, string idVk)
     {
         // Setup
