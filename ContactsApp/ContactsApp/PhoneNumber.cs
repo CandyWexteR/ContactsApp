@@ -7,7 +7,7 @@ namespace ContactsApp
     /// <summary>
     /// Класс для информации о номере телефона.
     /// </summary>
-    public class PhoneNumber:IEquatable<PhoneNumber>
+    public class PhoneNumber : IEquatable<PhoneNumber>
     {
         //Означает, что этот конструктор будет использоваться для десериализации.
         [JsonConstructor]
@@ -15,7 +15,7 @@ namespace ContactsApp
         {
             Number = number;
         }
-        
+
         /// <summary>
         /// Номер телефона.
         /// </summary>

@@ -14,7 +14,7 @@ namespace ContactsApp
         /// <summary>
         /// Базовый путь к контактам
         /// </summary>
-        public string FullPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
+        public string FullPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "ContactsApp", "contacts.json");
 
         //Для десериализации.

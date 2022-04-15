@@ -14,6 +14,10 @@ namespace ContactsApp.UI
         public const string IDVK_EXAMPLE_TEXT = "Тут вписать ID vk.com/{id}";
         public const string EMAIL_EXAMPLE_TEXT = "Пример: usermail@example.com";
         public const string PHONE_EXAMPLE_TEXT = "87654321098";
+        public static readonly Color ExampleForeColor = Color.Gray;
+        public static readonly Color UsualForeColor = Color.Black;
+        public static readonly Color UsualBackgroundColor = Color.White;
+        public static readonly Color BrownColor = Color.Brown;
 
         public ContactForm()
         {
@@ -48,18 +52,18 @@ namespace ContactsApp.UI
 
             //Сохраняются Фамилия и Имя следующим образом:
             //Первая буква всегда имеет верхний регистр, остальные нижний
-            if (SurnameTextBox.ForeColor != Color.Gray && SurnameTextBox.Text.Length > 0)
+            if (SurnameTextBox.ForeColor != ExampleForeColor && SurnameTextBox.Text.Length > 0)
             {
                 surname += char.ToUpper(SurnameTextBox.Text[0]);
                 surname += SurnameTextBox.Text.Remove(0, 1);
             }
 
-            if (NameTextBox.ForeColor != Color.Gray && NameTextBox.Text.Length > 0)
+            if (NameTextBox.ForeColor != ExampleForeColor && NameTextBox.Text.Length > 0)
             {
                 name += char.ToUpper(NameTextBox.Text[0]);
                 name += NameTextBox.Text.Remove(0, 1);
             }
-            //TODO: Максимум 1 пустая строка во всем проекте
+
             try
             {
                 Contact = Contact.Create(_contactId, surname, name, parsed ? number : 0L, BirthdayDateTimePicker.Value,
@@ -68,11 +72,10 @@ namespace ContactsApp.UI
             }
             catch (AggregateException exception)
             {
-                //TODO: Сокращения переименовать в нормальные названия
-                var msgs = exception.InnerExceptions.Select(s => $"{s.Message}\n");
-                var msg = msgs.Aggregate(string.Empty, (current, str) => current + str);
+                var exceptionsMessages = exception.InnerExceptions.Select(s => $"{s.Message}\n");
+                var message = exceptionsMessages.Aggregate(string.Empty, (current, str) => current + str);
 
-                MessageBox.Show(msg, "Ошибка при создании/редактировании контакта", MessageBoxButtons.OK,
+                MessageBox.Show(message, "Ошибка при создании/редактировании контакта", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
             }
@@ -104,10 +107,10 @@ namespace ContactsApp.UI
 
         private void SurnameTextBox_Enter(object sender, EventArgs e)
         {
-            if (SurnameTextBox.ForeColor != Color.Gray) return;
+            if (SurnameTextBox.ForeColor != ExampleForeColor) return;
             SurnameTextBox.Text = null;
-            SurnameTextBox.ForeColor = Color.Black;
-            SurnameTextBox.BackColor = Color.White;
+            SurnameTextBox.ForeColor = UsualForeColor;
+            SurnameTextBox.BackColor = UsualBackgroundColor;
         }
 
         private void SurnameTextBox_Leave(object sender, EventArgs e)
@@ -117,10 +120,10 @@ namespace ContactsApp.UI
 
         private void NameTextBox_Enter(object sender, EventArgs e)
         {
-            if (NameTextBox.ForeColor != Color.Gray) return;
+            if (NameTextBox.ForeColor != ExampleForeColor) return;
             NameTextBox.Text = null;
-            NameTextBox.ForeColor = Color.Black;
-            NameTextBox.BackColor = Color.White;
+            NameTextBox.ForeColor = UsualForeColor;
+            NameTextBox.BackColor = UsualBackgroundColor;
         }
 
         private void NameTextBox_Leave(object sender, EventArgs e)
@@ -128,13 +131,12 @@ namespace ContactsApp.UI
             NameTextBoxLeave();
         }
 
-        private void PhoneTextBox_Enter(object sender, EventArgs e) 
+        private void PhoneTextBox_Enter(object sender, EventArgs e)
         {
-            if (PhoneTextBox.ForeColor != Color.Gray) return;
+            if (PhoneTextBox.ForeColor != ExampleForeColor) return;
             PhoneTextBox.Text = null;
-            //TODO: В константы цвета
-            PhoneTextBox.ForeColor = Color.Black;
-            PhoneTextBox.BackColor = Color.White;
+            PhoneTextBox.ForeColor = UsualForeColor;
+            PhoneTextBox.BackColor = UsualBackgroundColor;
         }
 
         private void PhoneTextBox_Leave(object sender, EventArgs e)
@@ -144,10 +146,10 @@ namespace ContactsApp.UI
 
         private void EmailTextBox_Enter(object sender, EventArgs e)
         {
-            if (EmailTextBox.ForeColor != Color.Gray) return;
+            if (EmailTextBox.ForeColor != ExampleForeColor) return;
             EmailTextBox.Text = null;
-            EmailTextBox.ForeColor = Color.Black;
-            EmailTextBox.BackColor = Color.White;
+            EmailTextBox.ForeColor = UsualForeColor;
+            EmailTextBox.BackColor = UsualBackgroundColor;
         }
 
         private void EmailTextBox_Leave(object sender, EventArgs e)
@@ -157,10 +159,10 @@ namespace ContactsApp.UI
 
         private void VkTextBox_Enter(object sender, EventArgs e)
         {
-            if (VkTextBox.ForeColor != Color.Gray) return;
+            if (VkTextBox.ForeColor != ExampleForeColor) return;
             VkTextBox.Text = null;
-            VkTextBox.ForeColor = Color.Black;
-            VkTextBox.BackColor = Color.White;
+            VkTextBox.ForeColor = UsualForeColor;
+            VkTextBox.BackColor = UsualBackgroundColor;
         }
 
         private void VkTextBox_Leave(object sender, EventArgs e)
@@ -173,35 +175,40 @@ namespace ContactsApp.UI
             if (PhoneTextBox.Text.Length != 0) return;
 
             PhoneTextBox.Text = PHONE_EXAMPLE_TEXT;
-            PhoneTextBox.ForeColor = Color.Gray;
-            PhoneTextBox.BackColor = Color.Brown;
+            PhoneTextBox.ForeColor = ExampleForeColor;
+            PhoneTextBox.BackColor = BrownColor;
         }
+
         private void NameTextBoxLeave()
         {
             if (NameTextBox.Text.Length != 0) return;
             NameTextBox.Text = NAME_EXAMPLE_TEXT;
-            NameTextBox.ForeColor = Color.Gray;
-            NameTextBox.BackColor = Color.Brown;
+            NameTextBox.ForeColor = ExampleForeColor;
+            NameTextBox.BackColor = BrownColor;
         }
+
         private void VkTextBoxLeave()
         {
             if (VkTextBox.Text.Length != 0) return;
             VkTextBox.Text = IDVK_EXAMPLE_TEXT;
-            VkTextBox.ForeColor = Color.Gray;
+            VkTextBox.ForeColor = ExampleForeColor;
         }
+
         private void EmailTextBoxLeave()
         {
             if (EmailTextBox.Text.Length != 0) return;
             EmailTextBox.Text = EMAIL_EXAMPLE_TEXT;
-            EmailTextBox.ForeColor = Color.Gray;
+            EmailTextBox.ForeColor = ExampleForeColor;
         }
+
         private void SurnameTextBoxLeave()
         {
             if (SurnameTextBox.Text.Length != 0) return;
             SurnameTextBox.Text = SURNAME_EXAMPLE_TEXT;
-            SurnameTextBox.ForeColor = Color.Gray;
-            SurnameTextBox.BackColor = Color.Brown;
+            SurnameTextBox.ForeColor = ExampleForeColor;
+            SurnameTextBox.BackColor = BrownColor;
         }
+
         private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) //Проверка введена ли цифра

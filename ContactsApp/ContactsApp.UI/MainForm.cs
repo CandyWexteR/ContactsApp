@@ -155,7 +155,7 @@ namespace ContactsApp.UI
             _manager.Project.AddContact(editForm.Contact.Surname, editForm.Contact.Name,
                 editForm.Contact.PhoneNumber.Number, editForm.Contact.BirthDay, editForm.Contact.Email,
                 editForm.Contact.IdVk);
-            
+
             _manager.Serialize();
             UpdateContactsList();
         }
@@ -177,7 +177,7 @@ namespace ContactsApp.UI
             _manager.Serialize();
             UpdateContactsList();
         }
-        
+
         private void EditContact()
         {
             if (_manager.Project.ContactsCount == 0)

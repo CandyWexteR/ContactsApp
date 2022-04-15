@@ -151,11 +151,11 @@ namespace ContactsApp
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id && 
-                   Surname == other.Surname && 
+            return Id == other.Id &&
+                   Surname == other.Surname &&
                    Name == other.Name &&
-                   Equals(PhoneNumber, other.PhoneNumber) && 
-                   Email == other.Email && 
+                   Equals(PhoneNumber, other.PhoneNumber) &&
+                   Email == other.Email &&
                    IdVk == other.IdVk &&
                    BirthDay.Equals(other.BirthDay);
         }

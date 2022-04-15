@@ -41,13 +41,13 @@ namespace ContactsApp
         {
             var upperFilter = nameSurnameFilter.ToUpper();
             return _contacts
-                .Where(c => $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(upperFilter) 
-                            || $"{c.Name.ToUpper()} {c.Surname.ToUpper()}".Contains(upperFilter) 
-                            || c.Name.ToUpper().Contains(upperFilter) 
+                .Where(c => $"{c.Surname.ToUpper()} {c.Name.ToUpper()}".Contains(upperFilter)
+                            || $"{c.Name.ToUpper()} {c.Surname.ToUpper()}".Contains(upperFilter)
+                            || c.Name.ToUpper().Contains(upperFilter)
                             || c.Surname.ToUpper().Contains(upperFilter))
                 .OrderBy(c => $"{c.Surname} {c.Name}").ToList();
         }
-            
+
         /// <summary>
         /// Добавление контакта.
         /// </summary>
