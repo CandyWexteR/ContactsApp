@@ -34,8 +34,8 @@ Name: "{commondesktop}\ContactsApp"; Filename: "{app}\\ContactsApp.UI.exe"; Icon
 
 [Files]
 Source: "{#SourcePath}\\{#Name}.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs;
-Source: "{#SourcePath}\\..\\ContactsApp\ContactsApp.UI\bin\Release\\ContactsApp.UI.exe"  ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs;
-Source: "{#SourcePath}\\..\\ContactsApp\ContactsApp.UI\bin\Release\\*"  ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: contacts.json;
+Source: "{#SourcePath}\\..\\ContactsApp\ContactsApp.Installer\bin\Release\\ContactsApp.UI.exe"  ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs;
+Source: "{#SourcePath}\\..\\ContactsApp\ContactsApp.Installer\bin\Release\\*"  ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: contacts.json;
 
 [UninstallDelete]
 Type: filesandordirs; Name: {app};
